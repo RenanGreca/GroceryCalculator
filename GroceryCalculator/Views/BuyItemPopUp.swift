@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BuyItemPopUp: View {
     
-//    @State var grocery: GroceryItem
+//    @Binding var grocery: GroceryItem
     @State var amountString: String
     @State var unitPriceString: String
     var okAction: (_: Int, _: Double) -> Void

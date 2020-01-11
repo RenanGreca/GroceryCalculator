@@ -12,10 +12,10 @@ struct PurchaseList: View {
     var body: some View {
         NavigationView {
             VStack {
-                List(groceries.filter({ $0.amount > 0 })) { grocery in
-                    PurchaseRow(groceryItem: grocery)
+                List(GroceryItem.fetchAll().filter({ $0.amount > 0 })) { grocery in
+                    PurchaseRow(groceryItem: .constant(grocery))
                 }
-                TotalRow(totalPrice: groceries.reduce(0) { $0 + $1.price })
+                TotalRow(totalPrice: GroceryItem.fetchAll().reduce(0) { $0 + $1.price })
             }
             .navigationBarTitle(Text("Purchases"))
             .navigationBarItems(trailing: Button(action: {

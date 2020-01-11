@@ -13,13 +13,14 @@ struct GroceryList: View {
     @State var addItemPopUpVisible = false
     @State var buyItemPopUpVisible = false
     @State var selectedGrocery: GroceryItem?
+//    @State var groceries = GroceryItem.fetcshAll()
     
     var body: some View {
         return ZStack {
             // NavigationView including the list of groceries
             NavigationView {
-                List(groceries) { grocery in
-                    ListRow(groceryItem: grocery).onTapGesture {
+                List(GroceryItem.fetchAll()) { grocery in
+                    ListRow(groceryItem: .constant(grocery)).onTapGesture {
                         self.selectedGrocery = grocery
                         self.buyItemPopUpVisible.toggle()
                     }
@@ -44,7 +45,9 @@ struct GroceryList: View {
                 
                 AddItemPopUp(
                 okAction: { name in
-                    groceries.append(GroceryItem(name: name))
+                    let groceryItem = GroceryItem(name: name)
+                    groceryItem.save()
+//                    self.groceries = GroceryItem.fetchAll()
                     self.addItemPopUpVisible.toggle()
                 }, cancelAction: {
                     self.addItemPopUpVisible.toggle()
@@ -55,16 +58,19 @@ struct GroceryList: View {
                 Color.black.opacity(0.65)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        self.addItemPopUpVisible.toggle()
+                        self.buyItemPopUpVisible.toggle()
                     }
                 
                 BuyItemPopUp(amountString: "\(self.selectedGrocery!.amount)",
                     unitPriceString: String(format: "%.2f", self.selectedGrocery!.unitPrice),
                 okAction: { amount, unitPrice in
-//                    groceries.first(where: { $0.id == selectedGrocery?.id})?.amount = amount
-//                    groceries.first(where: { $0.id == selectedGrocery?.id})?.unitPrice = unitPrice
-                    self.selectedGrocery?.amount = amount
-                    self.selectedGrocery?.unitPrice = unitPrice
+                    if var groceryItem = self.selectedGrocery?.duplicate() {
+                        groceryItem.amount = amount
+                        groceryItem.unitPrice = unitPrice
+                        groceryItem.save()
+                    }
+                    self.selectedGrocery = nil
+//                    self.grocesries = GroceryItem.fetchAll()
                     self.buyItemPopUpVisible.toggle()
                 }, cancelAction: {
                     self.buyItemPopUpVisible.toggle()

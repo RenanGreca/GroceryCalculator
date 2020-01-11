@@ -18,17 +18,50 @@ class GroceryCalculatorTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testInsertItem() {
+        let item = GroceryItem(name: "Banana")
+        item.save()
+        XCTAssertNotNil(item)
     }
+    
+    func testFetchAll() {
+        let groceries = GroceryItem.fetchAll()
+        XCTAssertNotNil(groceries)
+    }
+    
+    func testInsertAndFetch() {
+        let item = GroceryItem(name: "Banana")
+        item.save()
+        let groceries = GroceryItem.fetchAll()
+        
+        XCTAssertEqual(item, groceries.first!)
+    }
+    
+    func testInsertAndUpdate() {
+        var item = GroceryItem(name: "Banana")
+        item.save()
+        
+        var groceries = GroceryItem.fetchAll()
+        XCTAssertEqual(item, groceries.first!)
+        
+        // Change something in the item, save and test again
+        item.amount = 2
+        item.save()
+        
+        groceries = GroceryItem.fetchAll()
+        XCTAssertEqual(item, groceries.first!)
+    }
+    
+    func testInsertTwoItems() {
+        let item1 = GroceryItem(name: "Banana")
+        item1.save()
+        
+        let item2 = GroceryItem(name: "Apple")
+        item2.save()
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        let groceries = GroceryItem.fetchAll()
+        XCTAssertEqual(groceries.count, 2)
     }
 
 }

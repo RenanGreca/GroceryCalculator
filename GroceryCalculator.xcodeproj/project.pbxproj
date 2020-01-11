@@ -70,6 +70,8 @@
 		1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleGroceries.json; sourceTree = "<group>"; };
 		1F1CF9E723C8C59300053A71 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
+		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F70E41023C8D22400B181DC /* AddItemPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,10 +181,20 @@
 		1F1CF9E023C8BE6C00053A71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1F65BD2D23CA317200F41F90 /* ManagedObjects */,
 				1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */,
 				1F1CF9E723C8C59300053A71 /* Data.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1F65BD2D23CA317200F41F90 /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */,
+				1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */,
+			);
+			path = ManagedObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct PurchaseRow: View {
-    var groceryItem: GroceryItem
+    
+    @Binding var groceryItem: GroceryItem
     
     var body: some View {
         HStack {
@@ -27,8 +28,8 @@ struct PurchaseRow_Previews: PreviewProvider {
         let apples = GroceryItem(name: "Apples")
         
         return Group {
-            PurchaseRow(groceryItem: bananas)
-            PurchaseRow(groceryItem: apples)
+            PurchaseRow(groceryItem: .constant(bananas))
+            PurchaseRow(groceryItem: .constant(apples))
         }
         .previewLayout(.fixed(width: 300, height: 70))
     }

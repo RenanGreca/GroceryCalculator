@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ListRow: View {
     
-    var groceryItem: GroceryItem
+    @Binding var groceryItem: GroceryItem
+//    var stroke: Bool
     
     var body: some View {
         HStack {
@@ -29,8 +30,8 @@ struct ListRow: View {
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
         return Group {
-            ListRow(groceryItem: groceries[0])
-            ListRow(groceryItem: groceries[5])
+            ListRow(groceryItem: .constant(groceries[0]))
+            ListRow(groceryItem: .constant(groceries[5]))
         }
         .previewLayout(.fixed(width: 300, height: 70))
     }

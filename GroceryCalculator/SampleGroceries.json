@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Cream Cheese",
+        "amount": 1,
+        "unitPrice": 1.19
+    },
+    {
+        "id": 2,
+        "name": "Eggs",
+        "amount": 2,
+        "unitPrice": 1.29
+    },
+    {
+        "id": 3,
+        "name": "Milk",
+        "amount": 2,
+        "unitPrice": 1.15
+    },
+    {
+        "id": 4,
+        "name": "Corn",
+        "amount": 1,
+        "unitPrice": 1.89
+    },
+    {
+        "id": 5,
+        "name": "Corn starch",
+        "amount": 1,
+        "unitPrice": 0.79
+    },
+    {
+        "id": 6,
+        "name": "Cream",
+        "amount": 0,
+        "unitPrice": 0.89
+    },
+    {
+        "id": 7,
+        "name": "Chicken broth",
+        "amount": 1,
+        "unitPrice": 1.89
+    }
+]

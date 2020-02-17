@@ -16,7 +16,6 @@
 		1F1CF9B323C8BDC300053A71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9B223C8BDC300053A71 /* Preview Assets.xcassets */; };
 		1F1CF9B623C8BDC300053A71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9B423C8BDC300053A71 /* LaunchScreen.storyboard */; };
 		1F1CF9C123C8BDC300053A71 /* GroceryCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9C023C8BDC300053A71 /* GroceryCalculatorTests.swift */; };
-		1F1CF9CC23C8BDC300053A71 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9D923C8BE1600053A71 /* ListRow.swift */; };
 		1F1CF9DD23C8BE3000053A71 /* PurchaseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DC23C8BE3000053A71 /* PurchaseRow.swift */; };
 		1F1CF9DF23C8BE6800053A71 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */; };
@@ -26,6 +25,8 @@
 		1F1CF9E823C8C59300053A71 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E723C8C59300053A71 /* Data.swift */; };
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F70E41123C8D22400B181DC /* AddItemPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E41023C8D22400B181DC /* AddItemPopUp.swift */; };
+		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
+		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 			remoteGlobalIDString = 1F1CF9A223C8BDC200053A71;
 			remoteInfo = GroceryCalculator;
 		};
-		1F1CF9C823C8BDC300053A71 /* PBXContainerItemProxy */ = {
+		1F71102E23FAD2AC00A28576 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F1CF99B23C8BDC200053A71 /* Project object */;
 			proxyType = 1;
@@ -59,7 +60,6 @@
 		1F1CF9BC23C8BDC300053A71 /* GroceryCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1CF9C023C8BDC300053A71 /* GroceryCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCalculatorTests.swift; sourceTree = "<group>"; };
 		1F1CF9C223C8BDC300053A71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F1CF9C723C8BDC300053A71 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCalculatorUITests.swift; sourceTree = "<group>"; };
 		1F1CF9CD23C8BDC300053A71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1CF9D923C8BE1600053A71 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
@@ -73,6 +73,8 @@
 		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F70E41023C8D22400B181DC /* AddItemPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPopUp.swift; sourceTree = "<group>"; };
+		1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +92,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F1CF9C423C8BDC300053A71 /* Frameworks */ = {
+		1F71102623FAD2AC00A28576 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +117,7 @@
 			children = (
 				1F1CF9A323C8BDC200053A71 /* GroceryCalculator.app */,
 				1F1CF9BC23C8BDC300053A71 /* GroceryCalculatorTests.xctest */,
-				1F1CF9C723C8BDC300053A71 /* GroceryCalculatorUITests.xctest */,
+				1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +152,7 @@
 			children = (
 				1F1CF9C023C8BDC300053A71 /* GroceryCalculatorTests.swift */,
 				1F1CF9C223C8BDC300053A71 /* Info.plist */,
+				1F71103423FAD9E500A28576 /* CoreDataHelper.swift */,
 			);
 			path = GroceryCalculatorTests;
 			sourceTree = "<group>";
@@ -235,22 +238,22 @@
 			productReference = 1F1CF9BC23C8BDC300053A71 /* GroceryCalculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1F1CF9C623C8BDC300053A71 /* GroceryCalculatorUITests */ = {
+		1F71102823FAD2AC00A28576 /* GroceryCalculatorUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F1CF9D623C8BDC300053A71 /* Build configuration list for PBXNativeTarget "GroceryCalculatorUITests" */;
+			buildConfigurationList = 1F71103023FAD2AC00A28576 /* Build configuration list for PBXNativeTarget "GroceryCalculatorUITests" */;
 			buildPhases = (
-				1F1CF9C323C8BDC300053A71 /* Sources */,
-				1F1CF9C423C8BDC300053A71 /* Frameworks */,
-				1F1CF9C523C8BDC300053A71 /* Resources */,
+				1F71102523FAD2AC00A28576 /* Sources */,
+				1F71102623FAD2AC00A28576 /* Frameworks */,
+				1F71102723FAD2AC00A28576 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1F1CF9C923C8BDC300053A71 /* PBXTargetDependency */,
+				1F71102F23FAD2AC00A28576 /* PBXTargetDependency */,
 			);
 			name = GroceryCalculatorUITests;
 			productName = GroceryCalculatorUITests;
-			productReference = 1F1CF9C723C8BDC300053A71 /* GroceryCalculatorUITests.xctest */;
+			productReference = 1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -270,7 +273,7 @@
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = 1F1CF9A223C8BDC200053A71;
 					};
-					1F1CF9C623C8BDC300053A71 = {
+					1F71102823FAD2AC00A28576 = {
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = 1F1CF9A223C8BDC200053A71;
 					};
@@ -291,7 +294,7 @@
 			targets = (
 				1F1CF9A223C8BDC200053A71 /* GroceryCalculator */,
 				1F1CF9BB23C8BDC300053A71 /* GroceryCalculatorTests */,
-				1F1CF9C623C8BDC300053A71 /* GroceryCalculatorUITests */,
+				1F71102823FAD2AC00A28576 /* GroceryCalculatorUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -315,7 +318,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F1CF9C523C8BDC300053A71 /* Resources */ = {
+		1F71102723FAD2AC00A28576 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -349,15 +352,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */,
 				1F1CF9C123C8BDC300053A71 /* GroceryCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F1CF9C323C8BDC300053A71 /* Sources */ = {
+		1F71102523FAD2AC00A28576 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F1CF9CC23C8BDC300053A71 /* GroceryCalculatorUITests.swift in Sources */,
+				1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,10 +373,10 @@
 			target = 1F1CF9A223C8BDC200053A71 /* GroceryCalculator */;
 			targetProxy = 1F1CF9BD23C8BDC300053A71 /* PBXContainerItemProxy */;
 		};
-		1F1CF9C923C8BDC300053A71 /* PBXTargetDependency */ = {
+		1F71102F23FAD2AC00A28576 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1F1CF9A223C8BDC200053A71 /* GroceryCalculator */;
-			targetProxy = 1F1CF9C823C8BDC300053A71 /* PBXContainerItemProxy */;
+			targetProxy = 1F71102E23FAD2AC00A28576 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -586,10 +590,9 @@
 			};
 			name = Release;
 		};
-		1F1CF9D723C8BDC300053A71 /* Debug */ = {
+		1F71103123FAD2AC00A28576 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TN7Z9M8SW7;
 				INFOPLIST_FILE = GroceryCalculatorUITests/Info.plist;
@@ -606,10 +609,9 @@
 			};
 			name = Debug;
 		};
-		1F1CF9D823C8BDC300053A71 /* Release */ = {
+		1F71103223FAD2AC00A28576 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TN7Z9M8SW7;
 				INFOPLIST_FILE = GroceryCalculatorUITests/Info.plist;
@@ -656,11 +658,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F1CF9D623C8BDC300053A71 /* Build configuration list for PBXNativeTarget "GroceryCalculatorUITests" */ = {
+		1F71103023FAD2AC00A28576 /* Build configuration list for PBXNativeTarget "GroceryCalculatorUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1F1CF9D723C8BDC300053A71 /* Debug */,
-				1F1CF9D823C8BDC300053A71 /* Release */,
+				1F71103123FAD2AC00A28576 /* Debug */,
+				1F71103223FAD2AC00A28576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

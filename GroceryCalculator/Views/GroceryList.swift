@@ -29,12 +29,12 @@ struct GroceryList: View {
                 .navigationBarItems(trailing: Button(action: {
                     // Toggle the visibility of the pop-up
                     self.addItemPopUpVisible.toggle()
-                }) {
+                }, label: {
                     Image(systemName: "plus")
                     .frame(width: 30, height: 30)
-                })
+                }).accessibility(identifier: "AddItem"))
             }
-            
+                        
             if (addItemPopUpVisible) {
                 // If the pop-up should be visible, add a dark background
                 Color.black.opacity(0.65)

@@ -13,6 +13,7 @@ class GroceryCalculatorTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        CoreDataHelper.context = testingContext()
     }
 
     override func tearDown() {
@@ -27,7 +28,7 @@ class GroceryCalculatorTests: XCTestCase {
     
     func testFetchAll() {
         let groceries = GroceryItem.fetchAll()
-        XCTAssertNotNil(groceries)
+        XCTAssertEqual(groceries.count, 0)
     }
     
     func testInsertAndFetch() {
@@ -35,6 +36,7 @@ class GroceryCalculatorTests: XCTestCase {
         item.save()
         let groceries = GroceryItem.fetchAll()
         
+        XCTAssertEqual(groceries.count, 1)
         XCTAssertEqual(item, groceries.first!)
     }
     
@@ -54,6 +56,8 @@ class GroceryCalculatorTests: XCTestCase {
     }
     
     func testInsertTwoItems() {
+        let prevAmount = GroceryItem.fetchAll().count
+        
         let item1 = GroceryItem(name: "Banana")
         item1.save()
         
@@ -61,7 +65,7 @@ class GroceryCalculatorTests: XCTestCase {
         item2.save()
 
         let groceries = GroceryItem.fetchAll()
-        XCTAssertEqual(groceries.count, 2)
+        XCTAssertEqual(groceries.count, prevAmount+2)
     }
 
 }

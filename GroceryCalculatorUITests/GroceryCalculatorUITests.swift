@@ -2,7 +2,7 @@
 //  GroceryCalculatorUITests.swift
 //  GroceryCalculatorUITests
 //
-//  Created by Renan Greca on 10/01/2020.
+//  Created by Renan Greca on 17/02/2020.
 //  Copyright © 2020 Renan Greca. All rights reserved.
 //
 
@@ -30,6 +30,18 @@ class GroceryCalculatorUITests: XCTestCase {
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testAddItem() {
+                
+        let app = XCUIApplication()
+        app.launch()
+//        app.menuBarItems["AddItem"].tap()
+        app.buttons["AddItem"].tap()
+        let nameTextField = app.textFields["Name"]
+        nameTextField.tap()
+        nameTextField.typeText("Apple")
+        app.buttons["OK"].tap()
     }
 
     func testLaunchPerformance() {

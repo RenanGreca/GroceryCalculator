@@ -14,7 +14,9 @@ fileprivate var globalID = 1
 //var groceries:[GroceryItem] = [GroceryItem(name: "Bananas"),
 //                               GroceryItem(name: "Apples")]
 
-let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+struct CoreDataHelper {
+    static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+}
 
 struct GroceryItem: Hashable, Codable, Identifiable {
     static func == (lhs: GroceryItem, rhs: GroceryItem) -> Bool {
@@ -53,14 +55,14 @@ struct GroceryItem: Hashable, Codable, Identifiable {
         if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
             item = managedItem
         } else {
-            item = NSEntityDescription.insertNewObject(forEntityName: "GroceryItem", into: context) as! GroceryItemManagedObject
+            item = NSEntityDescription.insertNewObject(forEntityName: "GroceryItem", into: CoreDataHelper.context) as! GroceryItemManagedObject
         }
         item.id = Int64(self.id)
         item.name = self.name
         item.unitPrice = self.unitPrice
         item.amount = Int64(self.amount)
         
-        try? context.save()
+        try? CoreDataHelper.context.save()
     }
     
     func duplicate() -> GroceryItem {
@@ -76,7 +78,7 @@ struct GroceryItem: Hashable, Codable, Identifiable {
         let searchFilter = NSPredicate(format: "id = %d", id)
         fetchRequest.predicate = searchFilter
         
-        let results = try? context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject]
+        let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject]
         
         if let managedItem = results?.first {
             return managedItem
@@ -93,7 +95,7 @@ struct GroceryItem: Hashable, Codable, Identifiable {
         
         var groceries = [GroceryItem]()
         
-        if let results = try? context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject] {
+        if let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject] {
             for result in results {
                 let item = GroceryItem(from: result)
                 groceries.append(item)

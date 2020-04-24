@@ -11,7 +11,6 @@ import SwiftUI
 struct ListRow: View {
     
     @Binding var groceryItem: GroceryItem
-//    var stroke: Bool
     
     var body: some View {
         HStack {

@@ -13,6 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection){
+            // Tab 1
             GroceryList()
                 .tabItem {
                     VStack {
@@ -25,6 +26,7 @@ struct ContentView: View {
             }
             .tag(0)
             
+            // Tab 2
             PurchaseList()
                 .tabItem {
                     VStack {
@@ -33,7 +35,7 @@ struct ContentView: View {
                     }
             }
             .tag(1)
-        }.edgesIgnoringSafeArea(.top)
+        }
     }
 }
 

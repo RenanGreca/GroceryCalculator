@@ -15,24 +15,25 @@ struct GroceryList: View {
     @State var selectedGrocery: GroceryItem?
 //    @State var groceries = GroceryItem.fetcshAll()
     
+    @EnvironmentObject var groceryItems:GroceryItems
+    @State private var editMode = EditMode.inactive
+    
     var body: some View {
         return ZStack {
             // NavigationView including the list of groceries
             NavigationView {
-                List(GroceryItem.fetchAll()) { grocery in
-                    ListRow(groceryItem: .constant(grocery)).onTapGesture {
-                        self.selectedGrocery = grocery
-                        self.buyItemPopUpVisible.toggle()
-                    }
+                List {
+                    ForEach(groceryItems.list) { grocery in
+                        ListRow(groceryItem: .constant(grocery)).onTapGesture {
+                            self.selectedGrocery = grocery
+                            self.buyItemPopUpVisible.toggle()
+                        }
+                    }.onDelete(perform: onDelete(offsets:))
                 }
+                .environment(\.editMode, $editMode)
                 .navigationBarTitle(Text("Grocery List"))
-                .navigationBarItems(trailing: Button(action: {
-                    // Toggle the visibility of the pop-up
-                    self.addItemPopUpVisible.toggle()
-                }, label: {
-                    Image(systemName: "plus")
-                    .frame(width: 30, height: 30)
-                }).accessibility(identifier: "AddItem"))
+                .navigationBarItems(leading: EditButton(),
+                                    trailing: addButton)
             }
                         
             if (addItemPopUpVisible) {
@@ -43,13 +44,7 @@ struct GroceryList: View {
                         self.addItemPopUpVisible.toggle()
                     }
                 
-                AddItemPopUp(
-                okAction: { name in
-                    let groceryItem = GroceryItem(name: name)
-                    groceryItem.save()
-//                    self.groceries = GroceryItem.fetchAll()
-                    self.addItemPopUpVisible.toggle()
-                }, cancelAction: {
+                AddItemPopUp(okAction: addItem(name:), cancelAction: {
                     self.addItemPopUpVisible.toggle()
                 })
             }
@@ -63,20 +58,52 @@ struct GroceryList: View {
                 
                 BuyItemPopUp(amountString: "\(self.selectedGrocery!.amount)",
                     unitPriceString: String(format: "%.2f", self.selectedGrocery!.unitPrice),
-                okAction: { amount, unitPrice in
-                    if var groceryItem = self.selectedGrocery?.duplicate() {
-                        groceryItem.amount = amount
-                        groceryItem.unitPrice = unitPrice
-                        groceryItem.save()
-                    }
-                    self.selectedGrocery = nil
-//                    self.grocesries = GroceryItem.fetchAll()
-                    self.buyItemPopUpVisible.toggle()
-                }, cancelAction: {
+                okAction: buyItem(amount:unitPrice:), cancelAction: {
                     self.buyItemPopUpVisible.toggle()
                 })
             }
         }
+    }
+    
+    private var addButton: some View {
+        switch editMode {
+        case .inactive:
+            return AnyView(Button(action: onAdd) {
+                Image(systemName: "plus")
+            }.accessibility(identifier: "AddItem"))
+        default:
+            return AnyView(EmptyView())
+        }
+    }
+    
+    private func onDelete(offsets: IndexSet) {
+        groceryItems.list.remove(atOffsets: offsets)
+    }
+
+    private func onMove(source: IndexSet, destination: Int) {
+        groceryItems.list.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    private func onAdd() {
+        self.addItemPopUpVisible.toggle()
+    }
+    
+    func addItem(name: String) {
+        let groceryItem = GroceryItem(name: name)
+        groceryItem.save()
+        self.groceryItems.append(groceryItem)
+        self.addItemPopUpVisible.toggle()
+    }
+    
+    func buyItem(amount: Int, unitPrice: Double) {
+        if var groceryItem = self.selectedGrocery?.duplicate() {
+            groceryItem.amount = amount
+            groceryItem.unitPrice = unitPrice
+            groceryItem.save()
+        }
+        self.selectedGrocery = nil
+        self.groceryItems.refresh()
+        self.buyItemPopUpVisible.toggle()
     }
 }
 

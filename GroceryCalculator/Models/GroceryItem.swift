@@ -18,25 +18,25 @@ struct CoreDataHelper {
     static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 }
 
-struct GroceryItem: Hashable, Codable, Identifiable {
-    static func == (lhs: GroceryItem, rhs: GroceryItem) -> Bool {
-        return lhs.name == rhs.name
-    }
+class GroceryItem: Identifiable, ObservableObject {
+//    static func == (lhs: GroceryItem, rhs: GroceryItem) -> Bool {
+//        return lhs.name == rhs.name
+//    }
     
-    var id: Int
-    var name: String
-    var amount: Int
-    var unitPrice: Double
+    internal var id: UUID
+    @Published var name: String
+    @Published var amount: Int
+    @Published var unitPrice: Double
     
     init(name: String) {
         self.name = name
         self.amount = 0
         self.unitPrice = 0.0
-        self.id = GroceryItem.fetchAll().count
+        self.id = .init()
     }
     
     init(from managedItem:GroceryItemManagedObject) {
-        self.id = Int(managedItem.id)
+        self.id = managedItem.id!
         self.amount = Int(managedItem.amount)
         self.unitPrice = managedItem.unitPrice
         self.name = managedItem.name!
@@ -57,7 +57,7 @@ struct GroceryItem: Hashable, Codable, Identifiable {
         } else {
             item = NSEntityDescription.insertNewObject(forEntityName: "GroceryItem", into: CoreDataHelper.context) as! GroceryItemManagedObject
         }
-        item.id = Int64(self.id)
+        item.id = self.id
         item.name = self.name
         item.unitPrice = self.unitPrice
         item.amount = Int64(self.amount)
@@ -66,16 +66,16 @@ struct GroceryItem: Hashable, Codable, Identifiable {
     }
     
     func duplicate() -> GroceryItem {
-        var groceryItem = GroceryItem(name: self.name)
+        let groceryItem = GroceryItem(name: self.name)
         groceryItem.id = self.id
         groceryItem.amount = self.amount
         groceryItem.unitPrice = self.unitPrice
         return groceryItem
     }
     
-    static func fetchManagedWith(id:Int) -> GroceryItemManagedObject? {
+    static func fetchManagedWith(id:UUID) -> GroceryItemManagedObject? {
         let fetchRequest = NSFetchRequest<GroceryItemManagedObject>(entityName: "GroceryItem")
-        let searchFilter = NSPredicate(format: "id = %d", id)
+        let searchFilter = NSPredicate(format: "id = %@", id as CVarArg)
         fetchRequest.predicate = searchFilter
         
         let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject]

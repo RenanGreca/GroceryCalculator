@@ -31,13 +31,15 @@ class GroceryItems: ObservableObject {
         list.move(fromOffsets: source, toOffset: destination)
     }
     
-//    func edit(groceryItem: GroceryItem) {
-//        var index = list.firstIndex(of: groceryItem)
-//        list.remove(at: index)
-//        list.insert(groceryItem, at: index)
-//        
-//        self.groceryItems.refresh()
-//    }
+    func edit(groceryItem: GroceryItem) {
+//        if let index = list.firstIndex(of: groceryItem) {
+//            list.remove(at: index)
+//            list.insert(groceryItem, at: index)
+//            groceryItem.save()
+//        }
+        groceryItem.save()
+        self.refresh()
+    }
     
     func add(name: String) {
         let groceryItem = GroceryItem(name: name)

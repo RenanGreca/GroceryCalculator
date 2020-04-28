@@ -10,43 +10,48 @@ import SwiftUI
 
 struct BuyItemPopUp: View {
     
-//    @Binding var grocery: GroceryItem
+    @ObservedObject var groceryItem: GroceryItem
     @State var amountString: String
     @State var unitPriceString: String
     var okAction: (_: Int, _: Double) -> Void
     var cancelAction: () -> Void
     
     var body: some View {
-        return VStack {
-            Text("Buy Item")
-                .font(.headline)
-            TextField("Amount", text: $amountString)
-                .frame(height: 30.0)
-                .border(Color.gray)
-                .keyboardType(.decimalPad)
-            TextField("Unit Price", text: $unitPriceString)
-                .frame(height: 30.0)
-                .border(Color.gray)
-                .keyboardType(.decimalPad)
-            Spacer()
-            HStack {
-                Button(action: {
+        return NavigationView {
+            VStack {
+                TextField("Amount", text: $amountString)
+                    .frame(height: 30.0)
+                    .border(Color.gray)
+                    .keyboardType(.decimalPad)
+                TextField("Unit Price", text: $unitPriceString, onCommit: {
                     self.okAction(self.amount, self.unitPrice)
-                }) {
-                    Text("OK")
-                }.frame(width: 90, height: 30)
-                Button(action: {
-                    self.cancelAction()
-                }) {
-                    Text("Cancel")
-                        .foregroundColor(.red)
-                }.frame(width: 90, height: 30)
+                })
+                    .frame(height: 30.0)
+                    .border(Color.gray)
+                    .keyboardType(.decimalPad)
+//                HStack {
+//                    .frame(width: 90, height: 30)
+//                    .frame(width: 90, height: 30)
+//                }
+                Spacer()
             }
-        }.padding()
-        .frame(width: 200, height: 160)
-            .background(Color(UIColor.systemBackground))
-        .cornerRadius(5)
-        .shadow(radius: 10)
+            .navigationBarTitle(groceryItem.name)
+            .navigationBarItems(leading: Button(action: {
+                self.cancelAction()
+            }) {
+                Text("Cancel")
+                    .foregroundColor(.red)
+            }, trailing: Button(action: {
+                self.okAction(self.amount, self.unitPrice)
+            }) {
+                Text("Done").fontWeight(.bold)
+            })
+//            .padding()
+//            .frame(width: 200, height: 160)
+//                .background(Color(UIColor.systemBackground))
+//            .cornerRadius(5)
+//            .shadow(radius: 10)
+        }
     }
     
     var amount: Int {
@@ -61,13 +66,12 @@ struct BuyItemPopUp: View {
 
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        BuyItemPopUp(amountString: "\(groceries[0].amount)",
+        BuyItemPopUp(groceryItem: groceries[0], amountString: "\(groceries[0].amount)",
             unitPriceString: String(format: "%.2f", groceries[0].unitPrice),
         okAction: { amount, price in
             print("\(amount), \(price)")
         }, cancelAction: {
             print("nothing added")
         })
-        .previewLayout(.fixed(width: 300, height: 200))
     }
 }

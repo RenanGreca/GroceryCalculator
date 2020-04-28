@@ -13,27 +13,28 @@ struct GroceryList: View {
     @State var addItemPopUpVisible = false
     @State var buyItemPopUpVisible = false
     @State var selectedGrocery: GroceryItem?
-//    @State var groceries = GroceryItem.fetcshAll()
     
     @EnvironmentObject var groceryItems:GroceryItems
     @State private var editMode = EditMode.inactive
+    
+    @State var newGrocery = ""
     
     var body: some View {
         return ZStack {
             // NavigationView including the list of groceries
             NavigationView {
-                List {
-                    ForEach(groceryItems.list) { grocery in
-                        ListRow(groceryItem: .constant(grocery)).onTapGesture {
-                            self.selectedGrocery = grocery
-                            self.buyItemPopUpVisible.toggle()
-                        }
-                    }.onDelete(perform: onDelete(offsets:))
+                VStack {
+                    List {
+                        ForEach(groceryItems.list) { grocery in
+                            ListRow(groceryItem: .constant(grocery))
+                        }.onDelete(perform: onDelete(offsets:))
+                        NewGroceryRow()
+                    }
+                    TotalRow(totalPrice: groceryItems.total)
                 }
                 .environment(\.editMode, $editMode)
                 .navigationBarTitle(Text("Grocery List"))
-                .navigationBarItems(leading: EditButton(),
-                                    trailing: addButton)
+                .navigationBarItems(leading: EditButton())
             }
                         
             if (addItemPopUpVisible) {
@@ -65,16 +66,16 @@ struct GroceryList: View {
         }
     }
     
-    private var addButton: some View {
-        switch editMode {
-        case .inactive:
-            return AnyView(Button(action: onAdd) {
-                Image(systemName: "plus")
-            }.accessibility(identifier: "AddItem"))
-        default:
-            return AnyView(EmptyView())
-        }
-    }
+//    private var addButton: some View {
+//        switch editMode {
+//        case .inactive:
+//            return AnyView(Button(action: onAdd) {
+//                Image(systemName: "plus")
+//            }.accessibility(identifier: "AddItem"))
+//        default:
+//            return AnyView(EmptyView())
+//        }
+//    }
     
     private func onDelete(offsets: IndexSet) {
         groceryItems.list.remove(atOffsets: offsets)
@@ -89,9 +90,7 @@ struct GroceryList: View {
     }
     
     func addItem(name: String) {
-        let groceryItem = GroceryItem(name: name)
-        groceryItem.save()
-        self.groceryItems.append(groceryItem)
+        groceryItems.add(name: name)
         self.addItemPopUpVisible.toggle()
     }
     
@@ -109,6 +108,6 @@ struct GroceryList: View {
 
 struct GroceryList_Previews: PreviewProvider {
     static var previews: some View {
-        GroceryList()
+        GroceryList().environmentObject(GroceryItems.withSampleData)
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F158FBA2456E667001A3668 /* NewGroceryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F158FB92456E667001A3668 /* NewGroceryRow.swift */; };
 		1F18C53E23C8E50A00350F12 /* BuyItemPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18C53D23C8E50A00350F12 /* BuyItemPopUp.swift */; };
 		1F1CF9A723C8BDC200053A71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9A623C8BDC200053A71 /* AppDelegate.swift */; };
 		1F1CF9A923C8BDC200053A71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9A823C8BDC200053A71 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 		1F1CF9E823C8C59300053A71 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E723C8C59300053A71 /* Data.swift */; };
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F571C922453282D0007A019 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
+		1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C932456DFBB0007A019 /* GroceryListTests.swift */; };
 		1F70E41123C8D22400B181DC /* AddItemPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E41023C8D22400B181DC /* AddItemPopUp.swift */; };
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F120A3824582E7A00DC6B3C /* GroceryCalculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GroceryCalculator.entitlements; sourceTree = "<group>"; };
+		1F158FB92456E667001A3668 /* NewGroceryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroceryRow.swift; sourceTree = "<group>"; };
 		1F18C53D23C8E50A00350F12 /* BuyItemPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyItemPopUp.swift; sourceTree = "<group>"; };
 		1F1CF9A323C8BDC200053A71 /* GroceryCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1CF9A623C8BDC200053A71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		1F1CF9E723C8C59300053A71 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		1F571C912453282D0007A019 /* GroceryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
+		1F571C932456DFBB0007A019 /* GroceryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTests.swift; sourceTree = "<group>"; };
 		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F70E41023C8D22400B181DC /* AddItemPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPopUp.swift; sourceTree = "<group>"; };
@@ -127,6 +132,7 @@
 		1F1CF9A523C8BDC200053A71 /* GroceryCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				1F120A3824582E7A00DC6B3C /* GroceryCalculator.entitlements */,
 				1F1CF9A623C8BDC200053A71 /* AppDelegate.swift */,
 				1F1CF9A823C8BDC200053A71 /* SceneDelegate.swift */,
 				1F1CF9AF23C8BDC300053A71 /* Assets.xcassets */,
@@ -155,6 +161,7 @@
 				1F1CF9C023C8BDC300053A71 /* GroceryCalculatorTests.swift */,
 				1F1CF9C223C8BDC300053A71 /* Info.plist */,
 				1F71103423FAD9E500A28576 /* CoreDataHelper.swift */,
+				1F571C932456DFBB0007A019 /* GroceryListTests.swift */,
 			);
 			path = GroceryCalculatorTests;
 			sourceTree = "<group>";
@@ -173,6 +180,7 @@
 			children = (
 				1F1CF9AD23C8BDC200053A71 /* ContentView.swift */,
 				1F1CF9D923C8BE1600053A71 /* ListRow.swift */,
+				1F158FB92456E667001A3668 /* NewGroceryRow.swift */,
 				1F1CF9DC23C8BE3000053A71 /* PurchaseRow.swift */,
 				1F1CF9E923C8C68900053A71 /* TotalRow.swift */,
 				1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */,
@@ -344,6 +352,7 @@
 				1F18C53E23C8E50A00350F12 /* BuyItemPopUp.swift in Sources */,
 				1F70E41123C8D22400B181DC /* AddItemPopUp.swift in Sources */,
 				1F1CF9AE23C8BDC200053A71 /* ContentView.swift in Sources */,
+				1F158FBA2456E667001A3668 /* NewGroceryRow.swift in Sources */,
 				1F1CF9E423C8C0B600053A71 /* PurchaseList.swift in Sources */,
 				1F1CF9A923C8BDC200053A71 /* SceneDelegate.swift in Sources */,
 				1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */,
@@ -358,6 +367,7 @@
 			files = (
 				1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */,
 				1F1CF9C123C8BDC300053A71 /* GroceryCalculatorTests.swift in Sources */,
+				1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +524,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GroceryCalculator/GroceryCalculator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GroceryCalculator/Preview Content\"";
 				DEVELOPMENT_TEAM = TN7Z9M8SW7;
@@ -525,6 +536,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.GroceryCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -534,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GroceryCalculator/GroceryCalculator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GroceryCalculator/Preview Content\"";
 				DEVELOPMENT_TEAM = TN7Z9M8SW7;
@@ -545,6 +558,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.GroceryCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

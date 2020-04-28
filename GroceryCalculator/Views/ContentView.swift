@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var selection = 0
     
     var body: some View {
-        TabView(selection: $selection){
+//        TabView(selection: $selection){
             // Tab 1
             GroceryList()
                 .tabItem {
@@ -24,18 +24,18 @@ struct ContentView: View {
                         Text("List")
                     }
             }
-            .tag(0)
-            
-            // Tab 2
-            PurchaseList()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "eurosign.circle")
-                        Text("Purchase")
-                    }
-            }
-            .tag(1)
-        }
+//            .tag(0)
+//            
+//            // Tab 2
+//            PurchaseList()
+//                .tabItem {
+//                    VStack {
+//                        Image(systemName: "eurosign.circle")
+//                        Text("Purchase")
+//                    }
+//            }
+//            .tag(1)
+//        }
     }
 }
 

@@ -15,14 +15,39 @@ struct ListRow: View {
     var body: some View {
         HStack {
             if (groceryItem.amount > 0) {
-                Text(groceryItem.name)
+                Button(action: {
+//                    self.selectedGrocery = grocery
+//                    self.buyItemPopUpVisible.toggle()
+                }, label: {
+                    Image(systemName: "circle.fill")
+                        .resizable()
+                        .frame(width: 25, height: 25, alignment: .center)
+                        .foregroundColor(.blue)
+                })
+                
+                TextField("", text: $groceryItem.name, onCommit: updateGrocery)
                     .foregroundColor(.gray)
-                    .strikethrough()
+//                Text("×\(groceryItem.amount)")
+//                Spacer()
+                Text("€\(groceryItem.readablePrice)")
             } else {
-                Text(groceryItem.name)
+                Button(action: {
+                    
+                }, label: {
+                    Image(systemName: "circle")
+                        .resizable()
+                        .frame(width: 25, height: 25, alignment: .center)
+                        .foregroundColor(.blue)
+                })
+                
+                TextField("", text: $groceryItem.name, onCommit: updateGrocery)
             }
             Spacer()
         }.padding()
+    }
+    
+    func updateGrocery() {
+        groceryItem.save()
     }
 }
 

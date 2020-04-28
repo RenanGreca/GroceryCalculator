@@ -31,6 +31,24 @@ class GroceryItems: ObservableObject {
         list.move(fromOffsets: source, toOffset: destination)
     }
     
+//    func edit(groceryItem: GroceryItem) {
+//        var index = list.firstIndex(of: groceryItem)
+//        list.remove(at: index)
+//        list.insert(groceryItem, at: index)
+//        
+//        self.groceryItems.refresh()
+//    }
+    
+    func add(name: String) {
+        let groceryItem = GroceryItem(name: name)
+        groceryItem.save()
+        list.append(groceryItem)
+    }
+    
+    var total: Double {
+        list.reduce(0) { $0 + $1.price }
+    }
+    
     class var withSampleData:GroceryItems {
         let groceryItems = GroceryItems()
         groceryItems.list = groceries

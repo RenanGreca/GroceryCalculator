@@ -7,71 +7,92 @@
 //
 
 import SwiftUI
-
 struct BuyItemPopUp: View {
     
     @ObservedObject var groceryItem: GroceryItem
-    @State var amountString: String
-    @State var unitPriceString: String
-    var okAction: (_: Int, _: Double) -> Void
+    @State var price: Double = 0
+    var okAction: (_: GroceryItem) -> Void
     var cancelAction: () -> Void
+    
+    var currencyFormatter: NumberFormatter {
+        let nf = NumberFormatter()
+        nf.numberStyle = .currency
+        nf.isLenient = true
+        nf.currencySymbol = "€"
+        return nf
+    }
     
     var body: some View {
         return NavigationView {
             VStack {
-                TextField("Amount", text: $amountString)
-                    .frame(height: 30.0)
-                    .border(Color.gray)
-                    .keyboardType(.decimalPad)
-                TextField("Unit Price", text: $unitPriceString, onCommit: {
-                    self.okAction(self.amount, self.unitPrice)
-                })
-                    .frame(height: 30.0)
-                    .border(Color.gray)
-                    .keyboardType(.decimalPad)
-//                HStack {
-//                    .frame(width: 90, height: 30)
-//                    .frame(width: 90, height: 30)
-//                }
+                HStack {
+                    Text("Amount:").font(.headline).fontWeight(.bold)
+                    Spacer()
+                    Stepper("\(groceryItem.amount)", value: $groceryItem.amount)
+//                    TextField("Amount", text: $groceryItem.amountString)
+//                        .frame(width: 100, height: 50)
+//                        .border(Color.gray)
+//                        .keyboardType(.decimalPad)
+//                        .multilineTextAlignment(.trailing)
+                    
+//                        .font(.custom("SF", size: 24))
+                }
+                .padding()
+                
+                HStack {
+                    Text("Unit Price").font(.headline).fontWeight(.bold)
+                    Spacer()
+//                    DecimalField("Unit Price", value: $groceryItem.unitPrice, formatter: self.currencyFormatter)
+                    TextField("Unit Price", text: $groceryItem.unitPriceString, onCommit: {
+                        self.okAction(self.groceryItem)
+                    })
+                        .frame(width: 100, height: 50)
+                        .border(Color.gray)
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                }
+                .padding()
+
+                TotalRow(totalPrice: self.groceryItem.readablePrice)
                 Spacer()
             }
-            .navigationBarTitle(groceryItem.name)
+            .padding(.horizontal, 30)
+            .navigationBarTitle("\(groceryItem.name)", displayMode: .inline)
+//            .navigationBarTitle(groceryItem.name, displayMode: .inline)
             .navigationBarItems(leading: Button(action: {
                 self.cancelAction()
             }) {
                 Text("Cancel")
                     .foregroundColor(.red)
             }, trailing: Button(action: {
-                self.okAction(self.amount, self.unitPrice)
+                self.okAction(self.groceryItem)
             }) {
                 Text("Done").fontWeight(.bold)
             })
-//            .padding()
-//            .frame(width: 200, height: 160)
-//                .background(Color(UIColor.systemBackground))
-//            .cornerRadius(5)
-//            .shadow(radius: 10)
         }
     }
     
-    var amount: Int {
-        return Int(self.amountString) ?? 0
-    }
-    
-    var unitPrice: Double {
-        let unitPriceString = self.unitPriceString.replacingOccurrences(of: ",", with: ".")
-        return Double(unitPriceString) ?? 0.0
-    }
+//    var amount: Int {
+//        return Int(self.amountString) ?? 0
+//    }
+//
+//    var unitPrice: Double {
+//        let unitPriceString = self.unitPriceString.replacingOccurrences(of: ",", with: ".")
+//        return Double(unitPriceString) ?? 0.0
+//    }
 }
 
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        BuyItemPopUp(groceryItem: groceries[0], amountString: "\(groceries[0].amount)",
-            unitPriceString: String(format: "%.2f", groceries[0].unitPrice),
-        okAction: { amount, price in
-            print("\(amount), \(price)")
+        let groceryItem = GroceryItem(name: "Milk")
+        groceryItem.amount = 2
+        groceryItem.unitPrice = 0.99
+        
+        return BuyItemPopUp(groceryItem: groceryItem,
+        okAction: { groceryItem in
+            print("\(groceryItem.amountString), \(groceryItem.readablePrice)")
         }, cancelAction: {
             print("nothing added")
-        })
+        }).environment(\.colorScheme, .dark)
     }
 }

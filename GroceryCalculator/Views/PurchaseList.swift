@@ -18,7 +18,7 @@ struct PurchaseList: View {
                 List(groceryItems.list.filter({ $0.amount > 0 })) { grocery in
                     PurchaseRow(groceryItem: .constant(grocery))
                 }
-                TotalRow(totalPrice: GroceryItem.fetchAll().reduce(0) { $0 + $1.price })
+                TotalRow(totalPrice: groceryItems.readablePrice)
             }
             .navigationBarTitle(Text("Purchases"))
 //            .navigationBarItems(trailing: Button(action: {

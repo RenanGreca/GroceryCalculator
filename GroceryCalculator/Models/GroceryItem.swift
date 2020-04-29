@@ -18,10 +18,10 @@ struct CoreDataHelper {
     static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 }
 
-class GroceryItem: Identifiable, ObservableObject {
-//    static func == (lhs: GroceryItem, rhs: GroceryItem) -> Bool {
-//        return lhs.name == rhs.name
-//    }
+class GroceryItem: Equatable, Identifiable, ObservableObject {
+    static func == (lhs: GroceryItem, rhs: GroceryItem) -> Bool {
+        return lhs.name == rhs.name
+    }
     
     internal var id: UUID
     @Published var name: String
@@ -42,12 +42,38 @@ class GroceryItem: Identifiable, ObservableObject {
         self.name = managedItem.name!
     }
     
+    var amountString: String {
+        get {
+            return "\(amount)"
+        }
+        set {
+            self.amount = Int(newValue) ?? 0
+        }
+    }
+    
+    var unitPriceString: String {
+        get {
+            return String(format: "%.2f", unitPrice)
+        }
+        set {
+            let unitPriceString = newValue.replacingOccurrences(of: ",", with: ".")
+            self.unitPrice = Double(unitPriceString) ?? 0.0
+        }
+    }
+    
     var price: Double {
         unitPrice*Double(amount)
     }
     
     var readablePrice: String {
-        String(format: "%.2f", price)
+        var currencyFormatter: NumberFormatter {
+            let nf = NumberFormatter()
+            nf.numberStyle = .currency
+            nf.isLenient = true
+            nf.currencySymbol = "€"
+            return nf
+        }
+        return currencyFormatter.string(for: price) ?? ""
     }
     
     func save() {

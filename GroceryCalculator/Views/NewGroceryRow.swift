@@ -22,7 +22,8 @@ struct NewGroceryRow: View {
             TextField("Add a grocery", text: $newGrocery, onCommit: addGrocery)
             
             Spacer()
-        }.padding()
+        }
+        .padding(.vertical, 10)
     }
     
     func addGrocery() {

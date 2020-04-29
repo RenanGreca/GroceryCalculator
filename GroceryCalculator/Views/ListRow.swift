@@ -18,52 +18,39 @@ struct ListRow: View {
     var body: some View {
         HStack {
             if (groceryItem.amount > 0) {
-                Image(systemName: "circle.fill")
+                Image(systemName: "checkmark.circle.fill")
                     .resizable()
                     .frame(width: 25, height: 25, alignment: .center)
                     .foregroundColor(.blue)
                     .onTapGesture {
-//                        showBuyItemPopUp()
                         self.groceryItem.amount = 0
                         self.updateGrocery()
                     }
                                 
                 TextField("", text: $groceryItem.name, onCommit: updateGrocery)
                     .foregroundColor(.gray)
+                    .frame(height: 25)
 //                Text("×\(groceryItem.amount)")
 //                Spacer()
-                Text("€\(groceryItem.readablePrice)")
+                Text("\(groceryItem.readablePrice)")
             } else {
-//                NavigationLink(destination: BuyItemPopUp(amountString: "\(self.groceryItem.amount)",
-//                                                         unitPriceString: String(format: "%.2f", self.groceryItem.unitPrice),
-//                                                         okAction: buyItem(amount:unitPrice:),
-//                                                         cancelAction: {self.pushed = false}), isActive: $pushed) {
-//                    Image(systemName: "circle")
-//                        .resizable()
-//                        .frame(width: 25, height: 25, alignment: .center)
-//                }
-//                Navig
                 Image(systemName: "circle")
                     .resizable()
                     .frame(width: 25, height: 25, alignment: .center)
                     .foregroundColor(.blue)
                     .onTapGesture {
                         self.pushed = true
-                        
-//                        self.showBuyItemPopUp(self.groceryItem)
-//                        self.groceryItem.amount = 1
-//                        self.updateGrocery()
                     }
                 
                 TextField("", text: $groceryItem.name, onCommit: updateGrocery)
+                    .frame(height: 25)
             }
             Spacer()
-        }.padding()
+        }
+        .padding(.vertical, 10)
         .sheet(isPresented: $pushed) {
                 BuyItemPopUp(groceryItem: self.groceryItem,
-                    amountString: "\(self.groceryItem.amount)",
-                unitPriceString: String(format: "%.2f", self.groceryItem.unitPrice),
-                okAction: self.buyItem(amount:unitPrice:),
+                okAction: self.buyItem(groceryItem:),
                 cancelAction: {self.pushed = false})
         }
     }
@@ -71,14 +58,10 @@ struct ListRow: View {
     func updateGrocery() {
         groceryItem.save()
         groceryItems.refresh()
-//        groceryItems.edit(groceryItem: groceryItem)
     }
     
-    func buyItem(amount: Int, unitPrice: Double) {
-        groceryItem.amount = amount
-        groceryItem.unitPrice = unitPrice
+    func buyItem(groceryItem: GroceryItem) {
         groceryItem.save()
-//        self.selectedGrocery = nil
         self.groceryItems.refresh()
         self.pushed = false
     }
@@ -86,9 +69,17 @@ struct ListRow: View {
 
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
+        let grocery1 = GroceryItem(name: "Milk")
+        grocery1.amount = 2
+        grocery1.unitPrice = 0.99
+        
+        let grocery2 = GroceryItem(name: "Butter")
+        grocery2.amount = 0
+        grocery2.unitPrice = 0.99
+        
         return Group {
-            ListRow(showBuyItemPopUp: {_ in }, groceryItem: groceries[0])
-            ListRow(showBuyItemPopUp: {_ in }, groceryItem: groceries[5])
+            ListRow(showBuyItemPopUp: {_ in }, groceryItem: grocery1)
+            ListRow(showBuyItemPopUp: {_ in }, groceryItem: grocery2)
         }
         .previewLayout(.fixed(width: 300, height: 70))
     }

@@ -9,25 +9,22 @@
 import SwiftUI
 
 struct TotalRow: View {
-    var totalPrice: Double
+    var totalPrice: String
     
     var body: some View {
         HStack {
             Text("Total").font(.title).fontWeight(.bold)
             Spacer()
-            Text("€\(readablePrice)")
+            Text("\(totalPrice)")
         }
         .padding()
     }
-    
-    var readablePrice: String {
-        String(format: "%.2f", totalPrice)
-    }
+
 }
 
 struct TotalRow_Previews: PreviewProvider {
     static var previews: some View {
-        TotalRow(totalPrice: 12.39)
+        TotalRow(totalPrice: "12.39")
         .previewLayout(.fixed(width: 300, height: 70))
     }
 }

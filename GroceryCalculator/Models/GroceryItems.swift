@@ -51,6 +51,10 @@ class GroceryItems: ObservableObject {
         list.reduce(0) { $0 + $1.price }
     }
     
+    var readablePrice: String {
+        String(format: "%.2f", total)
+    }
+    
     class var withSampleData:GroceryItems {
         let groceryItems = GroceryItems()
         groceryItems.list = groceries

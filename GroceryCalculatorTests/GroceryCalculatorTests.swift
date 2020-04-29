@@ -41,7 +41,7 @@ class GroceryCalculatorTests: XCTestCase {
     }
     
     func testInsertAndUpdate() {
-        var item = GroceryItem(name: "Banana")
+        let item = GroceryItem(name: "Banana")
         item.save()
         
         var groceries = GroceryItem.fetchAll()

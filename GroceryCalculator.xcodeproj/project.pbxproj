@@ -27,6 +27,7 @@
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F571C922453282D0007A019 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
 		1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C932456DFBB0007A019 /* GroceryListTests.swift */; };
+		1F59C5FD2459E1FF0004B152 /* DecimalField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59C5FC2459E1FF0004B152 /* DecimalField.swift */; };
 		1F70E41123C8D22400B181DC /* AddItemPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E41023C8D22400B181DC /* AddItemPopUp.swift */; };
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
@@ -77,6 +78,7 @@
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		1F571C912453282D0007A019 /* GroceryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
 		1F571C932456DFBB0007A019 /* GroceryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTests.swift; sourceTree = "<group>"; };
+		1F59C5FC2459E1FF0004B152 /* DecimalField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalField.swift; sourceTree = "<group>"; };
 		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F70E41023C8D22400B181DC /* AddItemPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPopUp.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		1F1CF9DB23C8BE1A00053A71 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F59C5FC2459E1FF0004B152 /* DecimalField.swift */,
 				1F1CF9AD23C8BDC200053A71 /* ContentView.swift */,
 				1F1CF9D923C8BE1600053A71 /* ListRow.swift */,
 				1F158FB92456E667001A3668 /* NewGroceryRow.swift */,
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F59C5FD2459E1FF0004B152 /* DecimalField.swift in Sources */,
 				1F1CF9AC23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld in Sources */,
 				1F1CF9E823C8C59300053A71 /* Data.swift in Sources */,
 				1F571C922453282D0007A019 /* GroceryItems.swift in Sources */,

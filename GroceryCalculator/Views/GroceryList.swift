@@ -14,6 +14,7 @@ struct GroceryList: View {
 //    @State var buyItemPopUpVisible = false
     @State var selectedGrocery: GroceryItem?
     
+    @ObservedObject var keyboard = KeyboardResponder()
     @EnvironmentObject var groceryItems: GroceryItems
     @State private var editMode = EditMode.inactive
         
@@ -26,43 +27,22 @@ struct GroceryList: View {
                         ForEach(groceryItems.list) { grocery in
                             ListRow(showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:), groceryItem: grocery)
                         }.onDelete(perform: onDelete(offsets:))
+                        // Blank row for adding new grocery
                         NewGroceryRow()
                     }
-                    TotalRow(totalPrice: groceryItems.total)
+                    // Row showing total value of purchase
+                    if (keyboard.currentHeight == 0) {
+                        TotalRow(totalPrice: groceryItems.readablePrice)
+                    }
                 }
                 .environment(\.editMode, $editMode)
                 .navigationBarTitle(Text("Grocery List"))
                 .navigationBarItems(leading: EditButton())
+                .padding(.bottom, keyboard.currentHeight)
+                .edgesIgnoringSafeArea(.bottom)
+                .animation(.easeInOut(duration: 0.16))
             }
             .navigationViewStyle(StackNavigationViewStyle())
-//            .padding(.leading, leadingPadding())
-                        
-//            if (addItemPopUpVisible) {
-//                // If the pop-up should be visible, add a dark background
-//                Color.black.opacity(0.65)
-//                    .edgesIgnoringSafeArea(.all)
-//                    .onTapGesture {
-//                        self.addItemPopUpVisible.toggle()
-//                    }
-//
-//                AddItemPopUp(okAction: addItem(name:), cancelAction: {
-//                    self.addItemPopUpVisible.toggle()
-//                })
-//            }
-            
-//            if (buyItemPopUpVisible) {
-//                Color.black.opacity(0.65)
-//                    .edgesIgnoringSafeArea(.all)
-//                    .onTapGesture {
-//                        self.buyItemPopUpVisible.toggle()
-//                    }
-//
-//                BuyItemPopUp(amountString: "\(self.selectedGrocery!.amount)",
-//                    unitPriceString: String(format: "%.2f", self.selectedGrocery!.unitPrice),
-//                okAction: buyItem(amount:unitPrice:), cancelAction: {
-//                    self.buyItemPopUpVisible.toggle()
-//                })
-//            }
         }
     }
     
@@ -74,26 +54,6 @@ struct GroceryList: View {
         groceryItems.list.move(fromOffsets: source, toOffset: destination)
     }
     
-//    private func onAdd() {
-//        self.addItemPopUpVisible.toggle()
-//    }
-    
-    func addItem(name: String) {
-        groceryItems.add(name: name)
-//        self.addItemPopUpVisible.toggle()
-    }
-    
-    func buyItem(amount: Int, unitPrice: Double) {
-        if let groceryItem = self.selectedGrocery?.duplicate() {
-            groceryItem.amount = amount
-            groceryItem.unitPrice = unitPrice
-            groceryItem.save()
-        }
-        self.selectedGrocery = nil
-        self.groceryItems.refresh()
-//        self.buyItemPopUpVisible.toggle()
-    }
-    
     private func leadingPadding() -> CGFloat {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return 0.5
@@ -103,12 +63,36 @@ struct GroceryList: View {
     
     func showBuyItemPopUp(groceryItem: GroceryItem) {
         self.selectedGrocery = groceryItem
-//        self.buyItemPopUpVisible.toggle()
     }
 }
 
 struct GroceryList_Previews: PreviewProvider {
     static var previews: some View {
-        GroceryList().environmentObject(GroceryItems.withSampleData)
+        GroceryList().environmentObject(GroceryItems())
+    }
+}
+
+final class KeyboardResponder: ObservableObject {
+    private var notificationCenter: NotificationCenter
+    @Published private(set) var currentHeight: CGFloat = 0
+
+    init(center: NotificationCenter = .default) {
+        notificationCenter = center
+        notificationCenter.addObserver(self, selector: #selector(keyBoardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyBoardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
+
+    @objc func keyBoardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            currentHeight = keyboardSize.height// - 110
+        }
+    }
+
+    @objc func keyBoardWillHide(notification: Notification) {
+        currentHeight = 0
     }
 }

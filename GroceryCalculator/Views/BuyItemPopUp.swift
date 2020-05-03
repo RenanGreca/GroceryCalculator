@@ -94,7 +94,7 @@ struct BuyItemPopUp_Previews: PreviewProvider {
         
         return BuyItemPopUp(groceryItem: groceryItem,
         okAction: { groceryItem in
-            print("\(groceryItem.amountString), \(groceryItem.readablePrice)")
+            print("\(groceryItem.purchasedAmount), \(groceryItem.readablePrice)")
         }, cancelAction: {
             print("nothing added")
         }).environment(\.colorScheme, .dark)

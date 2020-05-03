@@ -30,6 +30,13 @@ class GroceryItems: ObservableObject {
         }
         list.remove(atOffsets: offsets)
     }
+    
+    func clear() {
+        for groceryItem in list {
+            groceryItem.delete()
+        }
+        self.refresh()
+    }
 
     func move(from source: IndexSet, to destination: Int) {
         list.move(fromOffsets: source, toOffset: destination)
@@ -56,7 +63,7 @@ class GroceryItems: ObservableObject {
     }
     
     var readablePrice: String {
-        String(format: "%.2f", total)
+        currencyFormatter.string(for: total) ?? "0"
     }
     
     class var withSampleData:GroceryItems {

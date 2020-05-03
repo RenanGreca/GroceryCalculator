@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ListRow: View {
     
-    var showBuyItemPopUp:((GroceryItem) -> Void)
     @ObservedObject var groceryItem: GroceryItem
+    var showBuyItemPopUp:((GroceryItem) -> Void)
     @EnvironmentObject var groceryItems: GroceryItems
     @State var pushed = false
     
@@ -56,7 +56,13 @@ struct ListRow: View {
     }
     
     func updateGrocery() {
-        groceryItem.save()
+        if (groceryItem.name.count == 0) {
+            // If the string is empty, we can delete this item
+            groceryItem.delete()
+            groceryItems.list.removeAll(where: {$0 == groceryItem})
+        } else {
+            groceryItem.save()
+        }
         groceryItems.refresh()
     }
     
@@ -78,8 +84,8 @@ struct ListRow_Previews: PreviewProvider {
         grocery2.unitPrice = 0.99
         
         return Group {
-            ListRow(showBuyItemPopUp: {_ in }, groceryItem: grocery1)
-            ListRow(showBuyItemPopUp: {_ in }, groceryItem: grocery2)
+            ListRow(groceryItem: grocery1, showBuyItemPopUp: {_ in })
+            ListRow(groceryItem: grocery2, showBuyItemPopUp: {_ in })
         }
         .previewLayout(.fixed(width: 300, height: 70))
     }

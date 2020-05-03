@@ -48,7 +48,7 @@ class GroceryCalculatorTests: XCTestCase {
         XCTAssertEqual(item, groceries.first!)
         
         // Change something in the item, save and test again
-        item.amount = 2
+        item.purchasedAmount = 2
         item.save()
         
         groceries = GroceryItem.fetchAll()

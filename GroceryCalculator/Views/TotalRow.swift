@@ -13,9 +13,9 @@ struct TotalRow: View {
     
     var body: some View {
         HStack {
-            Text("Total").font(.title).fontWeight(.bold)
+            Text("Total").font(.title).bold()
             Spacer()
-            Text("\(totalPrice)")
+            Text("\(totalPrice)").bold()
         }
         .padding()
     }

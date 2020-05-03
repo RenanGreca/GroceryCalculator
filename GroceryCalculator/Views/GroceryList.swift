@@ -25,7 +25,7 @@ struct GroceryList: View {
                 VStack {
                     List {
                         ForEach(groceryItems.list) { grocery in
-                            ListRow(showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:), groceryItem: grocery)
+                            ListRow(groceryItem: grocery, showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:))
                         }.onDelete(perform: onDelete(offsets:))
                         // Blank row for adding new grocery
                         NewGroceryRow()
@@ -37,7 +37,11 @@ struct GroceryList: View {
                 }
                 .environment(\.editMode, $editMode)
                 .navigationBarTitle(Text("Grocery List"))
-                .navigationBarItems(leading: EditButton())
+                .navigationBarItems(leading: Button(action: {
+                    self.groceryItems.clear()
+                }, label: {
+                    Text("Clear")
+                }))
                 .padding(.bottom, keyboard.currentHeight)
 //                .edgesIgnoringSafeArea(.bottom)
                 .animation(.easeInOut(duration: 0.16))

@@ -63,40 +63,54 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         self.name = managedItem.name!
     }
     
-    var amountString: String {
-        get {
-            return "\(purchasedAmount)"
-        }
-        set {
-            self.purchasedAmount = Int(newValue) ?? 0
-        }
-    }
+//    var amountString: String {
+//        get {
+//            return "\(purchasedAmount)"
+//        }
+//        set {
+//            self.purchasedAmount = Int(newValue) ?? 0
+//        }
+//    }
     
+    /// Used for binding with TextFields. Automatically sets the unitPrice.
     var visibleUnitPrice: String {
         get {
-//            return String(format: "%.2f", unitPrice)
-//            return (unitPrice == 0 ? "" : "\(unitPrice)")
+            // Just show the formatted string
             return self.unitPriceString
         }
         set {
-//            self.unitPriceString = numberFormatter.string(for: new)
-//            let priceString = newValue.replacingOccurrences(of: ",", with: ".")
-//            let unitPriceString = newValue.replacingOccurrences(of: ",", with: ".")
+            self.unitPriceString = newValue
             if let unitPrice = numberFormatter.number(from: newValue) as? Double {
                 self.unitPrice = unitPrice
-                self.unitPriceString = numberFormatter.string(for: unitPrice) ?? newValue
             }
+//            let numericCharacters = CharacterSet(charactersIn: "1234567890")
+//            // Remove all non-numeric characters from string
+//            var input = newValue.trimmingCharacters(in: numericCharacters.inverted)
+//            if (input.count >= 3) {
+//                input.insert(".", at: input.index(after: input.startIndex))
+//            }
+//
+//            // Set the new unit price
+//            if let unitPrice = Double(input) {
+//                // Save the valid number
+//                self.unitPrice = unitPrice
+//                // Format the string for the input field
+//                self.unitPriceString = numberFormatter.string(for: unitPrice) ?? newValue
+//            }
         }
     }
     
+    /// The total price of the units pruchased.
     var price: Double {
         unitPrice*Double(purchasedAmount)
     }
     
+    /// The `price` formatted to the local currency.
     var readablePrice: String {
         return currencyFormatter.string(for: price) ?? ""
     }
     
+    /// Saves the item to CoreData.
     func save() {
         let item:GroceryItemManagedObject
         if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
@@ -122,12 +136,14 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
 //        return groceryItem
 //    }
     
+    /// Removes the item from CoreData.
     func delete() {
         if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
             CoreDataHelper.context.delete(managedItem)
         }
     }
     
+    /// Finds the item with the given `id`.
     static func fetchManagedWith(id:UUID) -> GroceryItemManagedObject? {
         let fetchRequest = NSFetchRequest<GroceryItemManagedObject>(entityName: "GroceryItem")
         let searchFilter = NSPredicate(format: "id = %@", id as CVarArg)
@@ -142,6 +158,7 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         }
     }
     
+    /// Lists all items stored in CoreData.
     static func fetchAll() -> [GroceryItem] {
         let fetchRequest = NSFetchRequest<GroceryItemManagedObject>(entityName: "GroceryItem")
                 

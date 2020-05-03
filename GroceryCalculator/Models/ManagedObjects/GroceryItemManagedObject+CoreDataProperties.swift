@@ -17,7 +17,8 @@ extension GroceryItemManagedObject {
         return NSFetchRequest<GroceryItemManagedObject>(entityName: "GroceryItem")
     }
 
-    @NSManaged public var amount: Int64
+    @NSManaged public var desiredAmount: Int64
+    @NSManaged public var purchasedAmount: Int64
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var unitPrice: Double

@@ -18,17 +18,13 @@
 		1F1CF9B623C8BDC300053A71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9B423C8BDC300053A71 /* LaunchScreen.storyboard */; };
 		1F1CF9C123C8BDC300053A71 /* GroceryCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9C023C8BDC300053A71 /* GroceryCalculatorTests.swift */; };
 		1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9D923C8BE1600053A71 /* ListRow.swift */; };
-		1F1CF9DD23C8BE3000053A71 /* PurchaseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DC23C8BE3000053A71 /* PurchaseRow.swift */; };
 		1F1CF9DF23C8BE6800053A71 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */; };
 		1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */; };
-		1F1CF9E423C8C0B600053A71 /* PurchaseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E323C8C0B600053A71 /* PurchaseList.swift */; };
 		1F1CF9E623C8C3C700053A71 /* SampleGroceries.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */; };
 		1F1CF9E823C8C59300053A71 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E723C8C59300053A71 /* Data.swift */; };
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F571C922453282D0007A019 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
 		1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C932456DFBB0007A019 /* GroceryListTests.swift */; };
-		1F59C5FD2459E1FF0004B152 /* DecimalField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59C5FC2459E1FF0004B152 /* DecimalField.swift */; };
-		1F70E41123C8D22400B181DC /* AddItemPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E41023C8D22400B181DC /* AddItemPopUp.swift */; };
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
 /* End PBXBuildFile section */
@@ -69,19 +65,15 @@
 		1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCalculatorUITests.swift; sourceTree = "<group>"; };
 		1F1CF9CD23C8BDC300053A71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1CF9D923C8BE1600053A71 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
-		1F1CF9DC23C8BE3000053A71 /* PurchaseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRow.swift; sourceTree = "<group>"; };
 		1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryList.swift; sourceTree = "<group>"; };
-		1F1CF9E323C8C0B600053A71 /* PurchaseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseList.swift; sourceTree = "<group>"; };
 		1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleGroceries.json; sourceTree = "<group>"; };
 		1F1CF9E723C8C59300053A71 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		1F571C912453282D0007A019 /* GroceryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
 		1F571C932456DFBB0007A019 /* GroceryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTests.swift; sourceTree = "<group>"; };
-		1F59C5FC2459E1FF0004B152 /* DecimalField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecimalField.swift; sourceTree = "<group>"; };
 		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1F70E41023C8D22400B181DC /* AddItemPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPopUp.swift; sourceTree = "<group>"; };
 		1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,7 +132,6 @@
 				1F1CF9AF23C8BDC300053A71 /* Assets.xcassets */,
 				1F1CF9B423C8BDC300053A71 /* LaunchScreen.storyboard */,
 				1F1CF9B723C8BDC300053A71 /* Info.plist */,
-				1F1CF9AA23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld */,
 				1F1CF9B123C8BDC300053A71 /* Preview Content */,
 				1F1CF9DB23C8BE1A00053A71 /* Views */,
 				1F1CF9E023C8BE6C00053A71 /* Models */,
@@ -180,15 +171,11 @@
 		1F1CF9DB23C8BE1A00053A71 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1F59C5FC2459E1FF0004B152 /* DecimalField.swift */,
 				1F1CF9AD23C8BDC200053A71 /* ContentView.swift */,
 				1F1CF9D923C8BE1600053A71 /* ListRow.swift */,
 				1F158FB92456E667001A3668 /* NewGroceryRow.swift */,
-				1F1CF9DC23C8BE3000053A71 /* PurchaseRow.swift */,
 				1F1CF9E923C8C68900053A71 /* TotalRow.swift */,
 				1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */,
-				1F1CF9E323C8C0B600053A71 /* PurchaseList.swift */,
-				1F70E41023C8D22400B181DC /* AddItemPopUp.swift */,
 				1F18C53D23C8E50A00350F12 /* BuyItemPopUp.swift */,
 			);
 			path = Views;
@@ -197,6 +184,7 @@
 		1F1CF9E023C8BE6C00053A71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1F1CF9AA23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld */,
 				1F65BD2D23CA317200F41F90 /* ManagedObjects */,
 				1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */,
 				1F571C912453282D0007A019 /* GroceryItems.swift */,
@@ -346,18 +334,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F59C5FD2459E1FF0004B152 /* DecimalField.swift in Sources */,
 				1F1CF9AC23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld in Sources */,
 				1F1CF9E823C8C59300053A71 /* Data.swift in Sources */,
 				1F571C922453282D0007A019 /* GroceryItems.swift in Sources */,
-				1F1CF9DD23C8BE3000053A71 /* PurchaseRow.swift in Sources */,
 				1F1CF9A723C8BDC200053A71 /* AppDelegate.swift in Sources */,
 				1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */,
 				1F18C53E23C8E50A00350F12 /* BuyItemPopUp.swift in Sources */,
-				1F70E41123C8D22400B181DC /* AddItemPopUp.swift in Sources */,
 				1F1CF9AE23C8BDC200053A71 /* ContentView.swift in Sources */,
 				1F158FBA2456E667001A3668 /* NewGroceryRow.swift in Sources */,
-				1F1CF9E423C8C0B600053A71 /* PurchaseList.swift in Sources */,
 				1F1CF9A923C8BDC200053A71 /* SceneDelegate.swift in Sources */,
 				1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */,
 				1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */,

@@ -39,7 +39,7 @@ struct GroceryList: View {
                 .navigationBarTitle(Text("Grocery List"))
                 .navigationBarItems(leading: EditButton())
                 .padding(.bottom, keyboard.currentHeight)
-                .edgesIgnoringSafeArea(.bottom)
+//                .edgesIgnoringSafeArea(.bottom)
                 .animation(.easeInOut(duration: 0.16))
             }
             .navigationViewStyle(StackNavigationViewStyle())
@@ -47,11 +47,11 @@ struct GroceryList: View {
     }
     
     private func onDelete(offsets: IndexSet) {
-        groceryItems.list.remove(atOffsets: offsets)
+        groceryItems.remove(at: offsets)
     }
 
     private func onMove(source: IndexSet, destination: Int) {
-        groceryItems.list.move(fromOffsets: source, toOffset: destination)
+        groceryItems.move(from: source, to: destination)
     }
     
     private func leadingPadding() -> CGFloat {

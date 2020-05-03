@@ -28,7 +28,7 @@ struct BuyItemPopUp: View {
                 HStack {
                     Text("Amount:").font(.headline).fontWeight(.bold)
                     Spacer()
-                    Stepper("\(groceryItem.amount)", value: $groceryItem.amount)
+                    Stepper("\(groceryItem.purchasedAmount)", value: $groceryItem.purchasedAmount)
 //                    TextField("Amount", text: $groceryItem.amountString)
 //                        .frame(width: 100, height: 50)
 //                        .border(Color.gray)
@@ -42,8 +42,12 @@ struct BuyItemPopUp: View {
                 HStack {
                     Text("Unit Price").font(.headline).fontWeight(.bold)
                     Spacer()
-//                    DecimalField("Unit Price", value: $groceryItem.unitPrice, formatter: self.currencyFormatter)
-                    TextField("Unit Price", text: $groceryItem.unitPriceString, onCommit: {
+//                    DecimalField("Unit Price", value: $price, formatter: self.currencyFormatter, onEditingChanged: { _ in
+//                        self.groceryItem.unitPrice = self.price
+//                    }, onCommit: {
+//
+//                    })
+                    TextField("Unit Price", text: $groceryItem.visibleUnitPrice, onCommit: {
                         self.okAction(self.groceryItem)
                     })
                         .frame(width: 100, height: 50)
@@ -85,7 +89,7 @@ struct BuyItemPopUp: View {
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
         let groceryItem = GroceryItem(name: "Milk")
-        groceryItem.amount = 2
+        groceryItem.purchasedAmount = 2
         groceryItem.unitPrice = 0.99
         
         return BuyItemPopUp(groceryItem: groceryItem,

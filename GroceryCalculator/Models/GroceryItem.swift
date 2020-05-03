@@ -18,6 +18,21 @@ struct CoreDataHelper {
     static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 }
 
+var numberFormatter: NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.locale = Locale.current
+    formatter.numberStyle = .decimal
+    formatter.maximumFractionDigits = 2
+    formatter.isLenient = true
+    return formatter
+}
+
+var currencyFormatter: NumberFormatter {
+    let formatter = numberFormatter
+    formatter.numberStyle = .currency
+    return formatter
+}
+
 class GroceryItem: Equatable, Identifiable, ObservableObject {
     static func == (lhs: GroceryItem, rhs: GroceryItem) -> Bool {
         return lhs.name == rhs.name
@@ -25,54 +40,60 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
     
     internal var id: UUID
     @Published var name: String
-    @Published var amount: Int
-    @Published var unitPrice: Double
+    @Published var desiredAmount: Int = 1
+    @Published var purchasedAmount: Int = 0
+    
+    @Published var unitPrice: Double = 0.0
+    private var unitPriceString: String = ""
+    
     
     init(name: String) {
         self.name = name
-        self.amount = 0
-        self.unitPrice = 0.0
+//        self.amount = 0
+//        self.unitPrice = 0.0
         self.id = .init()
     }
     
     init(from managedItem:GroceryItemManagedObject) {
         self.id = managedItem.id!
-        self.amount = Int(managedItem.amount)
+        self.desiredAmount = Int(managedItem.desiredAmount)
+        self.purchasedAmount = Int(managedItem.purchasedAmount)
         self.unitPrice = managedItem.unitPrice
+        self.unitPriceString = numberFormatter.string(for: managedItem.unitPrice) ?? ""
         self.name = managedItem.name!
     }
     
     var amountString: String {
         get {
-            return "\(amount)"
+            return "\(purchasedAmount)"
         }
         set {
-            self.amount = Int(newValue) ?? 0
+            self.purchasedAmount = Int(newValue) ?? 0
         }
     }
     
-    var unitPriceString: String {
+    var visibleUnitPrice: String {
         get {
-            return String(format: "%.2f", unitPrice)
+//            return String(format: "%.2f", unitPrice)
+//            return (unitPrice == 0 ? "" : "\(unitPrice)")
+            return self.unitPriceString
         }
         set {
-            let unitPriceString = newValue.replacingOccurrences(of: ",", with: ".")
-            self.unitPrice = Double(unitPriceString) ?? 0.0
+//            self.unitPriceString = numberFormatter.string(for: new)
+//            let priceString = newValue.replacingOccurrences(of: ",", with: ".")
+//            let unitPriceString = newValue.replacingOccurrences(of: ",", with: ".")
+            if let unitPrice = numberFormatter.number(from: newValue) as? Double {
+                self.unitPrice = unitPrice
+                self.unitPriceString = numberFormatter.string(for: unitPrice) ?? newValue
+            }
         }
     }
     
     var price: Double {
-        unitPrice*Double(amount)
+        unitPrice*Double(purchasedAmount)
     }
     
     var readablePrice: String {
-        var currencyFormatter: NumberFormatter {
-            let nf = NumberFormatter()
-            nf.numberStyle = .currency
-            nf.isLenient = true
-            nf.currencySymbol = "€"
-            return nf
-        }
         return currencyFormatter.string(for: price) ?? ""
     }
     
@@ -86,17 +107,25 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         item.id = self.id
         item.name = self.name
         item.unitPrice = self.unitPrice
-        item.amount = Int64(self.amount)
+        item.desiredAmount = Int64(self.desiredAmount)
+        item.purchasedAmount = Int64(self.purchasedAmount)
         
         try? CoreDataHelper.context.save()
     }
     
-    func duplicate() -> GroceryItem {
-        let groceryItem = GroceryItem(name: self.name)
-        groceryItem.id = self.id
-        groceryItem.amount = self.amount
-        groceryItem.unitPrice = self.unitPrice
-        return groceryItem
+//    func duplicate() -> GroceryItem {
+//        let groceryItem = GroceryItem(name: self.name)
+//        groceryItem.id = self.id
+//        groceryItem.purchasedAmount = self.purchasedAmount
+//        groceryItem.desiredAmount = self.desiredAmount
+//        groceryItem.unitPrice = self.unitPrice
+//        return groceryItem
+//    }
+    
+    func delete() {
+        if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
+            CoreDataHelper.context.delete(managedItem)
+        }
     }
     
     static func fetchManagedWith(id:UUID) -> GroceryItemManagedObject? {

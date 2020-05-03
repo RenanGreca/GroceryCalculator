@@ -17,21 +17,19 @@ struct ListRow: View {
     
     var body: some View {
         HStack {
-            if (groceryItem.amount > 0) {
+            if (groceryItem.purchasedAmount > 0) {
                 Image(systemName: "checkmark.circle.fill")
                     .resizable()
                     .frame(width: 25, height: 25, alignment: .center)
                     .foregroundColor(.blue)
                     .onTapGesture {
-                        self.groceryItem.amount = 0
+                        self.groceryItem.purchasedAmount = 0
                         self.updateGrocery()
                     }
                                 
                 TextField("", text: $groceryItem.name, onCommit: updateGrocery)
                     .foregroundColor(.gray)
                     .frame(height: 25)
-//                Text("×\(groceryItem.amount)")
-//                Spacer()
                 Text("\(groceryItem.readablePrice)")
             } else {
                 Image(systemName: "circle")
@@ -39,6 +37,8 @@ struct ListRow: View {
                     .frame(width: 25, height: 25, alignment: .center)
                     .foregroundColor(.blue)
                     .onTapGesture {
+                        // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+                        self.groceryItem.purchasedAmount = self.groceryItem.desiredAmount
                         self.pushed = true
                     }
                 
@@ -70,11 +70,11 @@ struct ListRow: View {
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
         let grocery1 = GroceryItem(name: "Milk")
-        grocery1.amount = 2
+        grocery1.purchasedAmount = 2
         grocery1.unitPrice = 0.99
         
         let grocery2 = GroceryItem(name: "Butter")
-        grocery2.amount = 0
+        grocery2.purchasedAmount = 0
         grocery2.unitPrice = 0.99
         
         return Group {

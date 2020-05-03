@@ -23,11 +23,15 @@ class GroceryItems: ObservableObject {
         self.list.append(groceryItem)
     }
     
-    func onDelete(offsets: IndexSet) {
+    func remove(at offsets: IndexSet) {
+        for index in offsets {
+            let groceryItem = list[index]
+            groceryItem.delete()
+        }
         list.remove(atOffsets: offsets)
     }
 
-    func onMove(source: IndexSet, destination: Int) {
+    func move(from source: IndexSet, to destination: Int) {
         list.move(fromOffsets: source, toOffset: destination)
     }
     

@@ -60,16 +60,19 @@ struct ListRow: View {
             // If the string is empty, we can delete this item
             groceryItem.delete()
             groceryItems.list.removeAll(where: {$0 == groceryItem})
+            groceryItems.refresh()
         } else {
-            groceryItem.save()
+            groceryItem.save() {
+                self.groceryItems.refresh()
+            }
         }
-        groceryItems.refresh()
     }
     
     func buyItem(groceryItem: GroceryItem) {
-        groceryItem.save()
-        self.groceryItems.refresh()
-        self.pushed = false
+        groceryItem.save() {
+            self.groceryItems.refresh()
+            self.pushed = false
+        }
     }
 }
 

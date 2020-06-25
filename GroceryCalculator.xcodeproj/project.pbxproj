@@ -26,8 +26,21 @@
 		1F3F182E245F166F00A40EE6 /* GroceryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */; };
 		1F571C922453282D0007A019 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
 		1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C932456DFBB0007A019 /* GroceryListTests.swift */; };
+		1F6124BB24656C8B00CE2E75 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124B924656C8B00CE2E75 /* Interface.storyboard */; };
+		1F6124BD24656C8E00CE2E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124BC24656C8E00CE2E75 /* Assets.xcassets */; };
+		1F6124C424656C8E00CE2E75 /* Shopping Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124C824656C8E00CE2E75 /* ContentView.swift */; };
+		1F6124CB24656C8E00CE2E75 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CA24656C8E00CE2E75 /* HostingController.swift */; };
+		1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */; };
+		1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CE24656C8E00CE2E75 /* NotificationController.swift */; };
+		1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124D024656C8E00CE2E75 /* NotificationView.swift */; };
+		1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124D224656C8E00CE2E75 /* ComplicationController.swift */; };
+		1F6124D524656C8F00CE2E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124D424656C8F00CE2E75 /* Assets.xcassets */; };
+		1F6124D824656C8F00CE2E75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */; };
+		1F6124DD24656C8F00CE2E75 /* ShoppingWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
+		1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C2724A4AD73008AF525 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +51,20 @@
 			remoteGlobalIDString = 1F1CF9A223C8BDC200053A71;
 			remoteInfo = GroceryCalculator;
 		};
+		1F6124C524656C8E00CE2E75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F1CF99B23C8BDC200053A71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F6124C224656C8E00CE2E75;
+			remoteInfo = "Shopping Extension";
+		};
+		1F6124DB24656C8F00CE2E75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F1CF99B23C8BDC200053A71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F6124B624656C8B00CE2E75;
+			remoteInfo = Shopping;
+		};
 		1F71102E23FAD2AC00A28576 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F1CF99B23C8BDC200053A71 /* Project object */;
@@ -46,6 +73,31 @@
 			remoteInfo = GroceryCalculator;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1F6124E124656C8F00CE2E75 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1F6124C424656C8E00CE2E75 /* Shopping Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F6124E524656C8F00CE2E75 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				1F6124DD24656C8F00CE2E75 /* ShoppingWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1F120A3824582E7A00DC6B3C /* GroceryCalculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GroceryCalculator.entitlements; sourceTree = "<group>"; };
@@ -74,10 +126,26 @@
 		1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItemTests.swift; sourceTree = "<group>"; };
 		1F571C912453282D0007A019 /* GroceryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
 		1F571C932456DFBB0007A019 /* GroceryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTests.swift; sourceTree = "<group>"; };
+		1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F6124BA24656C8B00CE2E75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		1F6124BC24656C8E00CE2E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F6124BE24656C8E00CE2E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Shopping Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F6124C824656C8E00CE2E75 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1F6124CA24656C8E00CE2E75 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		1F6124CE24656C8E00CE2E75 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		1F6124D024656C8E00CE2E75 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		1F6124D224656C8E00CE2E75 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		1F6124D424656C8F00CE2E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1F6124D924656C8F00CE2E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F6124DA24656C8F00CE2E75 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		1FF60C2724A4AD73008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +153,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1F1CF9B923C8BDC300053A71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F6124C024656C8E00CE2E75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -111,7 +187,10 @@
 				1F1CF9A523C8BDC200053A71 /* GroceryCalculator */,
 				1F1CF9BF23C8BDC300053A71 /* GroceryCalculatorTests */,
 				1F1CF9CA23C8BDC300053A71 /* GroceryCalculatorUITests */,
+				1F6124B824656C8B00CE2E75 /* Shopping */,
+				1F6124C724656C8E00CE2E75 /* Shopping Extension */,
 				1F1CF9A423C8BDC200053A71 /* Products */,
+				1FF60C2624A4AD73008AF525 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +200,8 @@
 				1F1CF9A323C8BDC200053A71 /* GroceryCalculator.app */,
 				1F1CF9BC23C8BDC300053A71 /* GroceryCalculatorTests.xctest */,
 				1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */,
+				1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */,
+				1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +277,41 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1F6124B824656C8B00CE2E75 /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				1F6124B924656C8B00CE2E75 /* Interface.storyboard */,
+				1F6124BC24656C8E00CE2E75 /* Assets.xcassets */,
+				1F6124BE24656C8E00CE2E75 /* Info.plist */,
+			);
+			path = Shopping;
+			sourceTree = "<group>";
+		};
+		1F6124C724656C8E00CE2E75 /* Shopping Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1F6124C824656C8E00CE2E75 /* ContentView.swift */,
+				1F6124CA24656C8E00CE2E75 /* HostingController.swift */,
+				1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */,
+				1F6124CE24656C8E00CE2E75 /* NotificationController.swift */,
+				1F6124D024656C8E00CE2E75 /* NotificationView.swift */,
+				1F6124D224656C8E00CE2E75 /* ComplicationController.swift */,
+				1F6124D424656C8F00CE2E75 /* Assets.xcassets */,
+				1F6124D924656C8F00CE2E75 /* Info.plist */,
+				1F6124DA24656C8F00CE2E75 /* PushNotificationPayload.apns */,
+				1F6124D624656C8F00CE2E75 /* Preview Content */,
+			);
+			path = "Shopping Extension";
+			sourceTree = "<group>";
+		};
+		1F6124D624656C8F00CE2E75 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		1F65BD2D23CA317200F41F90 /* ManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +319,14 @@
 				1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */,
 			);
 			path = ManagedObjects;
+			sourceTree = "<group>";
+		};
+		1FF60C2624A4AD73008AF525 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FF60C2724A4AD73008AF525 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,10 +339,12 @@
 				1F1CF99F23C8BDC200053A71 /* Sources */,
 				1F1CF9A023C8BDC200053A71 /* Frameworks */,
 				1F1CF9A123C8BDC200053A71 /* Resources */,
+				1F6124E524656C8F00CE2E75 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1F6124DC24656C8F00CE2E75 /* PBXTargetDependency */,
 			);
 			name = GroceryCalculator;
 			productName = GroceryCalculator;
@@ -242,6 +368,40 @@
 			productName = GroceryCalculatorTests;
 			productReference = 1F1CF9BC23C8BDC300053A71 /* GroceryCalculatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1F6124B624656C8B00CE2E75 /* ShoppingWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F6124E224656C8F00CE2E75 /* Build configuration list for PBXNativeTarget "ShoppingWatch" */;
+			buildPhases = (
+				1F6124B524656C8B00CE2E75 /* Resources */,
+				1F6124E124656C8F00CE2E75 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F6124C624656C8E00CE2E75 /* PBXTargetDependency */,
+			);
+			name = ShoppingWatch;
+			productName = Shopping;
+			productReference = 1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		1F6124C224656C8E00CE2E75 /* Shopping Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F6124DE24656C8F00CE2E75 /* Build configuration list for PBXNativeTarget "Shopping Extension" */;
+			buildPhases = (
+				1F6124BF24656C8E00CE2E75 /* Sources */,
+				1F6124C024656C8E00CE2E75 /* Frameworks */,
+				1F6124C124656C8E00CE2E75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Shopping Extension";
+			productName = "Shopping Extension";
+			productReference = 1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		1F71102823FAD2AC00A28576 /* GroceryCalculatorUITests */ = {
 			isa = PBXNativeTarget;
@@ -267,7 +427,7 @@
 		1F1CF99B23C8BDC200053A71 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Renan Greca";
 				TargetAttributes = {
@@ -277,6 +437,12 @@
 					1F1CF9BB23C8BDC300053A71 = {
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = 1F1CF9A223C8BDC200053A71;
+					};
+					1F6124B624656C8B00CE2E75 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					1F6124C224656C8E00CE2E75 = {
+						CreatedOnToolsVersion = 11.4.1;
 					};
 					1F71102823FAD2AC00A28576 = {
 						CreatedOnToolsVersion = 11.3;
@@ -300,6 +466,8 @@
 				1F1CF9A223C8BDC200053A71 /* GroceryCalculator */,
 				1F1CF9BB23C8BDC300053A71 /* GroceryCalculatorTests */,
 				1F71102823FAD2AC00A28576 /* GroceryCalculatorUITests */,
+				1F6124B624656C8B00CE2E75 /* ShoppingWatch */,
+				1F6124C224656C8E00CE2E75 /* Shopping Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +488,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F6124B524656C8B00CE2E75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F6124BD24656C8E00CE2E75 /* Assets.xcassets in Resources */,
+				1F6124BB24656C8B00CE2E75 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F6124C124656C8E00CE2E75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F6124D824656C8F00CE2E75 /* Preview Assets.xcassets in Resources */,
+				1F6124D524656C8F00CE2E75 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +549,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F6124BF24656C8E00CE2E75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F6124CB24656C8E00CE2E75 /* HostingController.swift in Sources */,
+				1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */,
+				1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */,
+				1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */,
+				1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */,
+				1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F71102523FAD2AC00A28576 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,6 +578,16 @@
 			target = 1F1CF9A223C8BDC200053A71 /* GroceryCalculator */;
 			targetProxy = 1F1CF9BD23C8BDC300053A71 /* PBXContainerItemProxy */;
 		};
+		1F6124C624656C8E00CE2E75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F6124C224656C8E00CE2E75 /* Shopping Extension */;
+			targetProxy = 1F6124C524656C8E00CE2E75 /* PBXContainerItemProxy */;
+		};
+		1F6124DC24656C8F00CE2E75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F6124B624656C8B00CE2E75 /* ShoppingWatch */;
+			targetProxy = 1F6124DB24656C8F00CE2E75 /* PBXContainerItemProxy */;
+		};
 		1F71102F23FAD2AC00A28576 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1F1CF9A223C8BDC200053A71 /* GroceryCalculator */;
@@ -393,6 +602,14 @@
 				1F1CF9B523C8BDC300053A71 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		1F6124B924656C8B00CE2E75 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F6124BA24656C8B00CE2E75 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -517,16 +734,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GroceryCalculator/GroceryCalculator.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GroceryCalculator/Preview Content\"";
-				DEVELOPMENT_TEAM = TN7Z9M8SW7;
+				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GroceryCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.GroceryCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -539,16 +757,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GroceryCalculator/GroceryCalculator.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GroceryCalculator/Preview Content\"";
-				DEVELOPMENT_TEAM = TN7Z9M8SW7;
+				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GroceryCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.GroceryCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -597,6 +816,92 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GroceryCalculator.app/GroceryCalculator";
+			};
+			name = Release;
+		};
+		1F6124DF24656C8F00CE2E75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Shopping Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 6E3MXG6BSH;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Shopping Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		1F6124E024656C8F00CE2E75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Shopping Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 6E3MXG6BSH;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Shopping Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		1F6124E324656C8F00CE2E75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6E3MXG6BSH;
+				IBSC_MODULE = Shopping_Extension;
+				INFOPLIST_FILE = Shopping/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		1F6124E424656C8F00CE2E75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6E3MXG6BSH;
+				IBSC_MODULE = Shopping_Extension;
+				INFOPLIST_FILE = Shopping/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
 			};
 			name = Release;
 		};
@@ -664,6 +969,24 @@
 			buildConfigurations = (
 				1F1CF9D423C8BDC300053A71 /* Debug */,
 				1F1CF9D523C8BDC300053A71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F6124DE24656C8F00CE2E75 /* Build configuration list for PBXNativeTarget "Shopping Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F6124DF24656C8F00CE2E75 /* Debug */,
+				1F6124E024656C8F00CE2E75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F6124E224656C8F00CE2E75 /* Build configuration list for PBXNativeTarget "ShoppingWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F6124E324656C8F00CE2E75 /* Debug */,
+				1F6124E424656C8F00CE2E75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

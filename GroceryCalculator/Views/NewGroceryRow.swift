@@ -28,9 +28,10 @@ struct NewGroceryRow: View {
     
     func addGrocery() {
         let groceryItem = GroceryItem(name: newGrocery)
-        groceryItem.save()
-        newGrocery = ""
-        self.groceryItems.append(groceryItem)
+        groceryItem.save() {
+            self.groceryItems.refresh()
+            self.newGrocery = ""
+        }
     }
 }
 

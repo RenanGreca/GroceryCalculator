@@ -56,16 +56,19 @@ class GroceryCalculatorTests: XCTestCase {
     }
     
     func testInsertTwoItems() {
-        let prevAmount = GroceryItem.fetchAll().count
+        let groceryItems = GroceryItems()
+        
+        let prevAmount = groceryItems.list.count
         
         let item1 = GroceryItem(name: "Banana")
         item1.save()
-        
+
         let item2 = GroceryItem(name: "Apple")
         item2.save()
 
-        let groceries = GroceryItem.fetchAll()
-        XCTAssertEqual(groceries.count, prevAmount+2)
+        groceryItems.refresh()
+        XCTAssertEqual(groceryItems.list.count, prevAmount+2)
+        XCTAssertEqual(item1, groceryItems.list.first!)
     }
 
 }

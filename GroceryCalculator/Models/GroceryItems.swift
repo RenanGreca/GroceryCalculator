@@ -7,16 +7,50 @@
 //
 
 import Foundation
+import CloudKit
 
 class GroceryItems: ObservableObject {
-    @Published var list:[GroceryItem]
+    @Published var list:[GroceryItem] = []
     
-    init() {
-        self.list = GroceryItem.fetchAll()
-    }
+//    init() {
+//        self.refresh()
+//    }
     
     func refresh() {
-        self.list = GroceryItem.fetchAll()
+//        self.list = GroceryItem.fetchAll()
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "GroceryItem", predicate: predicate)
+        groceryItems(forQuery: query)
+    }
+    
+    private func groceryItems(forQuery query: CKQuery) {//}, _ completion: @escaping(Error?) -> Void) {
+        let privateDB = CKContainer.default().privateCloudDatabase
+        
+        privateDB
+            .perform(query,
+                     inZoneWith: CKRecordZone.default().zoneID) {
+                        [weak self] results, error in
+                        
+                        guard let self = self else { return }
+                        if let _ = error {
+                            DispatchQueue.main.async {
+//                                completion(error)
+                            }
+                            return
+                        }
+                        
+                        guard let results = results else { return }
+                        
+                        DispatchQueue.main.async {
+                            self.list = results.compactMap() {
+                                GroceryItem(from: $0, database: privateDB)
+                            }
+//                            completion(nil)
+                        }
+            
+        }
+        
     }
     
     func append(_ groceryItem: GroceryItem) {
@@ -48,14 +82,16 @@ class GroceryItems: ObservableObject {
 //            list.insert(groceryItem, at: index)
 //            groceryItem.save()
 //        }
-        groceryItem.save()
-        self.refresh()
+        groceryItem.save() {
+            self.refresh()
+        }
     }
     
     func add(name: String) {
         let groceryItem = GroceryItem(name: name)
-        groceryItem.save()
-        list.append(groceryItem)
+        groceryItem.save() {
+            self.refresh()
+        }
     }
     
     var total: Double {

@@ -47,7 +47,7 @@ struct BuyItemPopUp: View {
 //                    }, onCommit: {
 //
 //                    })
-                    TextField("Unit Price", text: $groceryItem.visibleUnitPrice, onCommit: {
+                    TextField(currencyFormatter.string(for: 0.00)!, text: $groceryItem.visibleUnitPrice, onCommit: {
                         self.okAction(self.groceryItem)
                     })
                         .frame(width: 100, height: 50)

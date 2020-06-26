@@ -72,7 +72,15 @@ struct GroceryList: View {
 
 struct GroceryList_Previews: PreviewProvider {
     static var previews: some View {
+        Group {
         GroceryList().environmentObject(GroceryItems())
+            .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
+            .previewDisplayName("iPhone 11 Pro")
+        
+        GroceryList().environmentObject(GroceryItems())
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (2nd generation)"))
+            .previewDisplayName("iPad Pro (11-inch)")
+        }
     }
 }
 

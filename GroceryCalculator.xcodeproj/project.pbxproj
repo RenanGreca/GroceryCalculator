@@ -41,6 +41,7 @@
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
 		1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C2724A4AD73008AF525 /* CloudKit.framework */; };
+		1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		1FF60C2724A4AD73008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		1FF60C2924A60279008AF525 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 				1F120A3824582E7A00DC6B3C /* GroceryCalculator.entitlements */,
 				1F1CF9A623C8BDC200053A71 /* AppDelegate.swift */,
 				1F1CF9A823C8BDC200053A71 /* SceneDelegate.swift */,
+				1FF60C2924A60279008AF525 /* CloudKitHelper.swift */,
 				1F1CF9AF23C8BDC300053A71 /* Assets.xcassets */,
 				1F1CF9B423C8BDC300053A71 /* LaunchScreen.storyboard */,
 				1F1CF9B723C8BDC300053A71 /* Info.plist */,
@@ -525,6 +528,7 @@
 			files = (
 				1F1CF9AC23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld in Sources */,
 				1F1CF9E823C8C59300053A71 /* Data.swift in Sources */,
+				1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */,
 				1F571C922453282D0007A019 /* GroceryItems.swift in Sources */,
 				1F1CF9A723C8BDC200053A71 /* AppDelegate.swift in Sources */,
 				1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */,

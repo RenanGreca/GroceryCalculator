@@ -186,6 +186,18 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
     
     /// Removes the item from CoreData.
     func delete() {
+        let privateDB = CKContainer.default().privateCloudDatabase
+
+        let record = self.record ?? CKRecord(recordType: "GroceryItem", recordID: self.id)
+        
+        privateDB.delete(withRecordID: record.recordID) {
+            (recordID: CKRecord.ID?, error: Error?) -> Void in
+            if let _ = error {
+                print("Error saving data to iCloud")
+                return
+            }
+            print("Successfully saved data to iCloud")
+        }
 //        if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
 //            CoreDataHelper.context.delete(managedItem)
 //        }

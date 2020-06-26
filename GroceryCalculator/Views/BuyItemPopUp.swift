@@ -74,6 +74,7 @@ struct BuyItemPopUp: View {
                 Text("Done").fontWeight(.bold)
             })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
 //    var amount: Int {

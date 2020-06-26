@@ -8,14 +8,17 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        application.registerForRemoteNotifications()
+        
+        CloudKitHelper.subscribeToCloudChanges()
+                
         return true
     }
 
@@ -77,6 +80,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        let dict = userInfo as! [String: NSObject]
+        let notification = CKNotification(fromRemoteNotificationDictionary: dict)
+        
+        if notification?.subscriptionID == Bundle.main.bundleIdentifier!+".subscription.iCloud.GroceryCreate" {
+            CloudKitHelper.fetchPrivateChanges {
+                completionHandler(UIBackgroundFetchResult.newData)
+            }
+        }
+        
+        if notification?.subscriptionID == Bundle.main.bundleIdentifier!+".subscription.iCloud.GroceryDelete" {
+            CloudKitHelper.fetchPrivateChanges {
+                completionHandler(UIBackgroundFetchResult.newData)
+            }
+        }
+    }
+    
 
 }
 

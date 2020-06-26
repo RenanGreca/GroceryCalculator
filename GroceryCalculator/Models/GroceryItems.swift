@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import UserNotifications
 
 class GroceryItems: ObservableObject {
     @Published var list:[GroceryItem] = []
@@ -16,15 +17,18 @@ class GroceryItems: ObservableObject {
 //        self.refresh()
 //    }
     
-    func refresh() {
+    func refresh(_ completion: ((Error?) -> Void)? = nil) {
 //        self.list = GroceryItem.fetchAll()
         
         let predicate = NSPredicate(value: true)
+        
         let query = CKQuery(recordType: "GroceryItem", predicate: predicate)
-        groceryItems(forQuery: query)
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+
+        groceryItems(forQuery: query, completion)
     }
     
-    private func groceryItems(forQuery query: CKQuery) {//}, _ completion: @escaping(Error?) -> Void) {
+    private func groceryItems(forQuery query: CKQuery, _ completion: ((Error?) -> Void)?) {
         let privateDB = CKContainer.default().privateCloudDatabase
         
         privateDB
@@ -33,9 +37,10 @@ class GroceryItems: ObservableObject {
                         [weak self] results, error in
                         
                         guard let self = self else { return }
-                        if let _ = error {
+                        if let error = error {
+                            print(error.localizedDescription)
                             DispatchQueue.main.async {
-//                                completion(error)
+                                completion?(error)
                             }
                             return
                         }
@@ -46,7 +51,7 @@ class GroceryItems: ObservableObject {
                             self.list = results.compactMap() {
                                 GroceryItem(from: $0, database: privateDB)
                             }
-//                            completion(nil)
+                            completion?(nil)
                         }
             
         }
@@ -90,7 +95,10 @@ class GroceryItems: ObservableObject {
     func add(name: String) {
         let groceryItem = GroceryItem(name: name)
         groceryItem.save() {
-            self.refresh()
+//            self.refresh()
+            DispatchQueue.main.async {
+                self.list.append(groceryItem)
+            }
         }
     }
     

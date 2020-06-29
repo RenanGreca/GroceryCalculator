@@ -104,3 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+struct CoreDataHelper {
+    static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+}
+

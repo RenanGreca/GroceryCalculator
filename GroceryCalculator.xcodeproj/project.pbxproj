@@ -42,6 +42,10 @@
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
 		1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C2724A4AD73008AF525 /* CloudKit.framework */; };
 		1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
+		1FF60C2B24A62619008AF525 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
+		1FF60C2C24A6261F008AF525 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */; };
+		1FF60C2D24A626C4008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
+		1FF60C3224A6317C008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C3124A6317C008AF525 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +152,8 @@
 		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		1FF60C2724A4AD73008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1FF60C2924A60279008AF525 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
+		1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Shopping Extension.entitlements"; sourceTree = "<group>"; };
+		1FF60C3124A6317C008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF60C3224A6317C008AF525 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +300,7 @@
 		1F6124C724656C8E00CE2E75 /* Shopping Extension */ = {
 			isa = PBXGroup;
 			children = (
+				1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */,
 				1F6124C824656C8E00CE2E75 /* ContentView.swift */,
 				1F6124CA24656C8E00CE2E75 /* HostingController.swift */,
 				1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */,
@@ -327,6 +335,7 @@
 		1FF60C2624A4AD73008AF525 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FF60C3124A6317C008AF525 /* CloudKit.framework */,
 				1FF60C2724A4AD73008AF525 /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -559,10 +568,13 @@
 			files = (
 				1F6124CB24656C8E00CE2E75 /* HostingController.swift in Sources */,
 				1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */,
+				1FF60C2B24A62619008AF525 /* GroceryItems.swift in Sources */,
 				1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */,
 				1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */,
 				1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */,
+				1FF60C2C24A6261F008AF525 /* GroceryItem.swift in Sources */,
 				1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */,
+				1FF60C2D24A626C4008AF525 /* CloudKitHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,6 +762,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,6 +786,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.renangreca.SmartShoppingCart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -827,6 +841,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Shopping Extension/Shopping Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
@@ -841,6 +856,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.2;
@@ -851,6 +867,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Shopping Extension/Shopping Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
@@ -865,6 +882,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.2;
@@ -884,6 +902,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.2;
@@ -903,6 +922,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				STRIP_BITCODE_FROM_COPIED_FILES = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 6.2;

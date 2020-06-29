@@ -18,32 +18,9 @@ struct ListRow: View {
     var body: some View {
         HStack {
             if (groceryItem.purchasedAmount > 0) {
-                Image(systemName: "checkmark.circle.fill")
-                    .resizable()
-                    .frame(width: 25, height: 25, alignment: .center)
-                    .foregroundColor(.blue)
-                    .onTapGesture {
-                        self.groceryItem.purchasedAmount = 0
-                        self.updateGrocery()
-                    }
-                                
-                TextField("", text: $groceryItem.name, onCommit: updateGrocery)
-                    .foregroundColor(.gray)
-                    .frame(height: 25)
-                Text("\(groceryItem.readablePrice)")
+                PurchasedRow
             } else {
-                Image(systemName: "circle")
-                    .resizable()
-                    .frame(width: 25, height: 25, alignment: .center)
-                    .foregroundColor(.blue)
-                    .onTapGesture {
-                        // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
-                        self.groceryItem.purchasedAmount = self.groceryItem.desiredAmount
-                        self.pushed = true
-                    }
-                
-                TextField("", text: $groceryItem.name, onCommit: updateGrocery)
-                    .frame(height: 25)
+                UnpurchasedRow
             }
             Spacer()
         }
@@ -51,7 +28,10 @@ struct ListRow: View {
         .sheet(isPresented: $pushed) {
                 BuyItemPopUp(groceryItem: self.groceryItem,
                 okAction: self.buyItem(groceryItem:),
-                cancelAction: {self.pushed = false})
+                cancelAction: {
+                    self.groceryItem.purchasedAmount = 0
+                    self.pushed = false
+                })
         }
     }
     
@@ -71,8 +51,8 @@ struct ListRow: View {
     func buyItem(groceryItem: GroceryItem) {
         groceryItem.save() {
             self.groceryItems.refresh()
-            self.pushed = false
         }
+        self.pushed = false
     }
 }
 
@@ -91,5 +71,49 @@ struct ListRow_Previews: PreviewProvider {
             ListRow(groceryItem: grocery2, showBuyItemPopUp: {_ in })
         }
         .previewLayout(.fixed(width: 300, height: 70))
+    }
+}
+
+extension ListRow {
+    
+    fileprivate var PurchasedRow: some View {
+        return HStack {
+            Image(systemName: "checkmark.circle.fill")
+            .resizable()
+                .frame(width: 25, height: 25, alignment: .center)
+                .foregroundColor(.blue)
+                .onTapGesture {
+                    self.groceryItem.purchasedAmount = 0
+                    self.updateGrocery()
+                }
+                            
+            TextField("", text: $groceryItem.name, onCommit: updateGrocery)
+                .foregroundColor(.gray)
+                .frame(height: 25)
+
+            
+            Text("\(groceryItem.readablePrice)")
+                .onTapGesture {
+                    self.groceryItem.purchasedAmount = self.groceryItem.desiredAmount
+                    self.pushed = true
+                }
+        }
+    }
+    
+    fileprivate var UnpurchasedRow: some View {
+        return HStack {
+            Image(systemName: "circle")
+                .resizable()
+                .frame(width: 25, height: 25, alignment: .center)
+                .foregroundColor(.blue)
+                .onTapGesture {
+                    // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+                    self.groceryItem.purchasedAmount = self.groceryItem.desiredAmount
+                    self.pushed = true
+                }
+            
+            TextField("", text: $groceryItem.name, onCommit: updateGrocery)
+                .frame(height: 25)
+        }
     }
 }

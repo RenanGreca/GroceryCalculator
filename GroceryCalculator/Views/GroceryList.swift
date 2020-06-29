@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WatchConnectivity
 
 struct GroceryList: View {
     
@@ -42,7 +43,7 @@ struct GroceryList: View {
                 }, label: {
                     Text("Clear")
                 }))
-                .padding(.bottom, keyboard.currentHeight)
+                .padding(.bottom, keyboard.currentHeight-35)
 //                .edgesIgnoringSafeArea(.bottom)
                 .animation(.easeInOut(duration: 0.16))
             }
@@ -107,4 +108,35 @@ final class KeyboardResponder: ObservableObject {
     @objc func keyBoardWillHide(notification: Notification) {
         currentHeight = 0
     }
+}
+
+class SessionDelegate: NSObject, WCSessionDelegate {
+    
+    var wcSession: WCSession! = nil
+    
+    func activate() {
+        wcSession = WCSession.default
+        wcSession.delegate = self
+        wcSession.activate()
+    }
+    
+    func sendData() {
+        wcSession.sendMessage(["Hello": 1], replyHandler: nil) {
+            error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
 }

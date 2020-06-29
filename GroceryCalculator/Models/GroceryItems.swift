@@ -94,11 +94,12 @@ class GroceryItems: ObservableObject {
     
     func add(name: String) {
         let groceryItem = GroceryItem(name: name)
+        self.list.append(groceryItem)
         groceryItem.save() {
 //            self.refresh()
-            DispatchQueue.main.async {
-                self.list.append(groceryItem)
-            }
+//            DispatchQueue.main.async {
+//                self.list.append(groceryItem)
+//            }
         }
     }
     
@@ -112,7 +113,8 @@ class GroceryItems: ObservableObject {
     
     class var withSampleData:GroceryItems {
         let groceryItems = GroceryItems()
-        groceryItems.list = groceries
+        groceryItems.append(GroceryItem(name: "Milk"))
+        groceryItems.append(GroceryItem(name: "Cheese"))
         return groceryItems
     }
 }

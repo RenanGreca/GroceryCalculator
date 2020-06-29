@@ -43,8 +43,8 @@ class GroceryItemTests: XCTestCase {
         let newPrice = "10"
         groceryItem.visibleUnitPrice = newPrice
         
-        XCTAssertEqual(groceryItem.unitPrice, 10.00)
-        XCTAssertEqual(groceryItem.visibleUnitPrice, numberFormatter.string(from: 10.00)!)
+        XCTAssertEqual(groceryItem.unitPrice, 0.10)
+        XCTAssertEqual(groceryItem.visibleUnitPrice, numberFormatter.string(from: 0.10)!)
     }
     
     func testSetUnitPriceWithThreeDigits() {

@@ -15,14 +15,11 @@ fileprivate var globalID = 1
 //var groceries:[GroceryItem] = [GroceryItem(name: "Bananas"),
 //                               GroceryItem(name: "Apples")]
 
-struct CoreDataHelper {
-    static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-}
-
 var numberFormatter: NumberFormatter {
     let formatter = NumberFormatter()
     formatter.locale = Locale.current
     formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 2
     formatter.maximumFractionDigits = 2
     formatter.isLenient = true
     return formatter
@@ -80,7 +77,7 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         self.desiredAmount = desiredAmount
         self.purchasedAmount = purchasedAmount
         self.unitPrice = unitPrice
-        self.unitPriceString = numberFormatter.string(for: unitPrice) ?? ""
+        self.unitPriceString = (unitPrice == 0 ? "" : currencyFormatter.string(for: unitPrice) ?? "")
         
         self.id = record.recordID
         self.record = record
@@ -103,24 +100,41 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
             return self.unitPriceString
         }
         set {
+            // Cheating; only works for euros
+            if newValue.contains("€") {
+                self.unitPriceString = newValue
+                return
+            }
+            
             self.unitPriceString = newValue
             if let unitPrice = numberFormatter.number(from: newValue) as? Double {
                 self.unitPrice = unitPrice
             }
-//            let numericCharacters = CharacterSet(charactersIn: "1234567890")
-//            // Remove all non-numeric characters from string
-//            var input = newValue.trimmingCharacters(in: numericCharacters.inverted)
-//            if (input.count >= 3) {
-//                input.insert(".", at: input.index(after: input.startIndex))
-//            }
-//
-//            // Set the new unit price
-//            if let unitPrice = Double(input) {
-//                // Save the valid number
-//                self.unitPrice = unitPrice
-//                // Format the string for the input field
-//                self.unitPriceString = numberFormatter.string(for: unitPrice) ?? newValue
-//            }
+            let numericCharacters = CharacterSet(charactersIn: "1234567890")
+            // Remove all non-numeric characters from string
+            var input = newValue.components(separatedBy: numericCharacters.inverted).joined()
+        
+            if (input.count == 0) {
+                input = "000"
+            } else if (input.count == 1) {
+                input = "00\(input)"
+            } else if (input.count == 2) {
+                input = "0\(input)"
+            }
+            // Insert a . at the proper location
+            input.insert(".", at: input.index(input.endIndex, offsetBy: -2))
+            
+            // Set the new unit price
+            if let unitPrice = Double(input) {
+                // Save the valid number
+                self.unitPrice = unitPrice
+                // Format the string for the input field
+                if self.unitPrice == 0 {
+                    self.unitPriceString = ""
+                } else {
+                    self.unitPriceString = numberFormatter.string(for: unitPrice) ?? newValue
+                }
+            }
         }
     }
     

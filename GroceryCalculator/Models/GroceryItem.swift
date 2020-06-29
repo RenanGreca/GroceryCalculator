@@ -36,6 +36,8 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         return lhs.name == rhs.name
     }
     
+    internal var uuid: UUID
+    
     internal var id: CKRecord.ID
     var record: CKRecord?
 //    let database: CKDatabase
@@ -53,23 +55,26 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
 //        self.amount = 0
 //        self.unitPrice = 0.0
         self.id = .init()
+        self.uuid = .init()
     }
     
-//    init(from managedItem:GroceryItemManagedObject) {
-//        self.id = managedItem.id!
-//        self.desiredAmount = Int(managedItem.desiredAmount)
-//        self.purchasedAmount = Int(managedItem.purchasedAmount)
-//        self.unitPrice = managedItem.unitPrice
-//        self.unitPriceString = numberFormatter.string(for: managedItem.unitPrice) ?? ""
-//        self.name = managedItem.name!
-//    }
+    init(from managedItem:GroceryItemMO) {
+        self.uuid = managedItem.id!
+        self.id = CKRecord.ID(recordName: managedItem.ckid!)
+        self.desiredAmount = Int(managedItem.desiredAmount)
+        self.purchasedAmount = Int(managedItem.purchasedAmount)
+        self.unitPrice = managedItem.unitPrice
+        self.unitPriceString = numberFormatter.string(for: managedItem.unitPrice) ?? ""
+        self.name = managedItem.name!
+    }
     
     init?(from record:CKRecord, database: CKDatabase) {
         guard
             let name = record["name"] as? String,
             let desiredAmount = record["desiredAmount"] as? Int,
             let purchasedAmount = record["purchasedAmount"] as? Int,
-            let unitPrice = record["unitPrice"] as? Double  else {
+            let unitPrice = record["unitPrice"] as? Double,
+            let uuid = record["UUID"] as? String else {
                 return nil
         }
         
@@ -80,6 +85,7 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         self.unitPriceString = (unitPrice == 0 ? "" : currencyFormatter.string(for: unitPrice) ?? "")
         
         self.id = record.recordID
+        self.uuid = UUID(uuidString: uuid) ?? UUID()
         self.record = record
 //        self.database = database
     }
@@ -148,8 +154,8 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         return currencyFormatter.string(for: price) ?? ""
     }
     
-    /// Saves the item to CoreData.
-    func save(completion: @escaping () -> Void) {
+    /// Saves the item to iCloud.
+    func saveToCloud(completion: @escaping () -> Void) {
         let privateDB = CKContainer.default().privateCloudDatabase
 
         let record = self.record ?? CKRecord(recordType: "GroceryItem", recordID: self.id)
@@ -158,10 +164,7 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
         record["desiredAmount"] = self.desiredAmount as NSInteger
         record["purchasedAmount"] = self.purchasedAmount as NSInteger
         record["unitPrice"] = self.unitPrice as NSNumber
-        
-//        let saveRecordsOperation = CKModifyRecordsOperation()
-//        saveRecordsOperation.recordsToSave = [record]
-//        saveRecordsOperation.savePolicy = .`
+        record["UUID"] = self.uuid.uuidString
         
         privateDB.save(record) {
             (record, error) in
@@ -172,21 +175,23 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
             print("Successfully saved data to iCloud")
             completion()
         }
-        
-        
-//        let item:GroceryItemManagedObject
-//        if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
-//            item = managedItem
-//        } else {
-//            item = NSEntityDescription.insertNewObject(forEntityName: "GroceryItem", into: CoreDataHelper.context) as! GroceryItemManagedObject
-//        }
-//        item.id = self.id
-//        item.name = self.name
-//        item.unitPrice = self.unitPrice
-//        item.desiredAmount = Int64(self.desiredAmount)
-//        item.purchasedAmount = Int64(self.purchasedAmount)
-//
-//        try? CoreDataHelper.context.save()
+    }
+    
+    func saveToCoreData() {
+       let item:GroceryItemMO
+       if let managedItem = GroceryItem.fetchManagedWith(id: self.uuid) {
+           item = managedItem
+       } else {
+           item = NSEntityDescription.insertNewObject(forEntityName: "GroceryItem", into: CoreDataHelper.context) as! GroceryItemMO
+       }
+       item.ckid = self.id.recordName
+       item.id = self.uuid
+       item.name = self.name
+       item.unitPrice = self.unitPrice
+       item.desiredAmount = Int64(self.desiredAmount)
+       item.purchasedAmount = Int64(self.purchasedAmount)
+
+       try? CoreDataHelper.context.save()
     }
     
 //    func duplicate() -> GroceryItem {
@@ -212,42 +217,63 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
             }
             print("Successfully saved data to iCloud")
         }
-//        if let managedItem = GroceryItem.fetchManagedWith(id: self.id) {
-//            CoreDataHelper.context.delete(managedItem)
-//        }
+        if let managedItem = GroceryItem.fetchManagedWith(id: self.uuid) {
+            CoreDataHelper.context.delete(managedItem)
+        }
     }
     
     /// Finds the item with the given `id`.
-//    static func fetchManagedWith(id:UUID) -> GroceryItemManagedObject? {
-//        let fetchRequest = NSFetchRequest<GroceryItemManagedObject>(entityName: "GroceryItem")
-//        let searchFilter = NSPredicate(format: "id = %@", id as CVarArg)
-//        fetchRequest.predicate = searchFilter
-//
-//        let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject]
-//
-//        if let managedItem = results?.first {
-//            return managedItem
-//        } else {
-//            return nil
-//        }
-//    }
+    static func fetchManagedWith(id:UUID) -> GroceryItemMO? {
+        let fetchRequest = NSFetchRequest<GroceryItemMO>(entityName: "GroceryItem")
+        let searchFilter = NSPredicate(format: "id = %@", id as CVarArg)
+        fetchRequest.predicate = searchFilter
+
+        let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemMO]
+
+        if let managedItem = results?.first {
+            return managedItem
+        } else {
+            return nil
+        }
+    }
     
     /// Lists all items stored in CoreData.
-//    static func fetchAll() -> [GroceryItem] {
-//        let fetchRequest = NSFetchRequest<GroceryItemManagedObject>(entityName: "GroceryItem")
-//
-//        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-//        fetchRequest.sortDescriptors = [sortDescriptor]
-//
-//        var groceries = [GroceryItem]()
-//
-//        if let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemManagedObject] {
-//            for result in results {
-//                let item = GroceryItem(from: result)
-//                groceries.append(item)
-//            }
-//        }
-//
-//        return groceries
-//    }
+    static func fetchAll() -> [GroceryItem] {
+        let fetchRequest = NSFetchRequest<GroceryItemMO>(entityName: "GroceryItem")
+
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        var groceries = [GroceryItem]()
+
+        if let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemMO] {
+            for result in results {
+                let item = GroceryItem(from: result)
+                groceries.append(item)
+            }
+        }
+
+        return groceries
+    }
+}
+
+@objc(GroceryItemMO)
+public class GroceryItemMO: NSManagedObject {
+
+}
+
+
+extension GroceryItemMO {
+
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<GroceryItemMO> {
+        return NSFetchRequest<GroceryItemMO>(entityName: "GroceryItem")
+    }
+
+    @NSManaged public var desiredAmount: Int64
+    @NSManaged public var id: UUID?
+    @NSManaged public var name: String?
+    @NSManaged public var purchasedAmount: Int64
+    @NSManaged public var unitPrice: Double
+    @NSManaged public var ckid: String?
+
 }

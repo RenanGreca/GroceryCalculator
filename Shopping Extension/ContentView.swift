@@ -11,13 +11,15 @@ import WatchConnectivity
 
 struct ContentView: View {
     
-    @EnvironmentObject var groceryItems: GroceryItems
+//    @EnvironmentObject var groceryItems: GroceryItems
     
     var body: some View {
         List {
-            ForEach(groceryItems.list) { grocery in
-                Text(grocery.name)
-            }
+            Text("Milk")
+            Text("Cheese")
+//            ForEach(groceryItems.list) { grocery in
+//                Text(grocery.name)
+//            }
 //                ForEach(groceryItems.list) { grocery in
 //                    ListRow(groceryItem: grocery, showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:))
 //                }.onDelete(perform: onDelete(offsets:))
@@ -33,7 +35,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(GroceryItems.withSampleData)
+        ContentView()//.environmentObject(GroceryItems.withSampleData)
     }
 }
 

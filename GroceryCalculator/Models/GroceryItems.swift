@@ -49,7 +49,10 @@ class GroceryItems: ObservableObject {
                         
                         DispatchQueue.main.async {
                             self.list = results.compactMap() {
-                                GroceryItem(from: $0, database: privateDB)
+                                $0["UUID"] = $0["UUID"] ?? UUID().uuidString
+                                let groceryItem = GroceryItem(from: $0, database: privateDB)
+                                groceryItem?.saveToCoreData()
+                                return groceryItem
                             }
                             completion?(nil)
                         }
@@ -87,7 +90,7 @@ class GroceryItems: ObservableObject {
 //            list.insert(groceryItem, at: index)
 //            groceryItem.save()
 //        }
-        groceryItem.save() {
+        groceryItem.saveToCloud() {
             self.refresh()
         }
     }
@@ -95,7 +98,7 @@ class GroceryItems: ObservableObject {
     func add(name: String) {
         let groceryItem = GroceryItem(name: name)
         self.list.append(groceryItem)
-        groceryItem.save() {
+        groceryItem.saveToCloud() {
 //            self.refresh()
 //            DispatchQueue.main.async {
 //                self.list.append(groceryItem)

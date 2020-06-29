@@ -42,14 +42,14 @@ struct ListRow: View {
             groceryItems.list.removeAll(where: {$0 == groceryItem})
             groceryItems.refresh()
         } else {
-            groceryItem.save() {
+            groceryItem.saveToCloud() {
                 self.groceryItems.refresh()
             }
         }
     }
     
     func buyItem(groceryItem: GroceryItem) {
-        groceryItem.save() {
+        groceryItem.saveToCloud() {
             self.groceryItems.refresh()
         }
         self.pushed = false

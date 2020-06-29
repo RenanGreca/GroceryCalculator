@@ -30,7 +30,6 @@
 		1F6124BD24656C8E00CE2E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124BC24656C8E00CE2E75 /* Assets.xcassets */; };
 		1F6124C424656C8E00CE2E75 /* Shopping Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124C824656C8E00CE2E75 /* ContentView.swift */; };
-		1F6124CB24656C8E00CE2E75 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CA24656C8E00CE2E75 /* HostingController.swift */; };
 		1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */; };
 		1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CE24656C8E00CE2E75 /* NotificationController.swift */; };
 		1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124D024656C8E00CE2E75 /* NotificationView.swift */; };
@@ -40,11 +39,9 @@
 		1F6124DD24656C8F00CE2E75 /* ShoppingWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
+		1F95433A24AA384A0082A0C2 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CA24656C8E00CE2E75 /* HostingController.swift */; };
 		1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C2724A4AD73008AF525 /* CloudKit.framework */; };
 		1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
-		1FF60C2B24A62619008AF525 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
-		1FF60C2C24A6261F008AF525 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */; };
-		1FF60C2D24A626C4008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
 		1FF60C3224A6317C008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C3124A6317C008AF525 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -146,8 +143,6 @@
 		1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F6124D924656C8F00CE2E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6124DA24656C8F00CE2E75 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItemManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		1FF60C2724A4AD73008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -326,8 +321,6 @@
 		1F65BD2D23CA317200F41F90 /* ManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
-				1F65BD3223CA326600F41F90 /* GroceryItemManagedObject+CoreDataClass.swift */,
-				1F65BD3323CA326600F41F90 /* GroceryItemManagedObject+CoreDataProperties.swift */,
 			);
 			path = ManagedObjects;
 			sourceTree = "<group>";
@@ -566,15 +559,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F6124CB24656C8E00CE2E75 /* HostingController.swift in Sources */,
 				1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */,
-				1FF60C2B24A62619008AF525 /* GroceryItems.swift in Sources */,
 				1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */,
 				1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */,
 				1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */,
-				1FF60C2C24A6261F008AF525 /* GroceryItem.swift in Sources */,
+				1F95433A24AA384A0082A0C2 /* HostingController.swift in Sources */,
 				1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */,
-				1FF60C2D24A626C4008AF525 /* CloudKitHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,10 @@ class CloudKitHelper {
     private static var privateDBChangeToken: CKServerChangeToken?
     private static let privateDB = CKContainer.default().privateCloudDatabase
     
+    static let container = CKContainer.default()
+    static let zoneID = CKRecordZone.default().zoneID
+    static var createdCustomZone = false
+    
     static let groceryItems = GroceryItems()
 
     static func subscribeToCloudChanges() {
@@ -109,13 +113,74 @@ class CloudKitHelper {
         privateDB.add(changesOperation)
     }
     
-    //    func fetchZoneChanges(changedZones: [CKRecordZone.ID], _ callback: () -> Void) {
-    //        let changesOperation = CKFetchRecordZoneChangesOperation(recordZoneIDs: changedZones, configurationsByRecordZoneID: nil)
-    //
-    //        changesOperation.fetchAllChanges = true
-    //        changesOperation.recordChangedBlock = {
-    //            (record: CKRecord) -> Void in
-    //        }
-    //
-    //    }
+    static func fetchZoneChanges(database: CKDatabase, databaseTokenKey: String, zoneIDs: [CKRecordZone.ID], completion: @escaping () -> Void) {
+        
+        // Look up the previous change token for each zone
+        var optionsByRecordZoneID = [CKRecordZone.ID: CKFetchRecordZoneChangesOperation.ZoneConfiguration]()
+        for zoneID in zoneIDs {
+            let options = CKFetchRecordZoneChangesOperation.ZoneConfiguration()
+            //options.previousServerChangeToken = … // Read change token from disk
+                optionsByRecordZoneID[zoneID] = options
+        }
+        let operation = CKFetchRecordZoneChangesOperation(recordZoneIDs: zoneIDs, configurationsByRecordZoneID: optionsByRecordZoneID)
+        
+        operation.recordChangedBlock = { (record) in
+            print("Record changed:", record)
+            // Write this record change to memory
+        }
+        
+        operation.recordWithIDWasDeletedBlock = { (recordId: CKRecord.ID, recordType: CKRecord.RecordType) -> Void in
+            print("Record deleted:", recordId)
+            // Write this record deletion to memory
+        }
+        
+        operation.recordZoneChangeTokensUpdatedBlock = { (zoneId, token, data) in
+            // Flush record changes and deletions for this zone to disk
+            // Write this new zone change token to disk
+        }
+        
+        operation.recordZoneFetchCompletionBlock = { (zoneId, changeToken, _, _, error) in
+            if let error = error {
+                print("Error fetching zone changes for \(databaseTokenKey) database:", error)
+                return
+            }
+            // Flush record changes and deletions for this zone to disk
+            // Write this new zone change token to disk
+        }
+        
+        operation.fetchRecordZoneChangesCompletionBlock = { (error) in
+            if let error = error {
+                print("Error fetching zone changes for \(databaseTokenKey) database:", error)
+            }
+            completion()
+        }
+        
+        database.add(operation)
+    }
+    
+    static func createCustomZones() {
+        
+        let createZoneGroup = DispatchGroup()
+         
+        if !createdCustomZone {
+            createZoneGroup.enter()
+            
+            let customZone = CKRecordZone(zoneID: zoneID)
+            
+            let createZoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [customZone], recordZoneIDsToDelete: [] )
+            
+            createZoneOperation.modifyRecordZonesCompletionBlock = { (saved, deleted, error) in
+                if (error == nil) { self.createdCustomZone = true }
+                // else custom error handling
+                createZoneGroup.leave()
+            }
+            createZoneOperation.qualityOfService = .userInitiated
+            
+            privateDB.add(createZoneOperation)
+        }
+        
+//        createZoneGroup.notify(queue: DispatchQueue.global(), work: nil)
+
+
+    }
 }

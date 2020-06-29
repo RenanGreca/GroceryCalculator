@@ -40,6 +40,7 @@ class GroceryItems: ObservableObject {
                         if let error = error {
                             print(error.localizedDescription)
                             DispatchQueue.main.async {
+                                self.list = GroceryItem.fetchAll()
                                 completion?(error)
                             }
                             return

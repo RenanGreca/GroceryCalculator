@@ -19,15 +19,28 @@ struct GroceryList: View {
     @EnvironmentObject var groceryItems: GroceryItems
     @State private var editMode = EditMode.inactive
         
+    @FetchRequest(entity: GroceryItemMO.entity(),
+                  sortDescriptors: [],
+                  predicate: NSPredicate(value: true),
+                  animation: .spring())
+    var fetchedGroceries: FetchedResults<GroceryItemMO>
+    
     var body: some View {
         return ZStack {
             // NavigationView including the list of groceries
             NavigationView {
                 VStack {
                     List {
-                        ForEach(groceryItems.list) { grocery in
-                            ListRow(groceryItem: grocery, showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:))
-                        }.onDelete(perform: onDelete(offsets:))
+                        ForEach(fetchedGroceries, id: \.self, content: { (groceryMO: GroceryItemMO) -> ListRow in
+                            let grocery = GroceryItem(from: groceryMO)
+                            return ListRow(groceryItem: grocery, showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:))
+                        })
+//                        ForEach(fetchedGroceries, id: \.self) { groceryMO in
+////                            Text(groceryMO.name)
+//                        }
+//                        ForEach(fetchedGroceries) { groceryMO in
+//
+//                        }.onDelete(perform: onDelete(offsets:))
                         // Blank row for adding new grocery
                         NewGroceryRow()
                     }

@@ -59,7 +59,7 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
     }
     
     init(from managedItem:GroceryItemMO) {
-        self.uuid = managedItem.id!
+        self.uuid = managedItem.uuid!
         self.id = CKRecord.ID(recordName: managedItem.ckid!)
         self.desiredAmount = Int(managedItem.desiredAmount)
         self.purchasedAmount = Int(managedItem.purchasedAmount)
@@ -182,16 +182,22 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
        if let managedItem = GroceryItem.fetchManagedWith(id: self.uuid) {
            item = managedItem
        } else {
-           item = NSEntityDescription.insertNewObject(forEntityName: "GroceryItem", into: CoreDataHelper.context) as! GroceryItemMO
+           item = NSEntityDescription.insertNewObject(forEntityName: GroceryItemMO.entityName, into: CoreDataHelper.context) as! GroceryItemMO
        }
        item.ckid = self.id.recordName
-       item.id = self.uuid
+       item.uuid = self.uuid
        item.name = self.name
        item.unitPrice = self.unitPrice
        item.desiredAmount = Int64(self.desiredAmount)
        item.purchasedAmount = Int64(self.purchasedAmount)
 
-       try? CoreDataHelper.context.save()
+        do {
+            if (CoreDataHelper.context.hasChanges) {
+                try CoreDataHelper.context.save()
+            }
+        } catch {
+            print("\(error)")
+        }
     }
     
 //    func duplicate() -> GroceryItem {
@@ -224,8 +230,8 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
     
     /// Finds the item with the given `id`.
     static func fetchManagedWith(id:UUID) -> GroceryItemMO? {
-        let fetchRequest = NSFetchRequest<GroceryItemMO>(entityName: "GroceryItem")
-        let searchFilter = NSPredicate(format: "id = %@", id as CVarArg)
+        let fetchRequest = NSFetchRequest<GroceryItemMO>(entityName: GroceryItemMO.entityName)
+        let searchFilter = NSPredicate(format: "uuid = %@", id as CVarArg)
         fetchRequest.predicate = searchFilter
 
         let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItemMO]
@@ -239,9 +245,9 @@ class GroceryItem: Equatable, Identifiable, ObservableObject {
     
     /// Lists all items stored in CoreData.
     static func fetchAll() -> [GroceryItem] {
-        let fetchRequest = NSFetchRequest<GroceryItemMO>(entityName: "GroceryItem")
+        let fetchRequest = NSFetchRequest<GroceryItemMO>(entityName: GroceryItemMO.entityName)
 
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "uuid", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
 
         var groceries = [GroceryItem]()
@@ -266,14 +272,16 @@ public class GroceryItemMO: NSManagedObject {
 extension GroceryItemMO {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<GroceryItemMO> {
-        return NSFetchRequest<GroceryItemMO>(entityName: "GroceryItem")
+        return NSFetchRequest<GroceryItemMO>(entityName: GroceryItemMO.entityName)
     }
 
     @NSManaged public var desiredAmount: Int64
-    @NSManaged public var id: UUID?
+    @NSManaged public var uuid: UUID?
     @NSManaged public var name: String?
     @NSManaged public var purchasedAmount: Int64
     @NSManaged public var unitPrice: Double
     @NSManaged public var ckid: String?
+    
+    static var entityName: String { return "GroceryItem" }
 
 }

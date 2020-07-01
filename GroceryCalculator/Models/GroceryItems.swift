@@ -18,47 +18,48 @@ class GroceryItems: ObservableObject {
 //    }
     
     func refresh(_ completion: ((Error?) -> Void)? = nil) {
-//        self.list = GroceryItem.fetchAll()
+        self.list = GroceryItem.fetchAll()
         
-        let predicate = NSPredicate(value: true)
-        
-        let query = CKQuery(recordType: "GroceryItem", predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-
-        groceryItems(forQuery: query, completion)
+//        let predicate = NSPredicate(value: true)
+//
+//        let query = CKQuery(recordType: "GroceryItem", predicate: predicate)
+//        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+//
+//        groceryItems(forQuery: query, completion)
+        completion?(nil)
     }
     
     private func groceryItems(forQuery query: CKQuery, _ completion: ((Error?) -> Void)?) {
-        let privateDB = CKContainer.default().privateCloudDatabase
-        
-        privateDB
-            .perform(query,
-                     inZoneWith: CKRecordZone.default().zoneID) {
-                        [weak self] results, error in
-                        
-                        guard let self = self else { return }
-                        if let error = error {
-                            print(error.localizedDescription)
-                            DispatchQueue.main.async {
-                                self.list = GroceryItem.fetchAll()
-                                completion?(error)
-                            }
-                            return
-                        }
-                        
-                        guard let results = results else { return }
-                        
-                        DispatchQueue.main.async {
-                            self.list = results.compactMap() {
-                                $0["UUID"] = $0["UUID"] ?? UUID().uuidString
-                                let groceryItem = GroceryItem(from: $0, database: privateDB)
-                                groceryItem?.saveToCoreData()
-                                return groceryItem
-                            }
-                            completion?(nil)
-                        }
+//        let privateDB = CKContainer.default().privateCloudDatabase
+//
+//        privateDB
+//            .perform(query,
+//                     inZoneWith: CKRecordZone.default().zoneID) {
+//                        [weak self] results, error in
+//
+//                        guard let self = self else { return }
+//                        if let error = error {
+//                            print(error.localizedDescription)
+//                            DispatchQueue.main.async {
+//                                self.list = GroceryItem.fetchAll()
+//                                completion?(error)
+//                            }
+//                            return
+//                        }
+//
+//                        guard let results = results else { return }
+//
+//                        DispatchQueue.main.async {
+//                            self.list = results.compactMap() {
+//                                $0["UUID"] = $0["UUID"] ?? UUID().uuidString
+//                                let groceryItem = GroceryItem(from: $0, database: privateDB)
+//                                groceryItem?.saveToCoreData()
+//                                return groceryItem
+//                            }
+//                            completion?(nil)
+//                        }
             
-        }
+//        }
         
     }
     
@@ -91,20 +92,22 @@ class GroceryItems: ObservableObject {
 //            list.insert(groceryItem, at: index)
 //            groceryItem.save()
 //        }
-        groceryItem.saveToCloud() {
-            self.refresh()
-        }
+        groceryItem.saveToCoreData()
+//        groceryItem.saveToCloud() {
+//            self.refresh()
+//        }
     }
     
     func add(name: String) {
         let groceryItem = GroceryItem(name: name)
         self.list.append(groceryItem)
-        groceryItem.saveToCloud() {
+        groceryItem.saveToCoreData()
+//        groceryItem.saveToCloud() {
 //            self.refresh()
 //            DispatchQueue.main.async {
 //                self.list.append(groceryItem)
 //            }
-        }
+//        }
     }
     
     var total: Double {

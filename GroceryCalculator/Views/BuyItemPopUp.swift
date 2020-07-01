@@ -11,9 +11,9 @@ import UIKit
 
 struct BuyItemPopUp: View {
     
-    @ObservedObject var groceryItem: GroceryItem
+    @ObservedObject var groceryItem: GroceryItemMO
     @State var price: Double = 0
-    var okAction: (_: GroceryItem) -> Void
+    var okAction: (_: GroceryItemMO) -> Void
     var cancelAction: () -> Void
     
     var currencyFormatter: NumberFormatter {
@@ -63,7 +63,8 @@ struct BuyItemPopUp: View {
 
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        let groceryItem = GroceryItem(name: "Milk")
+        let groceryItem = GroceryItemMO()
+        groceryItem.name = "Milk"
         groceryItem.purchasedAmount = 2
         groceryItem.unitPrice = 0.99
         
@@ -90,7 +91,7 @@ struct BuyItemPopUp_Previews: PreviewProvider {
 }
 
 struct AmountStepper: View {
-    @ObservedObject var groceryItem: GroceryItem
+    @ObservedObject var groceryItem: GroceryItemMO
     
     var body: some View {
         VStack {
@@ -134,8 +135,8 @@ struct AmountStepper: View {
 }
 
 struct UnitPriceField: View {
-    @ObservedObject var groceryItem: GroceryItem
-    var okAction: (_: GroceryItem) -> Void
+    @ObservedObject var groceryItem: GroceryItemMO
+    var okAction: (_: GroceryItemMO) -> Void
     
     var body: some View {
         VStack {

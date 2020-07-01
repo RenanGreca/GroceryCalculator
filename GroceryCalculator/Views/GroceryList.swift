@@ -13,49 +13,67 @@ struct GroceryList: View {
     
 //    @State var addItemPopUpVisible = false
 //    @State var buyItemPopUpVisible = false
-    @State var selectedGrocery: GroceryItem?
+//    @State var selectedGrocery: GroceryItem?
     
     @ObservedObject var keyboard = KeyboardResponder()
-    @EnvironmentObject var groceryItems: GroceryItems
-    @State private var editMode = EditMode.inactive
+//    @EnvironmentObject var groceryItems: GroceryItems
+//    @State private var editMode = EditMode.inactive
         
+    @Environment(\.managedObjectContext) var context
     @FetchRequest(entity: GroceryItemMO.entity(),
-                  sortDescriptors: [],
+                  sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
                   predicate: NSPredicate(value: true),
                   animation: .spring())
     var fetchedGroceries: FetchedResults<GroceryItemMO>
     
     var body: some View {
+        let total = fetchedGroceries.reduce(0) { $0 + $1.price }
+        let totalPrice = currencyFormatter.string(for: total) ?? "0"
+
         return ZStack {
             // NavigationView including the list of groceries
             NavigationView {
                 VStack {
                     List {
-                        ForEach(fetchedGroceries, id: \.self, content: { (groceryMO: GroceryItemMO) -> ListRow in
-                            let grocery = GroceryItem(from: groceryMO)
-                            return ListRow(groceryItem: grocery, showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:))
+                        ForEach(fetchedGroceries, id: \.self, content: { groceryMO in
+                            ListRow(groceryItem: groceryMO)
                         })
-//                        ForEach(fetchedGroceries, id: \.self) { groceryMO in
-////                            Text(groceryMO.name)
-//                        }
-//                        ForEach(fetchedGroceries) { groceryMO in
-//
-//                        }.onDelete(perform: onDelete(offsets:))
+                        .onDelete() { indexSet in
+                            let grocery = self.fetchedGroceries[indexSet.first!]
+                            self.context.delete(grocery)
+                            try? self.context.save()
+                        }
+                        .onMove() { source, destination in
+                            var list = self.fetchedGroceries.compactMap() { $0 }
+                            
+                            list.move(fromOffsets: source, toOffset: destination)
+
+                            for i in 0..<list.count {
+                                list[i].updatePosition(index: i)
+                            }
+                            
+                            try? self.context.save()
+                        }
+
                         // Blank row for adding new grocery
-                        NewGroceryRow()
+                        NewGroceryRow(position: self.fetchedGroceries.count)
                     }
                     // Row showing total value of purchase
                     if (keyboard.currentHeight == 0) {
-                        TotalRow(totalPrice: groceryItems.readablePrice)
+                        TotalRow(totalPrice: totalPrice)
                     }
                 }
-                .environment(\.editMode, $editMode)
+//                .environment(\.editMode, $editMode)
                 .navigationBarTitle(Text("Grocery List"))
                 .navigationBarItems(leading: Button(action: {
-                    self.groceryItems.clear()
+                    for item in self.fetchedGroceries {
+                        self.context.delete(item)
+                    }
+                    try? self.context.save()
+//                    self.groceryItems.clear()
                 }, label: {
                     Text("Clear")
-                }))
+                }), trailing: EditButton())
                 .padding(.bottom, keyboard.currentHeight-35)
 //                .edgesIgnoringSafeArea(.bottom)
                 .animation(.easeInOut(duration: 0.16))
@@ -65,11 +83,12 @@ struct GroceryList: View {
     }
     
     private func onDelete(offsets: IndexSet) {
-        groceryItems.remove(at: offsets)
+//        groceryItems.remove(at: offsets)
+        
     }
 
     private func onMove(source: IndexSet, destination: Int) {
-        groceryItems.move(from: source, to: destination)
+//        groceryItems.move(from: source, to: destination)
     }
     
     private func leadingPadding() -> CGFloat {
@@ -79,19 +98,19 @@ struct GroceryList: View {
         return 0
     }
     
-    func showBuyItemPopUp(groceryItem: GroceryItem) {
-        self.selectedGrocery = groceryItem
-    }
+//    func showBuyItemPopUp(groceryItem: GroceryItem) {
+//        self.selectedGrocery = groceryItem
+//    }
 }
 
 struct GroceryList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-        GroceryList().environmentObject(GroceryItems())
+        GroceryList()//.environmentObject(GroceryItems())
             .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
             .previewDisplayName("iPhone 11 Pro")
         
-        GroceryList().environmentObject(GroceryItems())
+        GroceryList()//.environmentObject(GroceryItems())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch) (2nd generation)"))
             .previewDisplayName("iPad Pro (11-inch)")
         }

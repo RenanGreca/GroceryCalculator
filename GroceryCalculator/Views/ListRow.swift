@@ -10,10 +10,12 @@ import SwiftUI
 
 struct ListRow: View {
     
-    @ObservedObject var groceryItem: GroceryItem
-    var showBuyItemPopUp:((GroceryItem) -> Void)
-    @EnvironmentObject var groceryItems: GroceryItems
+    @ObservedObject var groceryItem: GroceryItemMO
+//    var showBuyItemPopUp:((GroceryItem) -> Void)
+//    @EnvironmentObject var groceryItems: GroceryItems
     @State var pushed = false
+    
+    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         HStack {
@@ -26,51 +28,67 @@ struct ListRow: View {
         }
         .padding(.vertical, 10)
         .sheet(isPresented: $pushed) {
-                BuyItemPopUp(groceryItem: self.groceryItem,
-                okAction: self.buyItem(groceryItem:),
-                cancelAction: {
-                    self.groceryItem.purchasedAmount = 0
-                    self.pushed = false
-                })
+            BuyItemPopUp(groceryItem: self.groceryItem,
+                         okAction: { groceryItem in
+                            try? self.context.save()
+                            self.pushed = false
+            },
+                         cancelAction: {
+                            self.groceryItem.purchasedAmount = 0
+                            try? self.context.save()
+                            self.pushed = false
+            })
         }
+//        .sheet(isPresented: $pushed) {
+//            BuyItemPopUp(groceryItem: groceryItem,
+//            okAction: self.buyItem(groceryItem:),
+//            cancelAction: {
+//                self.groceryItem.purchasedAmount = 0
+//                self.pushed = false
+//            })
+//        }
     }
     
     func updateGrocery() {
         if (groceryItem.name.count == 0) {
             // If the string is empty, we can delete this item
-            groceryItem.delete()
-            groceryItems.list.removeAll(where: {$0 == groceryItem})
-            groceryItems.refresh()
+            
+//            groceryItem.delete()
+//            groceryItems.list.removeAll(where: {$0 == groceryItem})
+//            groceryItems.refresh()
         } else {
-            groceryItem.saveToCoreData()
+            try? self.context.save()
+//            groceryItem.saveToCoreData()
 //            groceryItem.saveToCloud() {
 //                self.groceryItems.refresh()
 //            }
         }
     }
     
-    func buyItem(groceryItem: GroceryItem) {
-        groceryItem.saveToCoreData()
-//        groceryItem.saveToCloud() {
-//            self.groceryItems.refresh()
-//        }
-        self.pushed = false
-    }
+//    func buyItem(groceryItem: GroceryItem) {
+//        groceryItem.saveToCoreData()
+////        groceryItem.saveToCloud() {
+////            self.groceryItems.refresh()
+////        }
+//        self.pushed = false
+//    }
 }
 
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
-        let grocery1 = GroceryItem(name: "Milk")
+        let grocery1 = GroceryItemMO()
+        grocery1.name = "Milk"
         grocery1.purchasedAmount = 2
         grocery1.unitPrice = 0.99
         
-        let grocery2 = GroceryItem(name: "Butter")
+        let grocery2 = GroceryItemMO()
+        grocery2.name = "Butter"
         grocery2.purchasedAmount = 0
         grocery2.unitPrice = 0.99
         
         return Group {
-            ListRow(groceryItem: grocery1, showBuyItemPopUp: {_ in })
-            ListRow(groceryItem: grocery2, showBuyItemPopUp: {_ in })
+            ListRow(groceryItem: grocery1)//, showBuyItemPopUp: {_ in })
+            ListRow(groceryItem: grocery2)//, showBuyItemPopUp: {_ in })
         }
         .previewLayout(.fixed(width: 300, height: 70))
     }

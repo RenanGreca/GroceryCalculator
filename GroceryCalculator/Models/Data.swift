@@ -8,7 +8,7 @@
 
 import Foundation
 
-var groceries: [GroceryItem] = [] //load("SampleGroceries.json")
+//var groceries: [GroceryItem] = [] //load("SampleGroceries.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

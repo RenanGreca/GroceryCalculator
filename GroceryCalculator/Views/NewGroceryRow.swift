@@ -10,7 +10,8 @@ import SwiftUI
 
 struct NewGroceryRow: View {
     @State var newGrocery = ""
-    @EnvironmentObject var groceryItems: GroceryItems
+    var position: Int
+//    @EnvironmentObject var groceryItems: GroceryItems
     
     var body: some View {
         HStack {
@@ -27,21 +28,17 @@ struct NewGroceryRow: View {
     }
     
     func addGrocery() {
-        self.groceryItems.add(name: newGrocery)
+        let _ = GroceryItemMO.new(name: newGrocery, position: position)
+        CoreDataHelper.saveContext()
         self.newGrocery = ""
-//        let groceryItem = GroceryItem(name: newGrocery)
-//        groceryItem.save() {
-//            self.groceryItems.add(name: <#T##String#>)
-////            self.groceryItems.refresh()
-//            self.newGrocery = ""
-//        }
     }
 }
 
 struct NewItemRow_Previews: PreviewProvider {
     static var previews: some View {
          return Group {
-            NewGroceryRow().environmentObject(GroceryItems.withSampleData)
+            NewGroceryRow(position: 0)
+            //.environmentObject(GroceryItems.withSampleData)
          }
          .previewLayout(.fixed(width: 300, height: 70))
     }

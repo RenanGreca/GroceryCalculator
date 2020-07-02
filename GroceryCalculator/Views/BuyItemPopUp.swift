@@ -11,7 +11,7 @@ import UIKit
 
 struct BuyItemPopUp: View {
     
-    @ObservedObject var groceryItem: GroceryItem
+    @ObservedObject var groceryItem: Grocery
     @State var price: Double = 0
     var okAction: () -> Void
     var cancelAction: () -> Void
@@ -55,7 +55,7 @@ struct BuyItemPopUp: View {
 
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        let groceryItem = GroceryItem()
+        let groceryItem = Grocery()
         groceryItem.name = "Milk"
         groceryItem.purchasedAmount = 2
         groceryItem.unitPrice = 0.99
@@ -83,7 +83,7 @@ struct BuyItemPopUp_Previews: PreviewProvider {
 }
 
 struct AmountStepper: View {
-    @ObservedObject var groceryItem: GroceryItem
+    @ObservedObject var groceryItem: Grocery
     
     var body: some View {
         VStack {
@@ -127,13 +127,15 @@ struct AmountStepper: View {
 }
 
 struct UnitPriceField: View {
-    @ObservedObject var groceryItem: GroceryItem
+    @ObservedObject var groceryItem: Grocery
     var okAction: () -> Void
     
     var body: some View {
         VStack {
             HStack {
-                PriceField(Formatter().currency.string(for: 0.00)!, text: $groceryItem.visibleUnitPrice, isFirstResponder: true) {
+                PriceField(Formatter().currency.string(for: 0.00)!,
+                           text: $groceryItem.visibleUnitPrice,
+                           isFirstResponder: true) {
                     self.okAction()
                 }
                     .keyboardType(.numberPad)
@@ -191,7 +193,7 @@ struct PriceField: UIViewRepresentable {
         innertTextField.keyboardType = .numberPad
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: innertTextField.frame.size.width, height: 44))
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(innertTextField.doneButtonTapped(button:)))
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(innertTextField.doneButtonTapped(button:)))
         toolBar.items = [doneButton]
         toolBar.setItems([doneButton], animated: true)
         innertTextField.inputAccessoryView = toolBar
@@ -247,7 +249,7 @@ struct PriceField: UIViewRepresentable {
             let stringValue = Formatter().currency.string(for: numberValue ?? 0)!
             
             self.parent.text.wrappedValue = stringValue
-//            textField.text = stringValue
+            textField.text = stringValue
         }
         
     }

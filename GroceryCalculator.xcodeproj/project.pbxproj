@@ -17,20 +17,22 @@
 		1F1CF9B623C8BDC300053A71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9B423C8BDC300053A71 /* LaunchScreen.storyboard */; };
 		1F1CF9C123C8BDC300053A71 /* GroceryCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9C023C8BDC300053A71 /* GroceryCalculatorTests.swift */; };
 		1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9D923C8BE1600053A71 /* ListRow.swift */; };
-		1F1CF9DF23C8BE6800053A71 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */; };
+		1F1CF9DF23C8BE6800053A71 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9DE23C8BE6800053A71 /* Grocery.swift */; };
 		1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */; };
 		1F1CF9E623C8C3C700053A71 /* SampleGroceries.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */; };
-		1F1CF9E823C8C59300053A71 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E723C8C59300053A71 /* Data.swift */; };
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F3F182E245F166F00A40EE6 /* GroceryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */; };
 		1F4D7DE024AC8CDD00BE255D /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */; };
 		1F53883224AE1C2600EAB2E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F53883424AE1C2600EAB2E8 /* Localizable.strings */; };
-		1F571C922453282D0007A019 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
+		1F53883824AE339D00EAB2E8 /* ShoppingExtension.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F53883624AE339D00EAB2E8 /* ShoppingExtension.xcdatamodeld */; };
+		1F53883A24AE350D00EAB2E8 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */; };
+		1F53884024AE39E000EAB2E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124C824656C8E00CE2E75 /* ContentView.swift */; };
+		1F53884724AE3BC500EAB2E8 /* GroceryItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F53884524AE3BC500EAB2E8 /* GroceryItem+CoreDataClass.swift */; };
+		1F53884824AE3BC500EAB2E8 /* GroceryItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F53884624AE3BC500EAB2E8 /* GroceryItem+CoreDataProperties.swift */; };
 		1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C932456DFBB0007A019 /* GroceryListTests.swift */; };
 		1F6124BB24656C8B00CE2E75 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124B924656C8B00CE2E75 /* Interface.storyboard */; };
 		1F6124BD24656C8E00CE2E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124BC24656C8E00CE2E75 /* Assets.xcassets */; };
 		1F6124C424656C8E00CE2E75 /* Shopping Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124C824656C8E00CE2E75 /* ContentView.swift */; };
 		1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */; };
 		1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CE24656C8E00CE2E75 /* NotificationController.swift */; };
 		1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124D024656C8E00CE2E75 /* NotificationView.swift */; };
@@ -120,16 +122,17 @@
 		1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryCalculatorUITests.swift; sourceTree = "<group>"; };
 		1F1CF9CD23C8BDC300053A71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1CF9D923C8BE1600053A71 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
-		1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
+		1F1CF9DE23C8BE6800053A71 /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
 		1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryList.swift; sourceTree = "<group>"; };
 		1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleGroceries.json; sourceTree = "<group>"; };
-		1F1CF9E723C8C59300053A71 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItemTests.swift; sourceTree = "<group>"; };
 		1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		1F53883324AE1C2600EAB2E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F53883524AE1C8B00EAB2E8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1F571C912453282D0007A019 /* GroceryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
+		1F53883724AE339D00EAB2E8 /* ShoppingExtension.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingExtension.xcdatamodel; sourceTree = "<group>"; };
+		1F53884524AE3BC500EAB2E8 /* GroceryItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1F53884624AE3BC500EAB2E8 /* GroceryItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroceryItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F571C932456DFBB0007A019 /* GroceryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTests.swift; sourceTree = "<group>"; };
 		1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6124BA24656C8B00CE2E75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -278,10 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				1F1CF9AA23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld */,
-				1F65BD2D23CA317200F41F90 /* ManagedObjects */,
-				1F1CF9DE23C8BE6800053A71 /* GroceryItem.swift */,
-				1F571C912453282D0007A019 /* GroceryItems.swift */,
-				1F1CF9E723C8C59300053A71 /* Data.swift */,
+				1F1CF9DE23C8BE6800053A71 /* Grocery.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,6 +299,8 @@
 		1F6124C724656C8E00CE2E75 /* Shopping Extension */ = {
 			isa = PBXGroup;
 			children = (
+				1F53884524AE3BC500EAB2E8 /* GroceryItem+CoreDataClass.swift */,
+				1F53884624AE3BC500EAB2E8 /* GroceryItem+CoreDataProperties.swift */,
 				1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */,
 				1F6124C824656C8E00CE2E75 /* ContentView.swift */,
 				1F6124CA24656C8E00CE2E75 /* HostingController.swift */,
@@ -310,6 +312,7 @@
 				1F6124D924656C8F00CE2E75 /* Info.plist */,
 				1F6124DA24656C8F00CE2E75 /* PushNotificationPayload.apns */,
 				1F6124D624656C8F00CE2E75 /* Preview Content */,
+				1F53883624AE339D00EAB2E8 /* ShoppingExtension.xcdatamodeld */,
 			);
 			path = "Shopping Extension";
 			sourceTree = "<group>";
@@ -320,13 +323,6 @@
 				1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		1F65BD2D23CA317200F41F90 /* ManagedObjects */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ManagedObjects;
 			sourceTree = "<group>";
 		};
 		1FF60C2624A4AD73008AF525 /* Frameworks */ = {
@@ -535,9 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1CF9AC23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld in Sources */,
-				1F1CF9E823C8C59300053A71 /* Data.swift in Sources */,
 				1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */,
-				1F571C922453282D0007A019 /* GroceryItems.swift in Sources */,
 				1F1CF9A723C8BDC200053A71 /* AppDelegate.swift in Sources */,
 				1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */,
 				1F18C53E23C8E50A00350F12 /* BuyItemPopUp.swift in Sources */,
@@ -546,7 +540,7 @@
 				1F4D7DE024AC8CDD00BE255D /* Formatter.swift in Sources */,
 				1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */,
 				1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */,
-				1F1CF9DF23C8BE6800053A71 /* GroceryItem.swift in Sources */,
+				1F1CF9DF23C8BE6800053A71 /* Grocery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,11 +559,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F6124C924656C8E00CE2E75 /* ContentView.swift in Sources */,
+				1F53883824AE339D00EAB2E8 /* ShoppingExtension.xcdatamodeld in Sources */,
 				1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */,
 				1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */,
+				1F53883A24AE350D00EAB2E8 /* Formatter.swift in Sources */,
 				1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */,
+				1F53884024AE39E000EAB2E8 /* ContentView.swift in Sources */,
 				1F95433A24AA384A0082A0C2 /* HostingController.swift in Sources */,
+				1F53884724AE3BC500EAB2E8 /* GroceryItem+CoreDataClass.swift in Sources */,
+				1F53884824AE3BC500EAB2E8 /* GroceryItem+CoreDataProperties.swift in Sources */,
 				1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1041,6 +1039,16 @@
 			);
 			currentVersion = 1F1CF9AB23C8BDC200053A71 /* GroceryCalculator.xcdatamodel */;
 			path = GroceryCalculator.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		1F53883624AE339D00EAB2E8 /* ShoppingExtension.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F53883724AE339D00EAB2E8 /* ShoppingExtension.xcdatamodel */,
+			);
+			currentVersion = 1F53883724AE339D00EAB2E8 /* ShoppingExtension.xcdatamodel */;
+			path = ShoppingExtension.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -16,11 +16,11 @@ struct GroceryList: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.locale) var locale
-    @FetchRequest(entity: GroceryItem.entity(),
+    @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
                   predicate: NSPredicate(value: true),
                   animation: .spring())
-    var fetchedGroceries: FetchedResults<GroceryItem>
+    var fetchedGroceries: FetchedResults<Grocery>
     
     var body: some View {
         let total = fetchedGroceries.reduce(0) { $0 + $1.price }
@@ -71,9 +71,9 @@ extension GroceryList {
     
     func GroceryList() -> some View {
         List {
-            ForEach(fetchedGroceries, id: \.self, content: { groceryMO in
+            ForEach(fetchedGroceries, id: \.self) { groceryMO in
                 ListRow(groceryItem: groceryMO)
-            })
+            }
             .onDelete() { indexSet in
                 let grocery = self.fetchedGroceries[indexSet.first!]
                 self.context.delete(grocery)

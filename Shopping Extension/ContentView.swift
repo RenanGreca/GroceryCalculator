@@ -11,25 +11,25 @@ import WatchConnectivity
 
 struct ContentView: View {
     
-//    @EnvironmentObject var groceryItems: GroceryItems
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest(entity: GroceryItem.entity(),
+                  sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
+                  predicate: NSPredicate(value: true),
+                  animation: .spring())
+    var fetchedGroceries: FetchedResults<GroceryItem>
+
     
     var body: some View {
-        List {
-            Text("Milk")
-            Text("Cheese")
-//            ForEach(groceryItems.list) { grocery in
-//                Text(grocery.name)
-//            }
-//                ForEach(groceryItems.list) { grocery in
-//                    ListRow(groceryItem: grocery, showBuyItemPopUp: self.showBuyItemPopUp(groceryItem:))
-//                }.onDelete(perform: onDelete(offsets:))
-//                // Blank row for adding new grocery
-//                NewGroceryRow()
+        let total = fetchedGroceries.reduce(0) { $0 + $1.price }
+        let totalPrice = Formatter().currency.string(for: total) ?? "0"
+        
+        return List {
+            ForEach(fetchedGroceries, id: \.self) { grocery in
+                Text("\(grocery.name!) - \(grocery.visibleUnitPrice)")
+            }
+            Text("Total: \(totalPrice)")
         }
-        // Row showing total value of purchase
-//            if (keyboard.currentHeight == 0) {
-//                TotalRow(totalPrice: groceryItems.readablePrice)
-//            }
+
     }
 }
 

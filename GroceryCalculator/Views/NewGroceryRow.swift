@@ -28,7 +28,7 @@ struct NewGroceryRow: View {
     }
     
     func addGrocery() {
-        let _ = GroceryItem.new(name: newGrocery, position: position)
+        let _ = Grocery.new(name: newGrocery, position: position)
         CoreDataHelper.saveContext()
         self.newGrocery = ""
     }

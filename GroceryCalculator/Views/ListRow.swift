@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ListRow: View {
     
-    @ObservedObject var groceryItem: GroceryItem
+    @ObservedObject var groceryItem: Grocery
     @State var pushed = false
     
     @Environment(\.managedObjectContext) var context
@@ -101,11 +101,11 @@ extension ListRow {
 
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
-        let grocery1 = GroceryItem.new(name: "Milk")
+        let grocery1 = Grocery.new(name: "Milk")
         grocery1.purchasedAmount = 2
         grocery1.unitPrice = 0.99
         
-        let grocery2 = GroceryItem.new(name: "Butter")
+        let grocery2 = Grocery.new(name: "Butter")
         grocery2.purchasedAmount = 0
         grocery2.unitPrice = 0.99
         

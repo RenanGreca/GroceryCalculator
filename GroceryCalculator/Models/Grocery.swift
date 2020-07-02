@@ -10,12 +10,12 @@ import CoreData
 //import UIKit
 import CloudKit
 
-@objc(GroceryItem)
-public class GroceryItem: NSManagedObject {
-    private var unitPriceString: String = ""
+@objc(Grocery)
+public class Grocery: NSManagedObject {
+    var unitPriceString: String = ""
     
-    static func new(name: String, position: Int = Int.max) -> GroceryItem {
-        let item = GroceryItem.fetch()
+    static func new(name: String, position: Int = Int.max) -> Grocery {
+        let item = Grocery.fetch()
         
         item.name = name
         item.ckid = .init()
@@ -27,24 +27,24 @@ public class GroceryItem: NSManagedObject {
         return item
     }
     
-    static func fetch(uuid: UUID? = nil) -> GroceryItem {
-        let item:GroceryItem
+    static func fetch(uuid: UUID? = nil) -> Grocery {
+        let item:Grocery
         if  let uuid = uuid,
-            let managedItem = GroceryItem.fetchManagedWith(id: uuid) {
+            let managedItem = Grocery.fetchManagedWith(id: uuid) {
             item = managedItem
         } else {
-            item = NSEntityDescription.insertNewObject(forEntityName: GroceryItem.entityName, into: CoreDataHelper.context) as! GroceryItem
+            item = NSEntityDescription.insertNewObject(forEntityName: Grocery.entityName, into: CoreDataHelper.context) as! Grocery
         }
         
         return item
     }
     
-    static func fetchManagedWith(id:UUID) -> GroceryItem? {
-        let fetchRequest = NSFetchRequest<GroceryItem>(entityName: GroceryItem.entityName)
+    static func fetchManagedWith(id:UUID) -> Grocery? {
+        let fetchRequest = NSFetchRequest<Grocery>(entityName: Grocery.entityName)
         let searchFilter = NSPredicate(format: "uuid = %@", id as CVarArg)
         fetchRequest.predicate = searchFilter
         
-        let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [GroceryItem]
+        let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [Grocery]
         
         if let managedItem = results?.first {
             return managedItem
@@ -59,10 +59,10 @@ public class GroceryItem: NSManagedObject {
 }
 
 // MARK: - CoreData stored properties
-extension GroceryItem {
+extension Grocery {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<GroceryItem> {
-        return NSFetchRequest<GroceryItem>(entityName: GroceryItem.entityName)
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Grocery> {
+        return NSFetchRequest<Grocery>(entityName: Grocery.entityName)
     }
 
     @NSManaged public var desiredAmount: Int64
@@ -73,11 +73,11 @@ extension GroceryItem {
     @NSManaged public var ckid: String?
     @NSManaged public var position: Int64
     
-    static var entityName: String { return "GroceryItem" }
+    static var entityName: String { return "Grocery" }
 }
 
 // MARK: - Helpers for price visualization
-extension GroceryItem {
+extension Grocery {
     /// The total price of the units pruchased.
     var price: Double {
         unitPrice*Double(purchasedAmount)
@@ -95,8 +95,8 @@ extension GroceryItem {
             return self.unitPriceString
         }
         set {
-            // Cheating; only works for euros
-            if newValue.contains("€") {
+            if  let symbol = Locale.current.currencySymbol,
+                newValue.contains(symbol) {
                 self.unitPriceString = newValue
                 return
             }
@@ -127,7 +127,7 @@ extension GroceryItem {
                 if self.unitPrice == 0 {
                     self.unitPriceString = ""
                 } else {
-                    self.unitPriceString = Formatter().currency.string(for: unitPrice) ?? newValue
+                    self.unitPriceString = Formatter().number.string(for: unitPrice) ?? newValue
                 }
             }
         }

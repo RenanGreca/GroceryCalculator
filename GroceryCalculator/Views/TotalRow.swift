@@ -27,7 +27,6 @@ struct TotalRow: View {
             Text("\(totalPrice)").font(.title).bold()
         }
         .padding()
-        .padding(.bottom, 10)
     }
 
 }

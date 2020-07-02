@@ -7,19 +7,26 @@
 //
 
 import Foundation
+import SwiftUI
 
-var numberFormatter: NumberFormatter {
-    let formatter = NumberFormatter()
-    formatter.locale = Locale.current
-    formatter.numberStyle = .decimal
-    formatter.minimumFractionDigits = 2
-    formatter.maximumFractionDigits = 2
-    formatter.isLenient = true
-    return formatter
-}
+struct Formatter {
+    
 
-var currencyFormatter: NumberFormatter {
-    let formatter = numberFormatter
-    formatter.numberStyle = .currency
-    return formatter
+    var number: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.isLenient = true
+        return formatter
+    }
+
+    var currency: NumberFormatter {
+        let formatter = self.number
+        formatter.numberStyle = .currency
+        return formatter
+    }
+
+
 }

@@ -11,19 +11,11 @@ import UIKit
 
 struct BuyItemPopUp: View {
     
-    @ObservedObject var groceryItem: GroceryItemMO
+    @ObservedObject var groceryItem: GroceryItem
     @State var price: Double = 0
-    var okAction: (_: GroceryItemMO) -> Void
+    var okAction: () -> Void
     var cancelAction: () -> Void
-    
-    var currencyFormatter: NumberFormatter {
-        let nf = NumberFormatter()
-        nf.numberStyle = .currency
-        nf.isLenient = true
-        nf.currencySymbol = "€"
-        return nf
-    }
-    
+        
     var body: some View {
         return NavigationView {
             VStack {
@@ -43,7 +35,7 @@ struct BuyItemPopUp: View {
                 Text("Cancel")
                     .foregroundColor(.red)
             }, trailing: Button(action: {
-                self.okAction(self.groceryItem)
+                self.okAction()
             }) {
                 Text("Done").fontWeight(.bold)
             })
@@ -63,14 +55,14 @@ struct BuyItemPopUp: View {
 
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        let groceryItem = GroceryItemMO()
+        let groceryItem = GroceryItem()
         groceryItem.name = "Milk"
         groceryItem.purchasedAmount = 2
         groceryItem.unitPrice = 0.99
         
         return Group {
             BuyItemPopUp(groceryItem: groceryItem,
-                         okAction: { groceryItem in
+                         okAction: {
                             print("\(groceryItem.purchasedAmount), \(groceryItem.readablePrice)")
             }, cancelAction: {
                 print("nothing added")
@@ -79,7 +71,7 @@ struct BuyItemPopUp_Previews: PreviewProvider {
                 .previewDisplayName("iPhone SE")
             
             BuyItemPopUp(groceryItem: groceryItem,
-                         okAction: { groceryItem in
+                         okAction: {
                             print("\(groceryItem.purchasedAmount), \(groceryItem.readablePrice)")
             }, cancelAction: {
                 print("nothing added")
@@ -91,7 +83,7 @@ struct BuyItemPopUp_Previews: PreviewProvider {
 }
 
 struct AmountStepper: View {
-    @ObservedObject var groceryItem: GroceryItemMO
+    @ObservedObject var groceryItem: GroceryItem
     
     var body: some View {
         VStack {
@@ -135,14 +127,14 @@ struct AmountStepper: View {
 }
 
 struct UnitPriceField: View {
-    @ObservedObject var groceryItem: GroceryItemMO
-    var okAction: (_: GroceryItemMO) -> Void
+    @ObservedObject var groceryItem: GroceryItem
+    var okAction: () -> Void
     
     var body: some View {
         VStack {
             HStack {
-                PriceField(currencyFormatter.string(for: 0.00)!, text: $groceryItem.visibleUnitPrice, isFirstResponder: true) {
-                    self.okAction(self.groceryItem)
+                PriceField(Formatter().currency.string(for: 0.00)!, text: $groceryItem.visibleUnitPrice, isFirstResponder: true) {
+                    self.okAction()
                 }
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.center)
@@ -243,16 +235,16 @@ struct PriceField: UIViewRepresentable {
         }
         
         @objc func textFieldDidBeginEditing(_ textField: UITextField) {
-            let numberValue = currencyFormatter.number(from: textField.text ?? "")
-            let stringValue = numberFormatter.string(for: numberValue ?? 0)!
+            let numberValue = Formatter().currency.number(from: textField.text ?? "")
+            let stringValue = Formatter().number.string(for: numberValue ?? 0)!
             
             self.parent.text.wrappedValue = stringValue
         }
         
         @objc func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
             
-            let numberValue = numberFormatter.number(from: textField.text ?? "")
-            let stringValue = currencyFormatter.string(for: numberValue ?? 0)!
+            let numberValue = Formatter().number.number(from: textField.text ?? "")
+            let stringValue = Formatter().currency.string(for: numberValue ?? 0)!
             
             self.parent.text.wrappedValue = stringValue
 //            textField.text = stringValue

@@ -1,0 +1,27 @@
+/* 
+  Localization.strings
+  GroceryCalculator
+
+  Created by Renan Greca on 02/07/2020.
+  Copyright © 2020 Renan Greca. All rights reserved.
+*/
+
+"Cancel" = "Cancelar";
+"Confirm" = "Confirmar";
+"Done" = "OK";
+
+// MARK: - GroceryList.swift
+"Grocery List" = "Lista de Compras";
+
+"Warning" = "Aviso";
+"Are you sure you want to clear your list?" = "Você  tem certeza que deseja esvaziar sua lista?";
+
+// MARK: - NewGroceryRow.swift
+"Add a grocery" = "Adicionar uma compra";
+
+// MARK: - TotalRow.swift
+"Total" = "Total";
+
+// MARK: - BuyItemPopUp.swift
+"Amount" = "Quantidade";
+"Unit Price" = "Preço Unitário";

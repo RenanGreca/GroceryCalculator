@@ -10,9 +10,7 @@ import SwiftUI
 
 struct ListRow: View {
     
-    @ObservedObject var groceryItem: GroceryItemMO
-//    var showBuyItemPopUp:((GroceryItem) -> Void)
-//    @EnvironmentObject var groceryItems: GroceryItems
+    @ObservedObject var groceryItem: GroceryItem
     @State var pushed = false
     
     @Environment(\.managedObjectContext) var context
@@ -20,84 +18,47 @@ struct ListRow: View {
     var body: some View {
         HStack {
             if (groceryItem.purchasedAmount > 0) {
-                PurchasedRow
+                PurchasedRow()
             } else {
-                UnpurchasedRow
+                UnpurchasedRow()
             }
             Spacer()
         }
         .padding(.vertical, 10)
         .sheet(isPresented: $pushed) {
             BuyItemPopUp(groceryItem: self.groceryItem,
-                         okAction: { groceryItem in
-                            try? self.context.save()
-                            self.pushed = false
-            },
-                         cancelAction: {
-                            self.groceryItem.purchasedAmount = 0
-                            try? self.context.save()
-                            self.pushed = false
-            })
+                         okAction: self.okAction,
+                         cancelAction: self.cancelAction)
         }
-//        .sheet(isPresented: $pushed) {
-//            BuyItemPopUp(groceryItem: groceryItem,
-//            okAction: self.buyItem(groceryItem:),
-//            cancelAction: {
-//                self.groceryItem.purchasedAmount = 0
-//                self.pushed = false
-//            })
-//        }
     }
     
     func updateGrocery() {
         if (groceryItem.name.count == 0) {
             // If the string is empty, we can delete this item
-            
-//            groceryItem.delete()
-//            groceryItems.list.removeAll(where: {$0 == groceryItem})
-//            groceryItems.refresh()
+            self.context.delete(self.groceryItem)
         } else {
-            try? self.context.save()
-//            groceryItem.saveToCoreData()
-//            groceryItem.saveToCloud() {
-//                self.groceryItems.refresh()
-//            }
+            // Save the updated name
+            CoreDataHelper.saveContext()
         }
     }
     
-//    func buyItem(groceryItem: GroceryItem) {
-//        groceryItem.saveToCoreData()
-////        groceryItem.saveToCloud() {
-////            self.groceryItems.refresh()
-////        }
-//        self.pushed = false
-//    }
-}
-
-struct ListRow_Previews: PreviewProvider {
-    static var previews: some View {
-        let grocery1 = GroceryItemMO()
-        grocery1.name = "Milk"
-        grocery1.purchasedAmount = 2
-        grocery1.unitPrice = 0.99
-        
-        let grocery2 = GroceryItemMO()
-        grocery2.name = "Butter"
-        grocery2.purchasedAmount = 0
-        grocery2.unitPrice = 0.99
-        
-        return Group {
-            ListRow(groceryItem: grocery1)//, showBuyItemPopUp: {_ in })
-            ListRow(groceryItem: grocery2)//, showBuyItemPopUp: {_ in })
-        }
-        .previewLayout(.fixed(width: 300, height: 70))
+    func okAction() {
+        CoreDataHelper.saveContext()
+        self.pushed = false
     }
+    
+    func cancelAction() {
+        self.groceryItem.purchasedAmount = 0
+        CoreDataHelper.saveContext()
+        self.pushed = false
+    }
+    
 }
 
 extension ListRow {
     
-    fileprivate var PurchasedRow: some View {
-        return HStack {
+    private func PurchasedRow() -> some View {
+        HStack {
             Image(systemName: "checkmark.circle.fill")
             .resizable()
                 .frame(width: 25, height: 25, alignment: .center)
@@ -120,8 +81,8 @@ extension ListRow {
         }
     }
     
-    fileprivate var UnpurchasedRow: some View {
-        return HStack {
+    private func UnpurchasedRow() -> some View {
+        HStack {
             Image(systemName: "circle")
                 .resizable()
                 .frame(width: 25, height: 25, alignment: .center)
@@ -135,5 +96,25 @@ extension ListRow {
             TextField("", text: $groceryItem.name, onCommit: updateGrocery)
                 .frame(height: 25)
         }
+    }
+}
+
+struct ListRow_Previews: PreviewProvider {
+    static var previews: some View {
+        let grocery1 = GroceryItem.new(name: "Milk")
+        grocery1.purchasedAmount = 2
+        grocery1.unitPrice = 0.99
+        
+        let grocery2 = GroceryItem.new(name: "Butter")
+        grocery2.purchasedAmount = 0
+        grocery2.unitPrice = 0.99
+        
+        return Group {
+            ListRow(groceryItem: grocery1)
+                .environment(\.colorScheme, .dark)
+            ListRow(groceryItem: grocery2)
+        }
+        .environment(\.managedObjectContext, CoreDataHelper.context)
+        .previewLayout(.fixed(width: 300, height: 70))
     }
 }

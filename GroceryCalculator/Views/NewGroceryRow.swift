@@ -28,7 +28,7 @@ struct NewGroceryRow: View {
     }
     
     func addGrocery() {
-        let _ = GroceryItemMO.new(name: newGrocery, position: position)
+        let _ = GroceryItem.new(name: newGrocery, position: position)
         CoreDataHelper.saveContext()
         self.newGrocery = ""
     }
@@ -38,7 +38,6 @@ struct NewItemRow_Previews: PreviewProvider {
     static var previews: some View {
          return Group {
             NewGroceryRow(position: 0)
-            //.environmentObject(GroceryItems.withSampleData)
          }
          .previewLayout(.fixed(width: 300, height: 70))
     }

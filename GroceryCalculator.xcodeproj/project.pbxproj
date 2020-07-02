@@ -12,7 +12,6 @@
 		1F1CF9A723C8BDC200053A71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9A623C8BDC200053A71 /* AppDelegate.swift */; };
 		1F1CF9A923C8BDC200053A71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9A823C8BDC200053A71 /* SceneDelegate.swift */; };
 		1F1CF9AC23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9AA23C8BDC200053A71 /* GroceryCalculator.xcdatamodeld */; };
-		1F1CF9AE23C8BDC200053A71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9AD23C8BDC200053A71 /* ContentView.swift */; };
 		1F1CF9B023C8BDC300053A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9AF23C8BDC300053A71 /* Assets.xcassets */; };
 		1F1CF9B323C8BDC300053A71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9B223C8BDC300053A71 /* Preview Assets.xcassets */; };
 		1F1CF9B623C8BDC300053A71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9B423C8BDC300053A71 /* LaunchScreen.storyboard */; };
@@ -25,6 +24,7 @@
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F3F182E245F166F00A40EE6 /* GroceryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */; };
 		1F4D7DE024AC8CDD00BE255D /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */; };
+		1F53883224AE1C2600EAB2E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F53883424AE1C2600EAB2E8 /* Localizable.strings */; };
 		1F571C922453282D0007A019 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C912453282D0007A019 /* GroceryItems.swift */; };
 		1F571C942456DFBB0007A019 /* GroceryListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F571C932456DFBB0007A019 /* GroceryListTests.swift */; };
 		1F6124BB24656C8B00CE2E75 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124B924656C8B00CE2E75 /* Interface.storyboard */; };
@@ -110,7 +110,6 @@
 		1F1CF9A623C8BDC200053A71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F1CF9A823C8BDC200053A71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1F1CF9AB23C8BDC200053A71 /* GroceryCalculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GroceryCalculator.xcdatamodel; sourceTree = "<group>"; };
-		1F1CF9AD23C8BDC200053A71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1F1CF9AF23C8BDC300053A71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F1CF9B223C8BDC300053A71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F1CF9B523C8BDC300053A71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -128,6 +127,8 @@
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItemTests.swift; sourceTree = "<group>"; };
 		1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		1F53883324AE1C2600EAB2E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1F53883524AE1C8B00EAB2E8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		1F571C912453282D0007A019 /* GroceryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
 		1F571C932456DFBB0007A019 /* GroceryListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTests.swift; sourceTree = "<group>"; };
 		1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +228,7 @@
 				1F1CF9E023C8BE6C00053A71 /* Models */,
 				1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */,
 				1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */,
+				1F53883424AE1C2600EAB2E8 /* Localizable.strings */,
 			);
 			path = GroceryCalculator;
 			sourceTree = "<group>";
@@ -263,11 +265,10 @@
 		1F1CF9DB23C8BE1A00053A71 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1F1CF9AD23C8BDC200053A71 /* ContentView.swift */,
+				1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */,
 				1F1CF9D923C8BE1600053A71 /* ListRow.swift */,
 				1F158FB92456E667001A3668 /* NewGroceryRow.swift */,
 				1F1CF9E923C8C68900053A71 /* TotalRow.swift */,
-				1F1CF9E123C8C0AC00053A71 /* GroceryList.swift */,
 				1F18C53D23C8E50A00350F12 /* BuyItemPopUp.swift */,
 			);
 			path = Views;
@@ -465,6 +466,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 1F1CF99A23C8BDC200053A71;
 			productRefGroup = 1F1CF9A423C8BDC200053A71 /* Products */;
@@ -487,6 +489,7 @@
 			files = (
 				1F1CF9B623C8BDC300053A71 /* LaunchScreen.storyboard in Resources */,
 				1F1CF9E623C8C3C700053A71 /* SampleGroceries.json in Resources */,
+				1F53883224AE1C2600EAB2E8 /* Localizable.strings in Resources */,
 				1F1CF9B323C8BDC300053A71 /* Preview Assets.xcassets in Resources */,
 				1F1CF9B023C8BDC300053A71 /* Assets.xcassets in Resources */,
 			);
@@ -538,7 +541,6 @@
 				1F1CF9A723C8BDC200053A71 /* AppDelegate.swift in Sources */,
 				1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */,
 				1F18C53E23C8E50A00350F12 /* BuyItemPopUp.swift in Sources */,
-				1F1CF9AE23C8BDC200053A71 /* ContentView.swift in Sources */,
 				1F158FBA2456E667001A3668 /* NewGroceryRow.swift in Sources */,
 				1F1CF9A923C8BDC200053A71 /* SceneDelegate.swift in Sources */,
 				1F4D7DE024AC8CDD00BE255D /* Formatter.swift in Sources */,
@@ -614,6 +616,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		1F53883424AE1C2600EAB2E8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F53883324AE1C2600EAB2E8 /* en */,
+				1F53883524AE1C8B00EAB2E8 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		1F6124B924656C8B00CE2E75 /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -629,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -689,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

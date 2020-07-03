@@ -92,7 +92,9 @@ extension Grocery {
     var visibleUnitPrice: String {
         get {
             // Just show the formatted string
-            return self.unitPriceString
+            return (self.unitPriceString == "" && self.unitPrice > 0
+                        ? Formatter().currency.string(for: self.unitPrice)!
+                        : self.unitPriceString)
         }
         set {
             if  let symbol = Locale.current.currencySymbol,

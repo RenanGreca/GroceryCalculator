@@ -27,50 +27,110 @@ struct ContentView: View {
         return VStack {
             List {
                 ForEach(fetchedGroceries, id: \.self) { grocery in
-                    return Text("\(grocery.name) - \(grocery.readablePrice)")
-                    .onTapGesture {
-                        grocery.purchasedAmount = grocery.desiredAmount
-                        try? self.context.save()
-                    }
+                    WatchRow(grocery: grocery)
                 }
             }
-            Text("Total: \(totalPrice)")
-                .edgesIgnoringSafeArea(.bottom)
+            HStack {
+                Spacer()
+                Text("Total: \(totalPrice)")
+                    .padding(1)
+                Spacer()
+            }
+            .background(Color.black)
+            
         }
+        .edgesIgnoringSafeArea(.bottom)
 
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()//.environmentObject(GroceryItems.withSampleData)
+        let grocery1 = Grocery.new(name: "Milk")
+        grocery1.purchasedAmount = 2
+        grocery1.unitPrice = 0.89
+        
+        let grocery2 = Grocery.new(name: "Butter")
+        grocery2.purchasedAmount = 0
+        grocery2.unitPrice = 0.99
+        
+        return Group {
+            ContentView()
+                .environment(\.managedObjectContext, (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext)
+                .previewDevice("Apple Watch Series 5 - 40mm")
+            
+            ContentView()
+                .environment(\.managedObjectContext, (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext)
+                .previewDevice("Apple Watch Series 3 - 38mm")
+        }
     }
 }
 
-class SessionDelegate: NSObject, WCSessionDelegate {
+struct WatchRow: View {
+    @ObservedObject var grocery: Grocery
+    @Environment(\.managedObjectContext) var context
     
-    var wcSession: WCSession! = nil
-    
-    func activate() {
-        wcSession = WCSession.default
-        wcSession.delegate = self
-        wcSession.activate()
+    var body: some View {
+        HStack {
+            if (grocery.purchasedAmount > 0) {
+                PurchasedRow(grocery: grocery)
+            } else {
+                UnpurchasedRow(grocery: grocery)
+            }
+        }
     }
+}
+
+extension WatchRow {
     
-    func sendData() {
-        wcSession.sendMessage(["Hello": 1], replyHandler: nil) {
-            error in
-            print(error.localizedDescription)
+    struct PurchasedRow: View {
+        @ObservedObject var grocery: Grocery
+        @Environment(\.managedObjectContext) var context
+
+        var body: some View {
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        self.grocery.purchasedAmount = 0
+                        try? self.context.save()
+                    }
+                                
+                Text(grocery.name)
+                    .foregroundColor(.gray)
+                    .frame(height: 25)
+
+                Spacer()
+                Text("\(grocery.readablePrice)")
+                    .onTapGesture {
+                        self.grocery.purchasedAmount = self.grocery.desiredAmount
+                    }
+            }
         }
     }
     
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print(message)
-    }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    struct UnpurchasedRow: View {
+        @ObservedObject var grocery: Grocery
+        @Environment(\.managedObjectContext) var context
         
-    }
+        var body: some View {
+            
+            HStack {
+                Image(systemName: "circle")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+                        self.grocery.purchasedAmount = self.grocery.desiredAmount
+                        //                    self.pushed = true
+                }
+                
+                Text(self.grocery.name)
+                    .frame(height: 25)
+                
+                Spacer()
 
-    
+            }
+        }
+    }
 }
+

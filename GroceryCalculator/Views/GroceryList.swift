@@ -141,34 +141,3 @@ final class KeyboardResponder: ObservableObject {
         currentHeight = 0
     }
 }
-
-class SessionDelegate: NSObject, WCSessionDelegate {
-    
-    var wcSession: WCSession! = nil
-    
-    func activate() {
-        wcSession = WCSession.default
-        wcSession.delegate = self
-        wcSession.activate()
-    }
-    
-    func sendData() {
-        wcSession.sendMessage(["Hello": 1], replyHandler: nil) {
-            error in
-            print(error.localizedDescription)
-        }
-    }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
-    
-}

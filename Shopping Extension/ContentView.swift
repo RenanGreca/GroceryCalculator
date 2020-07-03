@@ -12,22 +12,30 @@ import WatchConnectivity
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) var context
-    @FetchRequest(entity: GroceryItem.entity(),
+    @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
                   predicate: NSPredicate(value: true),
                   animation: .spring())
-    var fetchedGroceries: FetchedResults<GroceryItem>
+    var fetchedGroceries: FetchedResults<Grocery>
 
     
     var body: some View {
         let total = fetchedGroceries.reduce(0) { $0 + $1.price }
         let totalPrice = Formatter().currency.string(for: total) ?? "0"
-        
-        return List {
-            ForEach(fetchedGroceries, id: \.self) { grocery in
-                Text("\(grocery.name!) - \(grocery.visibleUnitPrice)")
+        print("Updating list... Grocerycount: \(fetchedGroceries.count)")
+        print("Updating price... \(totalPrice)")
+        return VStack {
+            List {
+                ForEach(fetchedGroceries, id: \.self) { grocery in
+                    return Text("\(grocery.name) - \(grocery.readablePrice)")
+                    .onTapGesture {
+                        grocery.purchasedAmount = grocery.desiredAmount
+                        try? self.context.save()
+                    }
+                }
             }
             Text("Total: \(totalPrice)")
+                .edgesIgnoringSafeArea(.bottom)
         }
 
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="GroceryItem" representedClassName="GroceryItem" syncable="YES">
+    <entity name="Grocery" representedClassName="Grocery" syncable="YES">
         <attribute name="ckid" optional="YES" attributeType="String"/>
         <attribute name="desiredAmount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -10,6 +10,6 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="GroceryItem" positionX="-54" positionY="-9" width="128" height="148"/>
+        <element name="Grocery" positionX="-54" positionY="-9" width="128" height="148"/>
     </elements>
 </model>

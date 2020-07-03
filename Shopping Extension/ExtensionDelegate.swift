@@ -12,13 +12,10 @@ import CloudKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
-    let persistentContainer = NSPersistentContainer(name: "ShoppingExtension")
+    let persistentContainer = NSPersistentCloudKitContainer(name: "GroceryCalculator")
 
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
-        
-//        CloudKitHelper.subscribeToCloudChanges()
-        
+        // Perform any final initialization of your application.        
         persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -119,6 +116,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func didReceiveRemoteNotification(_ userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (WKBackgroundFetchResult) -> Void) {
+        
+        print("Received notification")
     }
 
 }

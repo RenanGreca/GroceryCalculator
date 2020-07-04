@@ -28,9 +28,11 @@ struct NewGroceryRow: View {
     }
     
     func addGrocery() {
-        let _ = Grocery.new(name: newGrocery, position: position)
-        CoreDataHelper.saveContext()
-        self.newGrocery = ""
+        if (newGrocery.count > 0) {
+            let _ = Grocery.new(name: newGrocery, position: position)
+            CoreDataHelper.saveContext()
+            self.newGrocery = ""
+        }
     }
 }
 

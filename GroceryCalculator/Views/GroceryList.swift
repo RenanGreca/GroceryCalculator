@@ -37,7 +37,8 @@ struct GroceryList: View {
                     }
                 }
                 .navigationBarTitle(Text("Grocery List"))
-                .navigationBarItems(leading: ClearButton(),
+                .navigationBarItems(leading: ClearButton(showingAlert: self.$showingAlert,
+                                                         deleteAll: deleteAll),
                                     trailing: EditButton())
                 .padding(.bottom, (keyboard.currentHeight > 0 ? keyboard.currentHeight-35 : 0))
                 .animation(.easeInOut(duration: 0.16))
@@ -45,27 +46,38 @@ struct GroceryList: View {
             .navigationViewStyle(StackNavigationViewStyle())
         }
     }
+    
+    func deleteAll() {
+        for item in self.fetchedGroceries {
+            self.context.delete(item)
+        }
+        try? self.context.save()
+    }
 
 }
 
 extension GroceryList {
-    func ClearButton() -> some View {
-        Button(action: {
-            self.showingAlert.toggle()
-        }, label: {
-            Image(systemName: "trash")
-                .foregroundColor(.red)
-        }).alert(isPresented: $showingAlert) {
-            Alert(title: Text("Warning"),
-                  message: Text("Are you sure you want to clear your list?"),
-                  primaryButton: .cancel(Text("Cancel")),
-                  secondaryButton: .destructive(Text("Confirm")) {
-                    for item in self.fetchedGroceries {
-                        self.context.delete(item)
-                    }
-                    try? self.context.save()
-                    self.showingAlert = false
-                })
+    
+    struct ClearButton: View {
+        
+        @Binding var showingAlert: Bool
+        var deleteAll: () -> Void
+        
+        var body: some View {
+            Button(action: {
+                self.showingAlert = true
+            }, label: {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }).alert(isPresented: $showingAlert) {
+                Alert(title: Text("Warning"),
+                      message: Text("Are you sure you want to clear your list?"),
+                      primaryButton: .cancel(Text("Cancel")),
+                      secondaryButton: .destructive(Text("Confirm")) {
+                        self.deleteAll()
+                        self.showingAlert = false
+                    })
+            }
         }
     }
     
@@ -73,17 +85,6 @@ extension GroceryList {
         List {
             ForEach(fetchedGroceries, id: \.self) { grocery in
                 ListRow(grocery: grocery)
-                .contextMenu {
-                    Button(action: {
-                        self.context.delete(grocery)
-                        CoreDataHelper.saveContext()
-                    }, label: {
-                        HStack {
-                            Text("Delete")
-                            Image(systemName: "trash")
-                        }
-                    })
-                }
             }
             .onDelete() { indexSet in
                 let grocery = self.fetchedGroceries[indexSet.first!]

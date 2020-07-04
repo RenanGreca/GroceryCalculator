@@ -12,15 +12,20 @@ struct ListRow: View {
     
     @ObservedObject var grocery: Grocery
     @State var pushed = false
+    @State var isEditing = false
     
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
         HStack {
             if (grocery.purchasedAmount > 0) {
-                PurchasedRow(grocery: grocery, pushed: $pushed)
+                PurchasedRow(grocery: grocery,
+                             pushed: $pushed,
+                             isEditing: $isEditing)
             } else {
-                UnpurchasedRow()
+                UnpurchasedRow(grocery: grocery,
+                               pushed: $pushed,
+                               isEditing: $isEditing)
             }
             Spacer()
         }
@@ -29,6 +34,28 @@ struct ListRow: View {
             BuyItemPopUp(groceryItem: self.grocery,
                          okAction: self.okAction,
                          cancelAction: self.cancelAction)
+        }
+        .contextMenu {
+            // Rename button
+            Button(action: {
+                self.isEditing.toggle()
+            }, label: {
+                HStack {
+                    Text("Rename")
+                    Image(systemName: "square.and.pencil")
+                }
+            })
+                            
+            // Delete button
+            Button(action: {
+                self.context.delete(self.grocery)
+                CoreDataHelper.saveContext()
+            }, label: {
+                HStack {
+                    Text("Delete")
+                    Image(systemName: "trash")
+                }
+            })
         }
     }
     
@@ -61,7 +88,7 @@ extension ListRow {
         @Environment(\.managedObjectContext) var context
         @ObservedObject var grocery: Grocery
         @Binding var pushed: Bool
-        @State var isEditing = false
+        @Binding var isEditing: Bool
         
         var body: some View {
             HStack {
@@ -74,11 +101,12 @@ extension ListRow {
                     CoreDataHelper.saveContext()
                 }
                 
-                if isEditing {
+                if (isEditing) {
                     TextField("", text: $grocery.name) {
                         self.isEditing.toggle()
                         if (self.grocery.name.count == 0) {
-                            // If the string is empty, we can delete this item
+                            // If the string is empty,
+                            // we can delete this item
                             self.context.delete(self.grocery)
                         } else {
                             // Save the updated name
@@ -87,13 +115,12 @@ extension ListRow {
                     }
                     .foregroundColor(.gray)
                     .frame(height: 25)
+                    .border(Color.primary, width: 1)
+                    .cornerRadius(2)
                 } else {
                     Text(grocery.name)
-                    .onTapGesture {
-                            self.isEditing.toggle()
-                    }
                     .foregroundColor(.gray)
-        
+                    
                     Spacer()
                 }
                 
@@ -103,27 +130,59 @@ extension ListRow {
                     self.pushed = true
                 }
             }
+//            .onTapGesture {
+//                self.grocery.purchasedAmount = 0
+//                CoreDataHelper.saveContext()
+//            }
             
         }
     }
     
-    private func UnpurchasedRow() -> some View {
-        HStack {
-            Image(systemName: "circle")
-                .resizable()
-                .frame(width: 25, height: 25, alignment: .center)
-                .foregroundColor(.blue)
-                .onTapGesture {
-                    // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
-                    self.grocery.purchasedAmount = self.grocery.desiredAmount
-                    self.pushed = true
+    struct UnpurchasedRow: View {
+        @Environment(\.managedObjectContext) var context
+        @ObservedObject var grocery: Grocery
+        @Binding var pushed: Bool
+        @Binding var isEditing: Bool
+        
+        var body: some View {
+            HStack {
+                Image(systemName: "circle")
+                    .resizable()
+                    .frame(width: 25, height: 25, alignment: .center)
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+                        self.grocery.purchasedAmount = self.grocery.desiredAmount
+                        self.pushed = true
+                    }
+                
+                if (isEditing) {
+                    TextField("", text: $grocery.name) {
+                        self.isEditing.toggle()
+                        if (self.grocery.name.count == 0) {
+                            // If the string is empty,
+                            // we can delete this item
+                            self.context.delete(self.grocery)
+                        } else {
+                            // Save the updated name
+                            CoreDataHelper.saveContext()
+                        }
+                    }
+                    .frame(height: 25)
+                    .border(Color.primary, width: 1)
+                    .cornerRadius(2)
+
+                } else {
+                    Text(grocery.name)
+                    Spacer()
                 }
-            
-            Text(grocery.name)
-//            TextField("", text: $groceryItem.name, onCommit: updateGrocery)
-//                .frame(height: 25)
-            
-            Spacer()
+                
+            }
+//            .onTapGesture {
+//                // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+//                self.grocery.purchasedAmount = self.grocery.desiredAmount
+//                self.pushed = true
+//            }
         }
     }
 }

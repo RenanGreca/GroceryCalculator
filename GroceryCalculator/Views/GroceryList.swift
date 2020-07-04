@@ -71,8 +71,19 @@ extension GroceryList {
     
     func GroceryList() -> some View {
         List {
-            ForEach(fetchedGroceries, id: \.self) { groceryMO in
-                ListRow(groceryItem: groceryMO)
+            ForEach(fetchedGroceries, id: \.self) { grocery in
+                ListRow(grocery: grocery)
+                .contextMenu {
+                    Button(action: {
+                        self.context.delete(grocery)
+                        CoreDataHelper.saveContext()
+                    }, label: {
+                        HStack {
+                            Text("Delete")
+                            Image(systemName: "trash")
+                        }
+                    })
+                }
             }
             .onDelete() { indexSet in
                 let grocery = self.fetchedGroceries[indexSet.first!]

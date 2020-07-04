@@ -10,15 +10,15 @@ import SwiftUI
 
 struct ListRow: View {
     
-    @ObservedObject var groceryItem: Grocery
+    @ObservedObject var grocery: Grocery
     @State var pushed = false
     
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
         HStack {
-            if (groceryItem.purchasedAmount > 0) {
-                PurchasedRow()
+            if (grocery.purchasedAmount > 0) {
+                PurchasedRow(grocery: grocery, pushed: $pushed)
             } else {
                 UnpurchasedRow()
             }
@@ -26,16 +26,16 @@ struct ListRow: View {
         }
         .padding(.vertical, 10)
         .sheet(isPresented: $pushed) {
-            BuyItemPopUp(groceryItem: self.groceryItem,
+            BuyItemPopUp(groceryItem: self.grocery,
                          okAction: self.okAction,
                          cancelAction: self.cancelAction)
         }
     }
     
     func updateGrocery() {
-        if (groceryItem.name.count == 0) {
+        if (grocery.name.count == 0) {
             // If the string is empty, we can delete this item
-            self.context.delete(self.groceryItem)
+            self.context.delete(self.grocery)
         } else {
             // Save the updated name
             CoreDataHelper.saveContext()
@@ -48,7 +48,7 @@ struct ListRow: View {
     }
     
     func cancelAction() {
-        self.groceryItem.purchasedAmount = 0
+        self.grocery.purchasedAmount = 0
         CoreDataHelper.saveContext()
         self.pushed = false
     }
@@ -57,27 +57,53 @@ struct ListRow: View {
 
 extension ListRow {
     
-    private func PurchasedRow() -> some View {
-        HStack {
-            Image(systemName: "checkmark.circle.fill")
-            .resizable()
+    struct PurchasedRow: View {
+        @Environment(\.managedObjectContext) var context
+        @ObservedObject var grocery: Grocery
+        @Binding var pushed: Bool
+        @State var isEditing = false
+        
+        var body: some View {
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                .resizable()
                 .frame(width: 25, height: 25, alignment: .center)
                 .foregroundColor(.blue)
                 .onTapGesture {
-                    self.groceryItem.purchasedAmount = 0
-                    self.updateGrocery()
+                    self.grocery.purchasedAmount = 0
+                    CoreDataHelper.saveContext()
                 }
-                            
-            TextField("", text: $groceryItem.name, onCommit: updateGrocery)
-                .foregroundColor(.gray)
-                .frame(height: 25)
-
-            
-            Text("\(groceryItem.readablePrice)")
+                
+                if isEditing {
+                    TextField("", text: $grocery.name) {
+                        self.isEditing.toggle()
+                        if (self.grocery.name.count == 0) {
+                            // If the string is empty, we can delete this item
+                            self.context.delete(self.grocery)
+                        } else {
+                            // Save the updated name
+                            CoreDataHelper.saveContext()
+                        }
+                    }
+                    .foregroundColor(.gray)
+                    .frame(height: 25)
+                } else {
+                    Text(grocery.name)
+                    .onTapGesture {
+                            self.isEditing.toggle()
+                    }
+                    .foregroundColor(.gray)
+        
+                    Spacer()
+                }
+                
+                Text("\(grocery.readablePrice)")
                 .onTapGesture {
-                    self.groceryItem.purchasedAmount = self.groceryItem.desiredAmount
+                    self.grocery.purchasedAmount = self.grocery.desiredAmount
                     self.pushed = true
                 }
+            }
+            
         }
     }
     
@@ -89,12 +115,15 @@ extension ListRow {
                 .foregroundColor(.blue)
                 .onTapGesture {
                     // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
-                    self.groceryItem.purchasedAmount = self.groceryItem.desiredAmount
+                    self.grocery.purchasedAmount = self.grocery.desiredAmount
                     self.pushed = true
                 }
             
-            TextField("", text: $groceryItem.name, onCommit: updateGrocery)
-                .frame(height: 25)
+            Text(grocery.name)
+//            TextField("", text: $groceryItem.name, onCommit: updateGrocery)
+//                .frame(height: 25)
+            
+            Spacer()
         }
     }
 }
@@ -110,9 +139,9 @@ struct ListRow_Previews: PreviewProvider {
         grocery2.unitPrice = 0.99
         
         return Group {
-            ListRow(groceryItem: grocery1)
+            ListRow(grocery: grocery1)
                 .environment(\.colorScheme, .dark)
-            ListRow(groceryItem: grocery2)
+            ListRow(grocery: grocery2)
         }
         .environment(\.managedObjectContext, CoreDataHelper.context)
         .previewLayout(.fixed(width: 300, height: 70))

@@ -29,7 +29,24 @@ struct ContentView: View {
                 ForEach(fetchedGroceries, id: \.self) { grocery in
                     WatchRow(grocery: grocery)
                 }
+                .onDelete() { indexSet in
+                    let grocery = self.fetchedGroceries[indexSet.first!]
+                    self.context.delete(grocery)
+                    CoreDataHelper.saveContext()
+                }
+                .onMove() { source, destination in
+                    var list = self.fetchedGroceries.compactMap() { $0 }
+                    
+                    list.move(fromOffsets: source, toOffset: destination)
+                    
+                    for i in 0..<list.count {
+                        list[i].updatePosition(index: i)
+                    }
+                    
+                    CoreDataHelper.saveContext()
+                }
             }
+            .listStyle(CarouselListStyle())
             HStack {
                 Spacer()
                 Text("Total: \(totalPrice)")
@@ -39,6 +56,7 @@ struct ContentView: View {
             .background(Color.black)
             
         }
+        .navigationBarTitle("Grocery List")
         .edgesIgnoringSafeArea(.bottom)
 
     }
@@ -99,6 +117,7 @@ extension WatchRow {
                 Text(grocery.name)
                     .foregroundColor(.gray)
                     .frame(height: 25)
+                    .font(.system(.body, design: .rounded))
 
                 Spacer()
                 Text("\(grocery.readablePrice)")
@@ -126,6 +145,7 @@ extension WatchRow {
                 
                 Text(self.grocery.name)
                     .frame(height: 25)
+                    .font(.system(.body, design: .rounded))
                 
                 Spacer()
 

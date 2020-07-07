@@ -25,3 +25,7 @@
 // MARK: - BuyItemPopUp.swift
 "Amount" = "Amount";
 "Unit Price" = "Unit Price";
+
+// MARK: - Settings.swift
+"Settings" = "Settings";
+"About this app" = "This app was developed by Renan Greca, mostly as an experiment with SwiftUI. It is open-source under the GNU General Public License v3.0. If you have questions, feedback, suggestions or bug reports, please notify the developer using one of the methods below:";

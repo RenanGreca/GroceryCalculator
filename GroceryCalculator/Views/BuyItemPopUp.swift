@@ -25,10 +25,8 @@ struct BuyItemPopUp: View {
                 TotalPrice(totalPrice: self.groceryItem.readablePrice)
                 Spacer()
             }
-//            .frame(height: 300)
             .padding(.horizontal, 30)
             .navigationBarTitle("\(groceryItem.name)", displayMode: .inline)
-//            .navigationBarTitle(groceryItem.name, displayMode: .inline)
             .navigationBarItems(leading: Button(action: {
                 self.cancelAction()
             }) {

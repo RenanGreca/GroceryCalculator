@@ -10,15 +10,17 @@ import SwiftUI
 import WatchConnectivity
 
 struct GroceryList: View {
-        
+    
     @ObservedObject var keyboard = KeyboardResponder()
     @State var showingAlert = false
+    @State var pushed = false
+    @State var isEditing = true
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.locale) var locale
     @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
-                  predicate: NSPredicate(value: true),
+                  predicate: NSPredicate(format: "visible = %d", true),
                   animation: .spring())
     var fetchedGroceries: FetchedResults<Grocery>
     
@@ -37,23 +39,54 @@ struct GroceryList: View {
                     }
                 }
                 .navigationBarTitle(Text("Grocery List"))
-                .navigationBarItems(leading: ClearButton(showingAlert: self.$showingAlert,
-                                                         deleteAll: deleteAll),
-                                    trailing: EditButton())
-                .padding(.bottom, (keyboard.currentHeight > 0 ? keyboard.currentHeight-35 : 0))
-                .animation(.easeInOut(duration: 0.16))
+                .navigationBarItems(leading: leadingButton,
+                                    trailing: EditButton().simultaneousGesture(TapGesture().onEnded {
+                                        self.isEditing.toggle()
+                                        }))
+                    .padding(.bottom, (keyboard.currentHeight > 0 ? keyboard.currentHeight-35 : 0))
+                    .animation(.easeInOut(duration: 0.16))
             }
             .navigationViewStyle(StackNavigationViewStyle())
+            .sheet(isPresented: $pushed) {
+                Settings(pushed: self.$pushed)
+            }
+        }
+    }
+    
+    var leadingButton: some View {
+        Button(action: {
+            if self.isEditing {
+                self.showingAlert = true
+            } else {
+                self.pushed = true
+            }
+        }, label: {
+            if self.isEditing {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            } else {
+                Image(systemName: "gear")
+            }
+                
+        })
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Warning"),
+                  message: Text("Are you sure you want to clear your list?"),
+                  primaryButton: .cancel(Text("Cancel")),
+                  secondaryButton: .destructive(Text("Confirm")) {
+                    self.deleteAll()
+                    self.showingAlert = false
+                })
         }
     }
     
     func deleteAll() {
         for item in self.fetchedGroceries {
-            self.context.delete(item)
+            item.visible = false
         }
-        try? self.context.save()
+        CoreDataHelper.saveContext()
     }
-
+    
 }
 
 extension GroceryList {
@@ -84,11 +117,11 @@ extension GroceryList {
     func GroceryList() -> some View {
         List {
             ForEach(fetchedGroceries, id: \.self) { grocery in
-                ListRow(grocery: grocery)
+                ListRow(grocery: grocery, isEditing: false)
             }
             .onDelete() { indexSet in
                 let grocery = self.fetchedGroceries[indexSet.first!]
-                self.context.delete(grocery)
+                grocery.visible = false
                 CoreDataHelper.saveContext()
             }
             .onMove() { source, destination in

@@ -15,33 +15,27 @@ public class Grocery: NSManagedObject {
     var unitPriceString: String = ""
     
     static func new(name: String, position: Int = Int.max) -> Grocery {
-        let item = Grocery.fetch()
-        
-        item.name = name
-        item.ckid = .init()
-        item.uuid = .init()
-        item.desiredAmount = 1
-        item.purchasedAmount = 0
-        item.position = Int64(position)
-        
-        return item
-    }
-    
-    static func fetch(uuid: UUID? = nil) -> Grocery {
         let item:Grocery
-        if  let uuid = uuid,
-            let managedItem = Grocery.fetchManagedWith(id: uuid) {
+        if  let managedItem = Grocery.fetchManagedWith(name: name) {
             item = managedItem
         } else {
             item = NSEntityDescription.insertNewObject(forEntityName: Grocery.entityName, into: CoreDataHelper.context) as! Grocery
+            item.name = name
+            item.ckid = .init()
+            item.uuid = .init()
         }
+        
+        item.desiredAmount = 1
+        item.purchasedAmount = 0
+        item.position = Int64(position)
+        item.visible = true
         
         return item
     }
     
-    static func fetchManagedWith(id:UUID) -> Grocery? {
+    private static func fetchManagedWith(name:String) -> Grocery? {
         let fetchRequest = NSFetchRequest<Grocery>(entityName: Grocery.entityName)
-        let searchFilter = NSPredicate(format: "uuid = %@", id as CVarArg)
+        let searchFilter = NSPredicate(format: "name = %@", name)
         fetchRequest.predicate = searchFilter
         
         let results = try? CoreDataHelper.context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as? [Grocery]
@@ -72,6 +66,7 @@ extension Grocery {
     @NSManaged public var unitPrice: Double
     @NSManaged public var ckid: String?
     @NSManaged public var position: Int64
+    @NSManaged public var visible: Bool
     
     static var entityName: String { return "Grocery" }
 }

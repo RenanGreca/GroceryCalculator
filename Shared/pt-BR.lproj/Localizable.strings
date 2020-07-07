@@ -14,7 +14,7 @@
 "Grocery List" = "Lista de Compras";
 
 "Warning" = "Aviso";
-"Are you sure you want to clear your list?" = "Você  tem certeza que deseja esvaziar sua lista?";
+"Are you sure you want to clear your list?" = "Você tem certeza que deseja esvaziar sua lista?";
 
 // MARK: - NewGroceryRow.swift
 "Add a grocery" = "Adicionar uma compra";
@@ -25,3 +25,7 @@
 // MARK: - BuyItemPopUp.swift
 "Amount" = "Quantidade";
 "Unit Price" = "Preço Unitário";
+
+// MARK: - Settings.swift
+"Settings" = "Configurações";
+"About this app" = "This app was developed by Renan Greca, mostly as an experiment with SwiftUI.";

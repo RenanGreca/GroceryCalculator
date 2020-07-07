@@ -42,6 +42,7 @@
 		1F71103323FAD30300A28576 /* GroceryCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9CB23C8BDC300053A71 /* GroceryCalculatorUITests.swift */; };
 		1F71103523FAD9E500A28576 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F71103423FAD9E500A28576 /* CoreDataHelper.swift */; };
 		1F95433A24AA384A0082A0C2 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CA24656C8E00CE2E75 /* HostingController.swift */; };
+		1FC21DD524B48B4D00BB69B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC21DD424B48B4D00BB69B5 /* Settings.swift */; };
 		1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C2724A4AD73008AF525 /* CloudKit.framework */; };
 		1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
 		1FF60C3224A6317C008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C3124A6317C008AF525 /* CloudKit.framework */; };
@@ -147,6 +148,7 @@
 		1F6124DA24656C8F00CE2E75 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		1F71102923FAD2AC00A28576 /* GroceryCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GroceryCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F71103423FAD9E500A28576 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		1FC21DD424B48B4D00BB69B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		1FF60C2724A4AD73008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1FF60C2924A60279008AF525 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Shopping Extension.entitlements"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				1F158FB92456E667001A3668 /* NewGroceryRow.swift */,
 				1F1CF9E923C8C68900053A71 /* TotalRow.swift */,
 				1F18C53D23C8E50A00350F12 /* BuyItemPopUp.swift */,
+				1FC21DD424B48B4D00BB69B5 /* Settings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				1F1CF9E223C8C0AC00053A71 /* GroceryList.swift in Sources */,
 				1F18C53E23C8E50A00350F12 /* BuyItemPopUp.swift in Sources */,
 				1F158FBA2456E667001A3668 /* NewGroceryRow.swift in Sources */,
+				1FC21DD524B48B4D00BB69B5 /* Settings.swift in Sources */,
 				1F1CF9A923C8BDC200053A71 /* SceneDelegate.swift in Sources */,
 				1F4D7DE024AC8CDD00BE255D /* Formatter.swift in Sources */,
 				1F1CF9DA23C8BE1600053A71 /* ListRow.swift in Sources */,

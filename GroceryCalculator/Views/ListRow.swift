@@ -12,7 +12,7 @@ struct ListRow: View {
     
     @ObservedObject var grocery: Grocery
     @State var pushed = false
-    @State var isEditing = false
+    @State var isEditing:Bool
     
     @Environment(\.managedObjectContext) var context
     
@@ -48,7 +48,8 @@ struct ListRow: View {
                             
             // Delete button
             Button(action: {
-                self.context.delete(self.grocery)
+//                self.context.delete(self.grocery)
+                self.grocery.visible = false
                 CoreDataHelper.saveContext()
             }, label: {
                 HStack {
@@ -59,15 +60,15 @@ struct ListRow: View {
         }
     }
     
-    func updateGrocery() {
-        if (grocery.name.count == 0) {
-            // If the string is empty, we can delete this item
-            self.context.delete(self.grocery)
-        } else {
-            // Save the updated name
-            CoreDataHelper.saveContext()
-        }
-    }
+//    func updateGrocery() {
+//        if (grocery.name.count == 0) {
+//            // If the string is empty, we can delete this item
+//            self.context.delete(self.grocery)
+//        } else {
+//            // Save the updated name
+//            CoreDataHelper.saveContext()
+//        }
+//    }
     
     func okAction() {
         CoreDataHelper.saveContext()
@@ -115,7 +116,9 @@ extension ListRow {
                     }
                     .foregroundColor(.gray)
                     .frame(height: 25)
-                    .border(Color.primary, width: 1)
+                    .foregroundColor(Color.primary)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .border(Color.gray, width: 1)
                     .cornerRadius(2)
                 } else {
                     Text(grocery.name)
@@ -130,10 +133,13 @@ extension ListRow {
                     self.pushed = true
                 }
             }
-//            .onTapGesture {
-//                self.grocery.purchasedAmount = 0
-//                CoreDataHelper.saveContext()
-//            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if !self.isEditing {
+                    self.grocery.purchasedAmount = 0
+                    CoreDataHelper.saveContext()
+                }
+            }
             
         }
     }
@@ -169,7 +175,9 @@ extension ListRow {
                         }
                     }
                     .frame(height: 25)
-                    .border(Color.primary, width: 1)
+                    .foregroundColor(Color.primary)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .border(Color.gray, width: 1)
                     .cornerRadius(2)
 
                 } else {
@@ -178,11 +186,14 @@ extension ListRow {
                 }
                 
             }
-//            .onTapGesture {
-//                // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
-//                self.grocery.purchasedAmount = self.grocery.desiredAmount
-//                self.pushed = true
-//            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if !self.isEditing {
+                    // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+                    self.grocery.purchasedAmount = self.grocery.desiredAmount
+                    self.pushed = true
+                }
+            }
         }
     }
 }
@@ -198,9 +209,10 @@ struct ListRow_Previews: PreviewProvider {
         grocery2.unitPrice = 0.99
         
         return Group {
-            ListRow(grocery: grocery1)
+            ListRow(grocery: grocery1, isEditing: true)
                 .environment(\.colorScheme, .dark)
-            ListRow(grocery: grocery2)
+                .background(Color.black)
+            ListRow(grocery: grocery2, isEditing: false)
         }
         .environment(\.managedObjectContext, CoreDataHelper.context)
         .previewLayout(.fixed(width: 300, height: 70))

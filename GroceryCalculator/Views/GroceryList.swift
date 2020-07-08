@@ -18,6 +18,7 @@ struct GroceryList: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.locale) var locale
+//    @Environment(\.editMode) private var editMode: Binding<EditMode>!
     @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
                   predicate: NSPredicate(format: "visible = %d", true),
@@ -33,6 +34,7 @@ struct GroceryList: View {
             NavigationView {
                 VStack {
                     GroceryList()
+//                    .environment(\.editMode, editMode)//.animation(Animation.spring())
                     // Row showing total value of purchase
                     if (keyboard.currentHeight == 0) {
                         TotalRow(totalPrice: totalPrice)
@@ -40,45 +42,55 @@ struct GroceryList: View {
                 }
                 .navigationBarTitle(Text("Grocery List"))
                 .navigationBarItems(leading: leadingButton,
-                                    trailing: EditButton().simultaneousGesture(TapGesture().onEnded {
-                                        self.isEditing.toggle()
-                                        }))
+                                    trailing: EditButton())
                     .padding(.bottom, (keyboard.currentHeight > 0 ? keyboard.currentHeight-35 : 0))
                     .animation(.easeInOut(duration: 0.16))
             }
             .navigationViewStyle(StackNavigationViewStyle())
-            .sheet(isPresented: $pushed) {
-                Settings(pushed: self.$pushed)
-            }
         }
     }
     
     var leadingButton: some View {
-        Button(action: {
-            if self.isEditing {
-                self.showingAlert = true
-            } else {
+        HStack {
+            Button(action: {
                 self.pushed = true
-            }
-        }, label: {
-            if self.isEditing {
-                Image(systemName: "trash")
-                    .foregroundColor(.red)
-            } else {
+            }, label: {
                 Image(systemName: "gear")
+            })
+            .sheet(isPresented: $pushed) {
+                Settings(pushed: self.$pushed)
             }
-                
-        })
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Warning"),
-                  message: Text("Are you sure you want to clear your list?"),
-                  primaryButton: .cancel(Text("Cancel")),
-                  secondaryButton: .destructive(Text("Confirm")) {
-                    self.deleteAll()
-                    self.showingAlert = false
-                })
+            .padding(.trailing, 10)
+
+            Button(action: {
+                self.showingAlert = true
+            }, label: {
+                Image(systemName: "trash")
+                        .foregroundColor(.red)
+            })
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Warning"),
+                      message: Text("Are you sure you want to clear your list?"),
+                      primaryButton: .cancel(Text("Cancel")),
+                      secondaryButton: .destructive(Text("Confirm")) {
+                        self.deleteAll()
+                        self.showingAlert = false
+                    })
+            }
         }
     }
+    
+//    var editButton: some View {
+//        Button(action: {
+//            self.editMode.wrappedValue = (self.editMode.wrappedValue == .active ? .inactive : .active)
+//        }, label: {
+//            if self.editMode.wrappedValue == .active {
+//                Text("Done")
+//            } else {
+//                Text("Edit")
+//            }
+//        })
+//    }
     
     func deleteAll() {
         for item in self.fetchedGroceries {

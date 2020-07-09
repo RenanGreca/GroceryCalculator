@@ -53,8 +53,7 @@ struct BuyItemPopUp: View {
 
 struct BuyItemPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        let groceryItem = Grocery()
-        groceryItem.name = "Milk"
+        let groceryItem = Grocery.new(name: "Milk")
         groceryItem.purchasedAmount = 2
         groceryItem.unitPrice = 0.99
         

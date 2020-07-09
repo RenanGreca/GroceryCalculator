@@ -46,6 +46,8 @@
 		1FF60C2824A4AD73008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C2724A4AD73008AF525 /* CloudKit.framework */; };
 		1FF60C2A24A6027A008AF525 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF60C2924A60279008AF525 /* CloudKitHelper.swift */; };
 		1FF60C3224A6317C008AF525 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF60C3124A6317C008AF525 /* CloudKit.framework */; };
+		1FFF188F24B7089E00EEC6D7 /* WatchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF188E24B7089E00EEC6D7 /* WatchRow.swift */; };
+		1FFF189124B708EA00EEC6D7 /* BuyItemWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF189024B708EA00EEC6D7 /* BuyItemWatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +155,8 @@
 		1FF60C2924A60279008AF525 /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Shopping Extension.entitlements"; sourceTree = "<group>"; };
 		1FF60C3124A6317C008AF525 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		1FFF188E24B7089E00EEC6D7 /* WatchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRow.swift; sourceTree = "<group>"; };
+		1FFF189024B708EA00EEC6D7 /* BuyItemWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyItemWatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +304,8 @@
 			children = (
 				1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */,
 				1F6124C824656C8E00CE2E75 /* ContentView.swift */,
+				1FFF188E24B7089E00EEC6D7 /* WatchRow.swift */,
+				1FFF189024B708EA00EEC6D7 /* BuyItemWatch.swift */,
 				1F6124CA24656C8E00CE2E75 /* HostingController.swift */,
 				1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */,
 				1F6124CE24656C8E00CE2E75 /* NotificationController.swift */,
@@ -556,8 +562,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FFF189124B708EA00EEC6D7 /* BuyItemWatch.swift in Sources */,
 				1F53884B24AF17DF00EAB2E8 /* Grocery.swift in Sources */,
 				1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */,
+				1FFF188F24B7089E00EEC6D7 /* WatchRow.swift in Sources */,
 				1F53884C24AF187000EAB2E8 /* GroceryCalculator.xcdatamodeld in Sources */,
 				1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */,
 				1F53883A24AE350D00EAB2E8 /* Formatter.swift in Sources */,

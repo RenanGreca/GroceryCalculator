@@ -14,11 +14,9 @@ struct GroceryList: View {
     @ObservedObject var keyboard = KeyboardResponder()
     @State var showingAlert = false
     @State var pushed = false
-    @State var isEditing = true
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.locale) var locale
-//    @Environment(\.editMode) private var editMode: Binding<EditMode>!
     @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
                   predicate: NSPredicate(format: "visible = %d", true),
@@ -34,7 +32,6 @@ struct GroceryList: View {
             NavigationView {
                 VStack {
                     GroceryList()
-//                    .environment(\.editMode, editMode)//.animation(Animation.spring())
                     // Row showing total value of purchase
                     if (keyboard.currentHeight == 0) {
                         TotalRow(totalPrice: totalPrice)
@@ -79,18 +76,6 @@ struct GroceryList: View {
             }
         }
     }
-    
-//    var editButton: some View {
-//        Button(action: {
-//            self.editMode.wrappedValue = (self.editMode.wrappedValue == .active ? .inactive : .active)
-//        }, label: {
-//            if self.editMode.wrappedValue == .active {
-//                Text("Done")
-//            } else {
-//                Text("Edit")
-//            }
-//        })
-//    }
     
     func deleteAll() {
         for item in self.fetchedGroceries {

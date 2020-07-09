@@ -22,6 +22,7 @@
 		1F1CF9E623C8C3C700053A71 /* SampleGroceries.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */; };
 		1F1CF9EA23C8C68900053A71 /* TotalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF9E923C8C68900053A71 /* TotalRow.swift */; };
 		1F3F182E245F166F00A40EE6 /* GroceryItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */; };
+		1F4646AC24B76D920098F36D /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4646AB24B76D920098F36D /* ComplicationController.swift */; };
 		1F4D7DE024AC8CDD00BE255D /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */; };
 		1F53883224AE1C2600EAB2E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F53883424AE1C2600EAB2E8 /* Localizable.strings */; };
 		1F53883A24AE350D00EAB2E8 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */; };
@@ -33,9 +34,6 @@
 		1F6124BD24656C8E00CE2E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124BC24656C8E00CE2E75 /* Assets.xcassets */; };
 		1F6124C424656C8E00CE2E75 /* Shopping Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1F6124C324656C8E00CE2E75 /* Shopping Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */; };
-		1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124CE24656C8E00CE2E75 /* NotificationController.swift */; };
-		1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124D024656C8E00CE2E75 /* NotificationView.swift */; };
-		1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6124D224656C8E00CE2E75 /* ComplicationController.swift */; };
 		1F6124D524656C8F00CE2E75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124D424656C8F00CE2E75 /* Assets.xcassets */; };
 		1F6124D824656C8F00CE2E75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */; };
 		1F6124DD24656C8F00CE2E75 /* ShoppingWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1F6124B724656C8B00CE2E75 /* ShoppingWatch.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -129,6 +127,7 @@
 		1F1CF9E523C8C3C700053A71 /* SampleGroceries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleGroceries.json; sourceTree = "<group>"; };
 		1F1CF9E923C8C68900053A71 /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
 		1F3F182D245F166F00A40EE6 /* GroceryItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryItemTests.swift; sourceTree = "<group>"; };
+		1F4646AB24B76D920098F36D /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		1F4D7DDF24AC8CDD00BE255D /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		1F53883324AE1C2600EAB2E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F53883524AE1C8B00EAB2E8 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -141,9 +140,6 @@
 		1F6124C824656C8E00CE2E75 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1F6124CA24656C8E00CE2E75 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		1F6124CE24656C8E00CE2E75 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		1F6124D024656C8E00CE2E75 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		1F6124D224656C8E00CE2E75 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		1F6124D424656C8F00CE2E75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F6124D724656C8F00CE2E75 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F6124D924656C8F00CE2E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -308,9 +304,7 @@
 				1FFF189024B708EA00EEC6D7 /* BuyItemWatch.swift */,
 				1F6124CA24656C8E00CE2E75 /* HostingController.swift */,
 				1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */,
-				1F6124CE24656C8E00CE2E75 /* NotificationController.swift */,
-				1F6124D024656C8E00CE2E75 /* NotificationView.swift */,
-				1F6124D224656C8E00CE2E75 /* ComplicationController.swift */,
+				1F4646AB24B76D920098F36D /* ComplicationController.swift */,
 				1F6124D424656C8F00CE2E75 /* Assets.xcassets */,
 				1F6124D924656C8F00CE2E75 /* Info.plist */,
 				1F6124DA24656C8F00CE2E75 /* PushNotificationPayload.apns */,
@@ -564,15 +558,13 @@
 			files = (
 				1FFF189124B708EA00EEC6D7 /* BuyItemWatch.swift in Sources */,
 				1F53884B24AF17DF00EAB2E8 /* Grocery.swift in Sources */,
-				1F6124CF24656C8E00CE2E75 /* NotificationController.swift in Sources */,
+				1F4646AC24B76D920098F36D /* ComplicationController.swift in Sources */,
 				1FFF188F24B7089E00EEC6D7 /* WatchRow.swift in Sources */,
 				1F53884C24AF187000EAB2E8 /* GroceryCalculator.xcdatamodeld in Sources */,
 				1F6124CD24656C8E00CE2E75 /* ExtensionDelegate.swift in Sources */,
 				1F53883A24AE350D00EAB2E8 /* Formatter.swift in Sources */,
-				1F6124D124656C8E00CE2E75 /* NotificationView.swift in Sources */,
 				1F53884024AE39E000EAB2E8 /* ContentView.swift in Sources */,
 				1F95433A24AA384A0082A0C2 /* HostingController.swift in Sources */,
-				1F6124D324656C8E00CE2E75 /* ComplicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

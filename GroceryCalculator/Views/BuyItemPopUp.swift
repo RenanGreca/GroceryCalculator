@@ -20,8 +20,8 @@ struct BuyItemPopUp: View {
         return NavigationView {
             VStack {
 //                Spacer()
-                AmountStepper(groceryItem: groceryItem)
-                UnitPriceField(groceryItem: groceryItem, okAction: okAction)
+                AmountStepper(grocery: groceryItem)
+                UnitPriceField(grocery: groceryItem, okAction: okAction)
                 TotalPrice(totalPrice: self.groceryItem.readablePrice)
                 Spacer()
             }
@@ -66,6 +66,7 @@ struct BuyItemPopUp_Previews: PreviewProvider {
             })
                 .previewDevice(PreviewDevice(rawValue: "iPhone SE (1st generation)"))
                 .previewDisplayName("iPhone SE")
+            .environment(\.locale, Locale(identifier: "pt-br"))
             
             BuyItemPopUp(groceryItem: groceryItem,
                          okAction: {
@@ -75,19 +76,20 @@ struct BuyItemPopUp_Previews: PreviewProvider {
             }).environment(\.colorScheme, .dark)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro"))
                 .previewDisplayName("iPhone 11 Pro")
+            
         }
     }
 }
 
 struct AmountStepper: View {
-    @ObservedObject var groceryItem: Grocery
+    @ObservedObject var grocery: Grocery
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    if self.groceryItem.purchasedAmount > 0 {
-                        self.groceryItem.purchasedAmount -= 1
+                    if self.grocery.purchasedAmount > 0 {
+                        self.grocery.purchasedAmount -= 1
                     }
                 }, label: {
                     Image(systemName: "minus.circle.fill")
@@ -100,14 +102,14 @@ struct AmountStepper: View {
                 Spacer()
                 
                 VStack {
-                    Text("\(groceryItem.purchasedAmount)")
+                    Text("\(grocery.purchasedAmount)")
                         .font(.largeTitle)
                 }
                 
                 Spacer()
                 
                 Button(action: {
-                    self.groceryItem.purchasedAmount += 1
+                    self.grocery.purchasedAmount += 1
                 }, label: {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -124,14 +126,14 @@ struct AmountStepper: View {
 }
 
 struct UnitPriceField: View {
-    @ObservedObject var groceryItem: Grocery
+    @ObservedObject var grocery: Grocery
     var okAction: () -> Void
     
     var body: some View {
         VStack {
             HStack {
                 PriceField(Formatter().currency.string(for: 0.00)!,
-                           text: $groceryItem.visibleUnitPrice,
+                           text: $grocery.visibleUnitPrice,
                            isFirstResponder: true) {
                     self.okAction()
                 }

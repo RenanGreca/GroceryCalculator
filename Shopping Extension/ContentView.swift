@@ -9,12 +9,12 @@
 import SwiftUI
 import WatchConnectivity
 
-struct ContentView: View {
+struct WatchList: View {
     
     @Environment(\.managedObjectContext) var context
     @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
-                  predicate: NSPredicate(value: true),
+                  predicate: NSPredicate(format: "visible = %d", true),
                   animation: .spring())
     var fetchedGroceries: FetchedResults<Grocery>
 
@@ -22,8 +22,6 @@ struct ContentView: View {
     var body: some View {
         let total = fetchedGroceries.reduce(0) { $0 + $1.price }
         let totalPrice = Formatter().currency.string(for: total) ?? "0"
-        print("Updating list... Grocerycount: \(fetchedGroceries.count)")
-        print("Updating price... \(totalPrice)")
         return VStack {
             List {
                 ForEach(fetchedGroceries, id: \.self) { grocery in
@@ -34,7 +32,7 @@ struct ContentView: View {
                 }
                 .onDelete() { indexSet in
                     let grocery = self.fetchedGroceries[indexSet.first!]
-                    self.context.delete(grocery)
+                    grocery.visible = false
                     CoreDataHelper.saveContext()
                 }
                 .onMove() { source, destination in
@@ -79,16 +77,13 @@ struct ContentView_Previews: PreviewProvider {
         grocery2.unitPrice = 0.99
         
         return Group {
-            ContentView()
+            WatchList()
                 .environment(\.managedObjectContext, (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext)
                 .previewDevice("Apple Watch Series 5 - 40mm")
             
-            ContentView()
+            WatchList()
                 .environment(\.managedObjectContext, (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext)
                 .previewDevice("Apple Watch Series 3 - 38mm")
         }
     }
 }
-
-
-

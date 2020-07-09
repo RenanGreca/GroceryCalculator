@@ -50,6 +50,10 @@ public class Grocery: NSManagedObject {
     func updatePosition(index: Int) {
         self.position = Int64(index)
     }
+    
+    func updatePurchasedAmount(_ purchasedAmount: Int) {
+        self.purchasedAmount = Int64(purchasedAmount)
+    }
 }
 
 // MARK: - CoreData stored properties

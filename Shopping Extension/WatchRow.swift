@@ -33,10 +33,10 @@ extension WatchRow {
             HStack {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.blue)
-                    .onTapGesture {
-                        self.grocery.purchasedAmount = 0
-                        try? self.context.save()
-                    }
+//                    .onTapGesture {
+//                        self.grocery.purchasedAmount = 0
+//                        try? self.context.save()
+//                    }
                                 
                 Text(grocery.name)
                     .foregroundColor(.gray)
@@ -45,9 +45,10 @@ extension WatchRow {
 
                 Spacer()
                 Text("\(grocery.readablePrice)")
-                    .onTapGesture {
-                        self.grocery.purchasedAmount = self.grocery.desiredAmount
-                    }
+                    .font(.system(.footnote, design: .rounded))
+//                    .onTapGesture {
+//                        self.grocery.purchasedAmount = self.grocery.desiredAmount
+//                    }
             }
         }
     }
@@ -61,11 +62,11 @@ extension WatchRow {
             HStack {
                 Image(systemName: "circle")
                     .foregroundColor(.blue)
-                    .onTapGesture {
-                        // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
-                        self.grocery.purchasedAmount = self.grocery.desiredAmount
-                        //                    self.pushed = true
-                }
+//                    .onTapGesture {
+//                        // Once we choose to buy a grocery, let's automatically say that we purchased the amount we wanted.
+//                        self.grocery.purchasedAmount = self.grocery.desiredAmount
+//                        //                    self.pushed = true
+//                }
                 
                 Text(self.grocery.name)
                     .frame(height: 25)
@@ -74,6 +75,20 @@ extension WatchRow {
                 Spacer()
 
             }
+        }
+    }
+}
+
+struct WatchRows_Previews: PreviewProvider {
+    static var previews: some View {
+        let grocery = Grocery.new(name: "Milk")
+        grocery.purchasedAmount = 2
+        grocery.unitPrice = 0.99
+
+        return Group {
+            WatchRow.UnpurchasedRow(grocery:grocery)
+            
+            WatchRow.PurchasedRow(grocery:grocery)
         }
     }
 }

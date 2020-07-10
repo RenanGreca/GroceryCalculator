@@ -15,7 +15,7 @@ fileprivate let darkGray:Color = Color(red: 0.14,
                                        green: 0.14,
                                        blue: 0.14)
 
-struct BuyItemWatch: View {
+struct WatchGroceryDetail: View {
     @ObservedObject var grocery: Grocery
     
     var body: some View {
@@ -44,7 +44,6 @@ struct BuyItemWatch: View {
                     .frame(height: 30)
             }
             .navigationBarTitle("\(self.grocery.name)")
-//            .disabled(true)
         }
     }
     
@@ -71,10 +70,10 @@ struct BuyItemWatch_Previews: PreviewProvider {
         grocery.unitPrice = 0.99
         
         return Group {
-            BuyItemWatch(grocery: grocery)
+            WatchGroceryDetail(grocery: grocery)
                 .previewDevice("Apple Watch Series 5 - 44mm")
             
-            BuyItemWatch(grocery: grocery)
+            WatchGroceryDetail(grocery: grocery)
                 .previewDevice("Apple Watch Series 3 - 38mm")
                 .environment(\.locale, Locale(identifier: "pt-br"))
         }
@@ -90,10 +89,10 @@ struct AmountStepper: View {
     let pickerHeight:CGFloat
     
     var body: some View {
-//        updateAmount()
         return HStack {
             VStack(alignment: .leading) {
-                Text("Amount").font(.footnote)
+                Text("Amount")
+                    .font(.system(.footnote, design: .rounded))
                 Spacer()
             }
             
@@ -102,7 +101,7 @@ struct AmountStepper: View {
             Picker("", selection: $selectedNumber.onChange(updateGrocery), content: {
                 ForEach(0..<100, id: \.self) { number in
                     Text("\(number)")
-                        .font(.title)
+                        .font(.system(.title, design: .rounded))
                 }
                 .frame(width: pickerWidth+20, height: pickerHeight-10, alignment: .center)
             })
@@ -138,7 +137,8 @@ struct UnitPriceField: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Unit Price").font(.footnote)
+                Text("Unit Price")
+                    .font(.system(.footnote, design: .rounded))
                 Spacer()
             }
             
@@ -148,7 +148,7 @@ struct UnitPriceField: View {
                 Picker("", selection: $selectedNumber[0].onChange(updateGrocery), content: {
                     ForEach(0..<100, id: \.self) { number in
                         Text("\(number)")
-                            .font(.title)
+                            .font(.system(.title, design: .rounded))
                     }
                 })
                 .frame(width: pickerWidth+20, height: pickerHeight, alignment: .center)
@@ -164,7 +164,7 @@ struct UnitPriceField: View {
                 Picker("", selection: $selectedNumber[1].onChange(updateGrocery), content: {
                     ForEach(0..<10, id: \.self) { number in
                         Text("\(number)")
-                            .font(.title)
+                            .font(.system(.title, design: .rounded))
                     }
                 })
                 .frame(width: pickerWidth, height: pickerHeight, alignment: .center)
@@ -175,19 +175,13 @@ struct UnitPriceField: View {
                 Picker("", selection: $selectedNumber[2].onChange(updateGrocery), content: {
                     ForEach(0..<10, id: \.self) { number in
                         Text("\(number)")
-                            .font(.title)
+                            .font(.system(.title, design: .rounded))
                     }
                 })
                 .frame(width: pickerWidth, height: pickerHeight, alignment: .center)
                 .padding(.top, topPadding)
                 .cornerRadius(radius)
-//                Text(grocery.visibleUnitPrice)
-//                    .font(.largeTitle)
-//                    .frame(height: 30)
-                
-//                Spacer(minLength: 0)
             }
-//            .padding(.vertical, -15)
             
         }
         .padding(.leading, 5)
@@ -212,8 +206,7 @@ struct TotalPrice: View {
         HStack {
             VStack {
                 Text("Total")
-                    .font(.footnote)
-//                    .frame(width: 50, height: 20, alignment: .leading)
+                    .font(.system(.footnote, design: .rounded))
                 
                 Spacer()
             }
@@ -222,14 +215,12 @@ struct TotalPrice: View {
             Spacer()
             Text("\(totalPrice)")
                 .bold()
-                .font(.system(size: 15))
+                .font(.system(size: 15, design: .rounded))
                 .frame(height: 20)
             
-//            Spacer()
         }
         .padding(.leading, 5)
         .padding(.trailing)
-//        .padding(.vertical, )
     }
 }
 

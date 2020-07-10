@@ -21,7 +21,7 @@ class HostingController: WKHostingController<AnyView> {
     override var body: AnyView {
         let context = (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext
         context.automaticallyMergesChangesFromParent = true
-        return AnyView(WatchList()
+        return AnyView(WatchGroceryList()
             .environment(\.managedObjectContext, context)
         )
     }

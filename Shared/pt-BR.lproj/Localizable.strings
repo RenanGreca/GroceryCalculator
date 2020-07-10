@@ -11,7 +11,7 @@
 "Done" = "OK";
 
 // MARK: - GroceryNavigationView.swift
-"Grocery List" = "Lista de Compras";
+"Grocery List" = "Compras";
 
 "Warning" = "Aviso";
 "Are you sure you want to clear your list?" = "Você tem certeza que deseja esvaziar sua lista?";

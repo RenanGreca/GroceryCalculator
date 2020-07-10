@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Shopping Extension</string>
+	<string>Shopping Cart</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CLKComplicationPrincipalClass</key>
-	<string>$(PRODUCT_MODULE_NAME).ComplicationController</string>
+	<string>ComplicationController</string>
 	<key>CLKComplicationSupportedFamilies</key>
 	<array>
 		<string>CLKComplicationFamilyModularSmall</string>

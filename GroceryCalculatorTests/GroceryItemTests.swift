@@ -11,19 +11,10 @@ import XCTest
 
 class GroceryItemTests: XCTestCase {
     
-    var groceryItem: GroceryItem!
-    
-    var numberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale.current
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 2
-        formatter.isLenient = true
-        return formatter
-    }
+    var groceryItem: Grocery!
 
     override func setUpWithError() throws {
-        groceryItem = GroceryItem(name: "Apple")
+        groceryItem = Grocery.new(name: "Apple")
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
@@ -35,8 +26,8 @@ class GroceryItemTests: XCTestCase {
         let newPrice = "1"
         groceryItem.visibleUnitPrice = newPrice
         
-        XCTAssertEqual(groceryItem.unitPrice, 1.00)
-        XCTAssertEqual(groceryItem.visibleUnitPrice, numberFormatter.string(from: 1.00)!)
+        XCTAssertEqual(groceryItem.unitPrice, 0.01)
+        XCTAssertEqual(groceryItem.visibleUnitPrice, Formatter().number.string(from: 0.01)!)
     }
     
     func testSetUnitPriceWithTwoDigits() {
@@ -44,7 +35,7 @@ class GroceryItemTests: XCTestCase {
         groceryItem.visibleUnitPrice = newPrice
         
         XCTAssertEqual(groceryItem.unitPrice, 0.10)
-        XCTAssertEqual(groceryItem.visibleUnitPrice, numberFormatter.string(from: 0.10)!)
+        XCTAssertEqual(groceryItem.visibleUnitPrice, Formatter().number.string(from: 0.10)!)
     }
     
     func testSetUnitPriceWithThreeDigits() {
@@ -52,7 +43,7 @@ class GroceryItemTests: XCTestCase {
         groceryItem.visibleUnitPrice = newPrice
         
         XCTAssertEqual(groceryItem.unitPrice, 3.21)
-        XCTAssertEqual(groceryItem.visibleUnitPrice, numberFormatter.string(from: 3.21)!)
+        XCTAssertEqual(groceryItem.visibleUnitPrice, Formatter().number.string(from: 3.21)!)
     }
 
 }

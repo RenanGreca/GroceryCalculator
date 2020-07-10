@@ -90,6 +90,7 @@ struct CoreDataHelper {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
+    /// Just a shortcut to the context's `delete` method.
     static func delete(_ object: NSManagedObject) {
         self.context.delete(object)
     }

@@ -8,9 +8,8 @@
 
 import SwiftUI
 
-struct WatchRow: View {
+struct WatchGroceryRow: View {
     @ObservedObject var grocery: Grocery
-    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         HStack {
@@ -23,20 +22,15 @@ struct WatchRow: View {
     }
 }
 
-extension WatchRow {
+extension WatchGroceryRow {
     
     struct PurchasedRow: View {
         @ObservedObject var grocery: Grocery
-        @Environment(\.managedObjectContext) var context
 
         var body: some View {
             HStack {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.blue)
-//                    .onTapGesture {
-//                        self.grocery.purchasedAmount = 0
-//                        try? self.context.save()
-//                    }
                                 
                 Text(grocery.name)
                     .foregroundColor(.gray)
@@ -46,16 +40,13 @@ extension WatchRow {
                 Spacer()
                 Text("\(grocery.readablePrice)")
                     .font(.system(.footnote, design: .rounded))
-//                    .onTapGesture {
-//                        self.grocery.purchasedAmount = self.grocery.desiredAmount
-//                    }
+
             }
         }
     }
     
     struct UnpurchasedRow: View {
         @ObservedObject var grocery: Grocery
-        @Environment(\.managedObjectContext) var context
         
         var body: some View {
             
@@ -86,9 +77,9 @@ struct WatchRows_Previews: PreviewProvider {
         grocery.unitPrice = 0.99
 
         return Group {
-            WatchRow.UnpurchasedRow(grocery:grocery)
+            WatchGroceryRow.UnpurchasedRow(grocery:grocery)
             
-            WatchRow.PurchasedRow(grocery:grocery)
+            WatchGroceryRow.PurchasedRow(grocery:grocery)
         }
     }
 }

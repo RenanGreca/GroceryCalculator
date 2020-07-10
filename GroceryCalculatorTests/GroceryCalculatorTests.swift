@@ -21,54 +21,9 @@ class GroceryCalculatorTests: XCTestCase {
     }
     
     func testInsertItem() {
-        let item = GroceryItem(name: "Banana")
-        item.save()
+        let item = Grocery.new(name: "Banana")
         XCTAssertNotNil(item)
     }
-    
-    func testFetchAll() {
-        let groceries = GroceryItem.fetchAll()
-        XCTAssertEqual(groceries.count, 0)
-    }
-    
-    func testInsertAndFetch() {
-        let item = GroceryItem(name: "Banana")
-        item.save()
-        let groceries = GroceryItem.fetchAll()
-        
-        XCTAssertEqual(groceries.count, 1)
-        XCTAssertEqual(item, groceries.first!)
-    }
-    
-    func testInsertAndUpdate() {
-        let item = GroceryItem(name: "Banana")
-        item.save()
-        
-        var groceries = GroceryItem.fetchAll()
-        XCTAssertEqual(item, groceries.first!)
-        
-        // Change something in the item, save and test again
-        item.purchasedAmount = 2
-        item.save()
-        
-        groceries = GroceryItem.fetchAll()
-        XCTAssertEqual(item, groceries.first!)
-    }
-    
-    func testInsertTwoItems() {
-        let groceryItems = GroceryItems()
-        
-        let prevAmount = groceryItems.list.count
-        
-        let item1 = GroceryItem(name: "Banana")
-        item1.save()
 
-        let item2 = GroceryItem(name: "Apple")
-        item2.save()
-
-        groceryItems.refresh()
-        XCTAssertEqual(groceryItems.list.count, prevAmount+2)
-        XCTAssertEqual(item1, groceryItems.list.first!)
-    }
 
 }

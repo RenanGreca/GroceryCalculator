@@ -17,8 +17,8 @@
 "Are you sure you want to clear your list?" = "Você tem certeza que deseja esvaziar sua lista?";
 
 // MARK: - GroceryRow.swift
-"Rename" = "Rename";
-"Delete" = "Delete";
+"Rename" = "Renomear";
+"Delete" = "Apagar";
 
 // MARK: - NewGroceryRow.swift
 "Add a grocery" = "Adicionar um produto";

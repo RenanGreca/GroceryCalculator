@@ -758,7 +758,7 @@
 				CODE_SIGN_ENTITLEMENTS = GroceryCalculator/GroceryCalculator.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"GroceryCalculator/Preview Content\"";
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				ENABLE_PREVIEWS = YES;
@@ -783,7 +783,7 @@
 				CODE_SIGN_ENTITLEMENTS = GroceryCalculator/GroceryCalculator.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"GroceryCalculator/Preview Content\"";
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				ENABLE_PREVIEWS = YES;
@@ -851,7 +851,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Shopping Extension/Shopping Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				ENABLE_PREVIEWS = YES;
@@ -878,7 +878,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Shopping Extension/Shopping Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Shopping Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				ENABLE_PREVIEWS = YES;
@@ -905,7 +905,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				IBSC_MODULE = Shopping_Extension;
 				INFOPLIST_FILE = Shopping/Info.plist;
@@ -926,7 +926,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6E3MXG6BSH;
 				IBSC_MODULE = Shopping_Extension;
 				INFOPLIST_FILE = Shopping/Info.plist;

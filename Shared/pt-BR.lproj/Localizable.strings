@@ -10,22 +10,27 @@
 "Confirm" = "Confirmar";
 "Done" = "OK";
 
-// MARK: - GroceryList.swift
+// MARK: - GroceryNavigationView.swift
 "Grocery List" = "Lista de Compras";
 
 "Warning" = "Aviso";
 "Are you sure you want to clear your list?" = "Você tem certeza que deseja esvaziar sua lista?";
 
+// MARK: - GroceryRow.swift
+"Rename" = "Rename";
+"Delete" = "Delete";
+
 // MARK: - NewGroceryRow.swift
-"Add a grocery" = "Adicionar uma compra";
+"Add a grocery" = "Adicionar um produto";
 
 // MARK: - TotalRow.swift
 "Total" = "Total";
 
-// MARK: - BuyItemPopUp.swift
+// MARK: - GroceryDetail.swift
 "Amount" = "Quantidade";
 "Unit Price" = "Preço Unitário";
 
 // MARK: - Settings.swift
-"Settings" = "Configurações";
-"About this app" = "This app was developed by Renan Greca, mostly as an experiment with SwiftUI.";
+"About" = "Sobre";
+"About this app" = "Este app foi desenvolvido por Renan Greca, principalmente como um experimento em SwiftUI. O app é de código aberto sob a GNU General Public Licence v3.0. Se você tiver perguntas, sugestões ou avisos de bugs, por favor notifique o desenvolvedor usando um dos métodos abaixo:";
+"Email" = "E-mail";

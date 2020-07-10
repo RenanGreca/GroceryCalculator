@@ -22,22 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         context.automaticallyMergesChangesFromParent = true
         
-//        let groceryItems = GroceryItems()
-
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = GroceryList()
+        let contentView = GroceryNavigationView()
             .environment(\.managedObjectContext, context)
             .environment(\.locale, .current)
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)//.environmentObject(groceryItems))
+            window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
-//            groceryItems.refresh() { error in
             window.makeKeyAndVisible()
-//            }
         }
     }
 
@@ -78,6 +74,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 struct SceneDelegate_Previews: PreviewProvider {
     static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        GroceryNavigationView()
+            .environment(\.managedObjectContext, CoreDataHelper.context)
+            .environment(\.locale, .current)
     }
 }

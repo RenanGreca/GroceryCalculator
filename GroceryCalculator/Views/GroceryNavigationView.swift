@@ -13,7 +13,6 @@ struct GroceryNavigationView: View {
     
     @ObservedObject var keyboard = KeyboardResponder()
     
-    @Environment(\.managedObjectContext) var context
     @Environment(\.locale) var locale
     @FetchRequest(entity: Grocery.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
@@ -38,9 +37,9 @@ struct GroceryNavigationView: View {
                 .navigationBarTitle(Text("Grocery List"))
                 .navigationBarItems(leading: LeadingButtons(),
                                     trailing: EditButton())
-                .padding(.bottom,
-                         (keyboard.currentHeight > 0 ? keyboard.currentHeight-35 : 0))
-                .animation(.easeInOut(duration: 0.16))
+                    .padding(.bottom,
+                             (keyboard.currentHeight > 0 ? keyboard.currentHeight-35 : 0))
+                    .animation(.easeInOut(duration: 0.16))
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }
@@ -48,6 +47,7 @@ struct GroceryNavigationView: View {
     
 }
 
+// MARK: - Additional subviews
 extension GroceryNavigationView {
     
     struct LeadingButtons: View {
@@ -55,7 +55,7 @@ extension GroceryNavigationView {
         var body: some View {
             HStack {
                 SettingsButton()
-                .padding(.trailing, 10)
+                    .padding(.trailing, 10)
                 ClearButton()
             }
         }
@@ -67,10 +67,13 @@ extension GroceryNavigationView {
                 Button(action: {
                     self.pushed = true
                 }, label: {
-                    Image(systemName: "gear")
+                    Image(systemName: "info.circle")
+                    .resizable()
+                    .frame(width: 22, height: 22)
+                    
                 })
-                .sheet(isPresented: $pushed) {
-                    Settings(pushed: self.$pushed)
+                    .sheet(isPresented: $pushed) {
+                        Settings(pushed: self.$pushed)
                 }
             }
         }
@@ -80,7 +83,7 @@ extension GroceryNavigationView {
                           sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
                           predicate: NSPredicate(format: "visible = %d", true),
                           animation: .spring())
-            var fetchedGroceries: FetchedResults<Grocery>
+            var groceries: FetchedResults<Grocery>
             
             @State var showingAlert: Bool = false
             
@@ -102,7 +105,7 @@ extension GroceryNavigationView {
             }
             
             func deleteAll() {
-                for item in self.fetchedGroceries {
+                for item in self.groceries {
                     item.visible = false
                 }
                 CoreDataHelper.saveContext()
@@ -112,30 +115,38 @@ extension GroceryNavigationView {
     
     
     
-    func GroceryList() -> some View {
-        List {
-            ForEach(fetchedGroceries, id: \.self) { grocery in
-                ListRow(grocery: grocery, isEditing: false)
-            }
-            .onDelete() { indexSet in
-                let grocery = self.fetchedGroceries[indexSet.first!]
-                grocery.visible = false
-                CoreDataHelper.saveContext()
-            }
-            .onMove() { source, destination in
-                var list = self.fetchedGroceries.compactMap() { $0 }
-                
-                list.move(fromOffsets: source, toOffset: destination)
-                
-                for i in 0..<list.count {
-                    list[i].updatePosition(index: i)
+    struct GroceryList: View {
+        @FetchRequest(entity: Grocery.entity(),
+                      sortDescriptors: [NSSortDescriptor(key: "position", ascending: true)],
+                      predicate: NSPredicate(format: "visible = %d", true),
+                      animation: .spring())
+        var groceries: FetchedResults<Grocery>
+        
+        var body: some View {
+            List {
+                ForEach(groceries, id: \.self) { grocery in
+                    GroceryRow(grocery: grocery, isEditing: false)
+                }
+                .onDelete() { indexSet in
+                    let grocery = self.groceries[indexSet.first!]
+                    grocery.visible = false
+                    CoreDataHelper.saveContext()
+                }
+                .onMove() { source, destination in
+                    var list = self.groceries.compactMap { $0 }
+                    
+                    list.move(fromOffsets: source, toOffset: destination)
+                    
+                    for i in 0..<list.count {
+                        list[i].updatePosition(index: i)
+                    }
+                    
+                    CoreDataHelper.saveContext()
                 }
                 
-                CoreDataHelper.saveContext()
+                // Blank row for adding new grocery
+                NewGroceryRow(position: self.groceries.count)
             }
-            
-            // Blank row for adding new grocery
-            NewGroceryRow(position: self.fetchedGroceries.count)
         }
     }
 }

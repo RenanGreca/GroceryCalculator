@@ -10,17 +10,8 @@ import SwiftUI
 
 struct TotalRow: View {
     var totalPrice: String
-    
-//    @FetchRequest(entity: GroceryItemMO.entity(),
-//                  sortDescriptors: [],
-//                  predicate: NSPredicate(value: true),
-//                  animation: .spring())
-//    var fetchedGroceries: FetchedResults<GroceryItemMO>
-    
-    var body: some View {
-//        let total = fetchedGroceries.reduce(0) { $0 + $1.price }
-//        let totalPrice = currencyFormatter.string(for: total) ?? "0"
         
+    var body: some View {        
         return HStack {
             Text("Total").bold()
             Spacer()
@@ -31,6 +22,7 @@ struct TotalRow: View {
 
 }
 
+// MARK: - Preview
 struct TotalRow_Previews: PreviewProvider {
     static var previews: some View {
         TotalRow(totalPrice: "12.39 €")

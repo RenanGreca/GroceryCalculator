@@ -41,12 +41,14 @@ struct Settings: View {
                     .contentShape(Rectangle())
                     .listRowBackground(Color(UIColor.secondarySystemBackground))
                     .onTapGesture {
-                        let url = URL(string: "github://RenanGreca/GroceryCalculator")!
-                        if UIApplication.shared.canOpenURL(url) {
+                        if  let url = URL(string: "github://RenanGreca/GroceryCalculator"),
+                            UIApplication.shared.canOpenURL(url) {
+                            
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } else {
-                            let url = URL(string: "https://github.com/RenanGreca/GroceryCalculator")!
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            if let url = URL(string: "https://github.com/RenanGreca/GroceryCalculator") {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
                         }
                     }
                     
@@ -62,12 +64,14 @@ struct Settings: View {
                     .contentShape(Rectangle())
                     .listRowBackground(Color(UIColor.secondarySystemBackground))
                     .onTapGesture {
-                        let url = URL(string: "twitter://user?screen_name=RenanGreca")!
-                        if UIApplication.shared.canOpenURL(url) {
+                        if  let url = URL(string: "twitter://user?screen_name=RenanGreca"),
+                            UIApplication.shared.canOpenURL(url) {
+                            
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         } else {
-                            let url = URL(string: "https://twitter.com/RenanGreca")!
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            if let url = URL(string: "https://twitter.com/RenanGreca") {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
                         }
                     }
 
@@ -82,17 +86,22 @@ struct Settings: View {
                     }
                     .contentShape(Rectangle())
                     .listRowBackground(Color(UIColor.secondarySystemBackground))
+                    .onTapGesture {
+                        if  let url = URL(string: "mailto:renangreca@icloud.com"),
+                            UIApplication.shared.canOpenURL(url) {
+                            
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
                     
                 }
                 .frame(height: 140)
-//                .disabled(true)
-                
                 
                 
                 Spacer()
                 Text("GPL v3.0 \(year) Renan Greca")
             }
-            .navigationBarTitle("Settings")
+            .navigationBarTitle("About")
             .navigationBarItems(trailing: Button(action: {
                 self.pushed.toggle()
             }) {
@@ -102,6 +111,7 @@ struct Settings: View {
     }
 }
 
+// MARK: - Preview
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
         Settings(pushed: .constant(false))

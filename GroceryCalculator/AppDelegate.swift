@@ -81,15 +81,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 struct CoreDataHelper {
+    
+    /// Just a shortcut to the AppDelegate's `persistentContainer.viewContext`.
     static var context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    /// Just a shortcut to the AppDelegate's `saveContext` method.
     static func saveContext() {
-        do {
-            if (self.context.hasChanges) {
-                try self.context.save()
-            }
-        } catch {
-            print("\(error)")
-        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
+    
+    static func delete(_ object: NSManagedObject) {
+        self.context.delete(object)
+    }
+    
 }

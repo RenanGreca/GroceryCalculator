@@ -11,7 +11,6 @@ import SwiftUI
 struct NewGroceryRow: View {
     @State var newGrocery = ""
     var position: Int
-//    @EnvironmentObject var groceryItems: GroceryItems
     
     var body: some View {
         HStack {
@@ -36,6 +35,7 @@ struct NewGroceryRow: View {
     }
 }
 
+// MARK: - Preview
 struct NewItemRow_Previews: PreviewProvider {
     static var previews: some View {
          return Group {

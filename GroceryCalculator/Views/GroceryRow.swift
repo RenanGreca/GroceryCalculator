@@ -8,14 +8,12 @@
 
 import SwiftUI
 
-struct ListRow: View {
+struct GroceryRow: View {
     
     @ObservedObject var grocery: Grocery
     @State var pushed = false
     @State var isEditing:Bool
-    
-    @Environment(\.managedObjectContext) var context
-    
+        
     var body: some View {
         HStack {
             if (grocery.purchasedAmount > 0) {
@@ -31,7 +29,7 @@ struct ListRow: View {
         }
         .padding(.vertical, 10)
         .sheet(isPresented: $pushed) {
-            BuyItemPopUp(groceryItem: self.grocery,
+            GroceryDetail(groceryItem: self.grocery,
                          okAction: self.okAction,
                          cancelAction: self.cancelAction)
         }
@@ -48,7 +46,6 @@ struct ListRow: View {
                             
             // Delete button
             Button(action: {
-//                self.context.delete(self.grocery)
                 self.grocery.visible = false
                 CoreDataHelper.saveContext()
             }, label: {
@@ -59,16 +56,6 @@ struct ListRow: View {
             })
         }
     }
-    
-//    func updateGrocery() {
-//        if (grocery.name.count == 0) {
-//            // If the string is empty, we can delete this item
-//            self.context.delete(self.grocery)
-//        } else {
-//            // Save the updated name
-//            CoreDataHelper.saveContext()
-//        }
-//    }
     
     func okAction() {
         CoreDataHelper.saveContext()
@@ -83,10 +70,9 @@ struct ListRow: View {
     
 }
 
-extension ListRow {
+extension GroceryRow {
     
     struct PurchasedRow: View {
-        @Environment(\.managedObjectContext) var context
         @ObservedObject var grocery: Grocery
         @Binding var pushed: Bool
         @Binding var isEditing: Bool
@@ -108,7 +94,7 @@ extension ListRow {
                         if (self.grocery.name.count == 0) {
                             // If the string is empty,
                             // we can delete this item
-                            self.context.delete(self.grocery)
+                            CoreDataHelper.delete(self.grocery)
                         } else {
                             // Save the updated name
                             CoreDataHelper.saveContext()
@@ -145,7 +131,6 @@ extension ListRow {
     }
     
     struct UnpurchasedRow: View {
-        @Environment(\.managedObjectContext) var context
         @ObservedObject var grocery: Grocery
         @Binding var pushed: Bool
         @Binding var isEditing: Bool
@@ -168,7 +153,7 @@ extension ListRow {
                         if (self.grocery.name.count == 0) {
                             // If the string is empty,
                             // we can delete this item
-                            self.context.delete(self.grocery)
+                            CoreDataHelper.delete(self.grocery)
                         } else {
                             // Save the updated name
                             CoreDataHelper.saveContext()
@@ -198,6 +183,7 @@ extension ListRow {
     }
 }
 
+// MARK: - Preview
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
         let grocery1 = Grocery.new(name: "Milk")
@@ -209,10 +195,10 @@ struct ListRow_Previews: PreviewProvider {
         grocery2.unitPrice = 0.99
         
         return Group {
-            ListRow(grocery: grocery1, isEditing: true)
+            GroceryRow(grocery: grocery1, isEditing: true)
                 .environment(\.colorScheme, .dark)
                 .background(Color.black)
-            ListRow(grocery: grocery2, isEditing: false)
+            GroceryRow(grocery: grocery2, isEditing: false)
         }
         .environment(\.managedObjectContext, CoreDataHelper.context)
         .previewLayout(.fixed(width: 300, height: 70))

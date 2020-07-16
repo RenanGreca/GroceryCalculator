@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import GroceryCalculator
 
 class GroceryCalculatorUITests: XCTestCase {
 
@@ -15,6 +16,8 @@ class GroceryCalculatorUITests: XCTestCase {
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
+        
+//        CoreDataHelper.context = testingContext()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -34,22 +37,17 @@ class GroceryCalculatorUITests: XCTestCase {
     
     func testAddItem() {
                 
-        let app = XCUIApplication()
-        app.launch()
-//        app.menuBarItems["AddItem"].tap()
-        app.buttons["AddItem"].tap()
-        let nameTextField = app.textFields["Name"]
-        nameTextField.tap()
-        nameTextField.typeText("Apple")
-        app.buttons["OK"].tap()
+        let app = GroceryApp()
+        
+        try? app.addGroceryField().type(text: "Milk")
     }
 
-    func testLaunchPerformance() {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 }

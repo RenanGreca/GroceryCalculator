@@ -35,13 +35,7 @@ struct WatchGroceryList: View {
                     CoreDataHelper.saveContext()
                 }
                 .onMove() { source, destination in
-                    var list = self.fetchedGroceries.compactMap() { $0 }
-                    
-                    list.move(fromOffsets: source, toOffset: destination)
-                    
-                    for i in 0..<list.count {
-                        list[i].updatePosition(index: i)
-                    }
+                    self.fetchedGroceries.move(fromOffsets: source, toOffset: destination)
                     
                     CoreDataHelper.saveContext()
                 }

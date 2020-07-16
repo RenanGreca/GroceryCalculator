@@ -20,62 +20,62 @@ class WatchTests: XCTestCase {
     }
 
     func testArray0000() throws {
-        let array = Formatter.arrayFrom(double: 0.00)
+        let array = 0.00.toArray()
         
         XCTAssertEqual(array, [0, 0, 0])
     }
     
     func testArray0001() throws {
-        let array = Formatter.arrayFrom(double: 0.01)
+        let array = 0.01.toArray()
         
         XCTAssertEqual(array, [0, 0, 1])
     }
     
     func testArray0010() throws {
-        let array = Formatter.arrayFrom(double: 0.10)
+        let array = 0.10.toArray()
         
         XCTAssertEqual(array, [0, 1, 0])
     }
     
     func testArray0100() throws {
-        let array = Formatter.arrayFrom(double: 1.00)
+        let array = 1.00.toArray()
         
         XCTAssertEqual(array, [1, 0, 0])
     }
     
     func testArray1000() throws {
-        let array = Formatter.arrayFrom(double: 10.00)
+        let array = 10.00.toArray()
         
         XCTAssertEqual(array, [10, 0, 0])
     }
 
 
     func testDouble0000() throws {
-        let double = Formatter.doubleFrom(array: [0, 0, 0])
+        let double = [0, 0, 0].toDouble()
         
         XCTAssertEqual(double, 0.00)
     }
     
     func testDouble0001() throws {
-        let double = Formatter.doubleFrom(array: [0, 0, 1])
+        let double = [0, 0, 1].toDouble()
         
         XCTAssertEqual(double, 0.01)
     }
     
     func testDouble0010() throws {
-        let double = Formatter.doubleFrom(array: [0, 1, 0])
+        let double = [0, 1, 0].toDouble()
         
         XCTAssertEqual(double, 0.10)
     }
     
     func testDouble0100() throws {
-        let double = Formatter.doubleFrom(array: [1, 0, 0])
+        let double = [1, 0, 0].toDouble()
         
         XCTAssertEqual(double, 1.00)
     }
     
     func testDouble1000() throws {
-        let double = Formatter.doubleFrom(array: [10, 0, 0])
+        let double = [10, 0, 0].toDouble()
         
         XCTAssertEqual(double, 10.00)
     }

@@ -31,7 +31,7 @@ struct WatchGroceryDetail: View {
                     .padding(.top, 5)
                 
                 UnitPriceField(grocery: self.grocery,
-                               selectedNumber: Formatter.arrayFrom(double: self.grocery.unitPrice),
+                               selectedNumber: self.grocery.unitPrice.toArray(),
                                pickerWidth: geometry.size.width/4,
                                pickerHeight: geometry.size.width/3)
                     .background(darkGray)
@@ -176,7 +176,7 @@ struct UnitPriceField: View {
     }
     
     func updateGrocery(_ newValue: Int) {
-        self.grocery.unitPrice = Formatter.doubleFrom(array: selectedNumber)
+        self.grocery.unitPrice = selectedNumber.toDouble()
         CoreDataHelper.saveContext()
     }
 }

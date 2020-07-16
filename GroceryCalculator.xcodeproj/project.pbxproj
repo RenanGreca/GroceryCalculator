@@ -266,11 +266,11 @@
 		1F1CF9DB23C8BE1A00053A71 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1F18C53D23C8E50A00350F12 /* GroceryDetail.swift */,
 				1F1CF9E123C8C0AC00053A71 /* GroceryNavigationView.swift */,
 				1F1CF9D923C8BE1600053A71 /* GroceryRow.swift */,
 				1F158FB92456E667001A3668 /* NewGroceryRow.swift */,
 				1F1CF9E923C8C68900053A71 /* TotalRow.swift */,
-				1F18C53D23C8E50A00350F12 /* GroceryDetail.swift */,
 				1FC21DD424B48B4D00BB69B5 /* Settings.swift */,
 			);
 			path = Views;
@@ -287,6 +287,16 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		1F24EAB524C048250036FAC0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F6124C824656C8E00CE2E75 /* WatchGroceryList.swift */,
+				1FFF188E24B7089E00EEC6D7 /* WatchGroceryRow.swift */,
+				1FFF189024B708EA00EEC6D7 /* WatchGroceryDetail.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1F6124B824656C8B00CE2E75 /* Shopping */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,9 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF60C3024A63178008AF525 /* Shopping Extension.entitlements */,
-				1F6124C824656C8E00CE2E75 /* WatchGroceryList.swift */,
-				1FFF188E24B7089E00EEC6D7 /* WatchGroceryRow.swift */,
-				1FFF189024B708EA00EEC6D7 /* WatchGroceryDetail.swift */,
+				1F24EAB524C048250036FAC0 /* Views */,
 				1F6124CA24656C8E00CE2E75 /* HostingController.swift */,
 				1F6124CC24656C8E00CE2E75 /* ExtensionDelegate.swift */,
 				1F4646AB24B76D920098F36D /* ComplicationController.swift */,
